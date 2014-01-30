@@ -14,8 +14,9 @@ func DbInit() (*sql.DB, error) {
      */
     db, err := sql.Open("postgres", "user=root dbname=gothere sslmode=disable")
     if err != nil {
-        return db, err
+        log.Fatal(err)
     }
+
     err = db.Ping()
 
     return db, err
