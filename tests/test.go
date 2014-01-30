@@ -1,10 +1,10 @@
 package tests
 
 import (
-    "goThere/cookies"
-    "goThere/utils"
-    "goThere/password"
-    "goThere/database"
+    "gothere/cookies"
+    "gothere/utils"
+    "gothere/password"
+    "gothere/database"
     "fmt"
 )
 
@@ -12,11 +12,10 @@ func cookieTest() {
     fmt.Println()
     fmt.Println("<-- COOKIE TEST BEGIN -->")
 
-    cookie := cookies.GenerateCookie()
-    testUname := utils.RandomStr(16)
-    sessionid := cookies.GenerateSessionId(cookie, testUname)
+    testUname := "some@username.com"
+    sessionid := cookies.GenerateSessionId(testUname)
     fmt.Printf("SessionID: %s...\n", sessionid[:20])
-    username := cookies.UsernameFromCookie(cookie, sessionid)
+    username := cookies.UsernameFromCookie(sessionid)
     fmt.Printf("Username from cookie test: ")
     if username == testUname {
         fmt.Printf("PASSED\n")
@@ -78,9 +77,12 @@ func dbTest() {
     fmt.Println("<-- DB TEST BEGIN -->")
 
     fmt.Printf("Connection test: ")
+
+    database.DbInit()
+
     db, err := database.DbInit()
     if err != nil {
-        fmt.Printf("FAILED\n")
+        fmt.Printf("FAILED: ")
         fmt.Println(err)
     } else {
         fmt.Printf("PASSED\n")

@@ -1,7 +1,7 @@
 package password
 
 import (
-    "goThere/utils"
+    "gothere/utils"
     "crypto/sha256"
     "encoding/hex"
     "strings"

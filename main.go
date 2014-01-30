@@ -1,7 +1,7 @@
 package main
 
 import (
-    "goThere/tests"
+    "gothere/tests"
 )
 
 func main() {
