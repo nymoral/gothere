@@ -4,6 +4,8 @@ import (
     _ "github.com/lib/pq"
     "database/sql"
     "log"
+    "fmt"
+    "gothere/config"
 )
 
 
@@ -12,7 +14,8 @@ func DbInit() (*sql.DB, error) {
      * Opens a connection to a postgresql databalse
      * and returns a pointer to sql.DB object and error.
      */
-    db, err := sql.Open("postgres", "user=root dbname=gothere sslmode=disable")
+    openStatement := fmt.Sprintf("user=%s dbname=%s sslmode=disable", config.DbUser, config.DbName)
+    db, err := sql.Open("postgres", openStatement)
     if err != nil {
         log.Fatal(err)
     }

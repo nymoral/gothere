@@ -3,6 +3,7 @@ package cookies
 import (
     "log"
     "github.com/gorilla/securecookie"
+    "gothere/config"
 )
 
 func generateCookie() (*securecookie.SecureCookie) {
@@ -10,14 +11,17 @@ func generateCookie() (*securecookie.SecureCookie) {
     * Generates SecureCookie type object and returns a pointer to it.
     * It is used to Encode/Decode plain data to/from a cookie.
     */
-    hashKey := []byte("LhCn7gxgtkiCkmoy+QpFI5NW15eTb71A")
-    blockKey := []byte("b2Spz8zyzr54Vq$zf9Z06E9rWupXHgRT")
+    //hashKey := byte[](config.Secret1)
+    //blockKey := byte[](config.Secret2)
     // Both values ought to be loaded from private file.
     // These values are only for development purposes.
 
-    S := securecookie.New(hashKey, blockKey)
+    //S := securecookie.New(hashKey, blockKey)
+    S := securecookie.New([]byte(config.Secret1), []byte(config.Secret1))
     return S
 }
+
+var secCookie *securecookie.SecureCookie = generateCookie()
 
 func GenerateSessionId(username string) (string) {
     /*
@@ -26,8 +30,8 @@ func GenerateSessionId(username string) (string) {
     * HTTP response.
     */
     cookie_name := "sessionid"
-    S := generateCookie()
-    encoded_cookie, err := S.Encode(cookie_name, username)
+    //S := generateCookie()
+    encoded_cookie, err := secCookie.Encode(cookie_name, username)
     if err != nil {
         log.Fatal(err)
     }
@@ -40,8 +44,8 @@ func UsernameFromCookie(cookie string) (string) {
     * decodes it and returns plain-text data from it (username).
     */
     cookie_name := "sessionid"
-    S := generateCookie()
+    //S := generateCookie()
     var username string
-    S.Decode(cookie_name, cookie, &username)
+    secCookie.Decode(cookie_name, cookie, &username)
     return username
 }
