@@ -7,12 +7,15 @@ import (
     "io"
 )
 
-func Render(wr io.Writer, name string, data interface{}) (error) {
+func Render(wr io.Writer, name string, data interface{}) {
     dir := config.TemplateDir
     t, err := template.ParseFiles(dir+name+".html")
     if err != nil {
         log.Fatal(err)
     }
 
-    return t.Execute(wr, data)
+    err = t.Execute(wr, data)
+    if err != nil {
+        log.Fatal(err)
+    }
 }
