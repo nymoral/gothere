@@ -1,2 +1,3 @@
 config/config.go
+*.bin
 # To keep secret things secret.

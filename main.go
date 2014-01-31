@@ -5,6 +5,7 @@ import (
     "net/http"
     "gothere/config"
     "gothere/handlers"
+    //"gothere/tests"
     "fmt"
 )
 
