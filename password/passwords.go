@@ -1,10 +1,10 @@
 package password
 
 import (
-    "gothere/utils"
     "crypto/sha256"
     "encoding/hex"
     "strings"
+    "gothere/utils"
 )
 
 func hashPassword(plain, salt string) string {
@@ -14,6 +14,7 @@ func hashPassword(plain, salt string) string {
      * and returns hashed password.
      * Uses SHA256.
      */
+
     hash := sha256.New()
     hash.Write([]byte(salt+plain))
     md := hash.Sum(nil)
@@ -27,6 +28,7 @@ func NewPassword(plain string) (string) {
      * Uses hashPassword() func from this package.
      * Formated as "SALT|HASH"
      */
+
     salt := utils.RandomStr(16)
     return salt+"|"+hashPassword(plain, salt)
 }
@@ -39,6 +41,7 @@ func Authenticate(plain, hashed string) bool{
      * hashed one retrieved from a DB,
      * Uses hashPassword() from this package.
      */
+
     split := strings.Split(hashed, "|")
     return split[1] == hashPassword(plain, split[0])
 }

@@ -8,6 +8,7 @@ func RandomStr(L  int) string {
     /*
      * Generates a random string of lenght L.
      */
+
     const source = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
     var bytes = make([]byte, L)
     rand.Read(bytes)

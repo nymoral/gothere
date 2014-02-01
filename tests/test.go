@@ -1,11 +1,11 @@
 package tests
 
 import (
+    "fmt"
     "gothere/cookies"
     "gothere/utils"
     "gothere/password"
     "gothere/database"
-    "fmt"
 )
 
 func cookieTest() {

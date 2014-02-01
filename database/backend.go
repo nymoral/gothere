@@ -13,6 +13,7 @@ func DbInit() (*sql.DB, error) {
      * Opens a connection to a postgresql databalse
      * and returns a pointer to sql.DB object and error.
      */
+
     uname := " user=" + config.DbUser
     dname := " dbname=" + config.DbName
 
@@ -40,10 +41,12 @@ func DbClose(db *sql.DB) {
     /* 
      * Closes a connectio to a given sql.DB.
      */
+
     err := db.Close();
     if err != nil {
         log.Fatal(err)
     }
+
     log.Println("Closing connection")
 }
 

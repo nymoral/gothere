@@ -5,6 +5,9 @@ import (
 )
 
 type User struct {
+    // User mode.
+    // SQL statement in database/SQL/users.sql
+
     Pk          int
 
     Email       string

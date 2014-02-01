@@ -2,14 +2,19 @@ package templates
 
 import (
     "html/template"
-    "gothere/config"
     "log"
     "io"
+    "gothere/config"
 )
 
 func Render(wr io.Writer, name string, data interface{}) {
+    /*
+     * Renders html template to the response writer.
+     * Given template should exist in ./html as name + ".html"
+     */
+
     dir := config.TemplateDir
-    t, err := template.ParseFiles(dir+name+".html")
+    t, err := template.ParseFiles(dir + name + ".html")
     if err != nil {
         log.Fatal(err)
     }
