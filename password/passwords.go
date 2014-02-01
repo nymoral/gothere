@@ -42,6 +42,12 @@ func Authenticate(plain, hashed string) bool{
      * Uses hashPassword() from this package.
      */
 
+    if hashed == "" {
+        return false
+    }
     split := strings.Split(hashed, "|")
+    if len(split) != 2 {
+        return false
+    }
     return split[1] == hashPassword(plain, split[0])
 }
