@@ -5,8 +5,9 @@ import (
     "net/http"
     "gothere/config"
     "gothere/handlers"
-    "gothere/cookies"
     "log"
+    "gothere/database"
+    "database/sql"
 )
 
 func login(w http.ResponseWriter, r *http.Request) {
@@ -26,11 +27,11 @@ func home(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func register(w http.ResponseWriter, r *http.Request) {
+func register(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     if r.Method == "GET" {
         handlers.RegisterGet(w)
     } else {
-        handlers.RegisterPost(w, r)
+        handlers.RegisterPost(w, r, db)
     }
 
 }
@@ -38,15 +39,20 @@ func register(w http.ResponseWriter, r *http.Request) {
 func main() {
     //tests.Test()
 
+    db, err := database.DbInit()
+
+    if err != nil {
+        log.Fatal(err)
+    }
+
     http.HandleFunc("/", home)
     http.HandleFunc("/login/", login)
-    http.HandleFunc("/register/", register)
+    http.HandleFunc("/register/", func (w http.ResponseWriter, r *http.Request){ register(w, r, db)})
     if config.ServeStatic {
         http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir(config.Static))))
     }
     log.Println("Server starting")
     http.ListenAndServe(":" + config.Port, nil)
-
 }
 
 

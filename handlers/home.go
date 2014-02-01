@@ -4,7 +4,6 @@ import (
     "gothere/templates"
     "gothere/cookies"
     "net/http"
-    "log"
 )
 
 func HomeGet(w http.ResponseWriter, r *http.Request) {

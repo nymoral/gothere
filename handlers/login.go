@@ -3,12 +3,10 @@ package handlers
 import (
     "gothere/templates"
     "gothere/cookies"
-    "io"
     "net/http"
-    "log"
 )
 
-func LoginGet(w io.Writer) {
+func LoginGet(w http.ResponseWriter) {
     templates.Render(w, "login", nil)
 }
 
