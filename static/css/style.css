@@ -3,7 +3,7 @@ body {
     font-family: "Sans", "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     font-size: 12px;
 }
-#login_container {
+#form-cont{
     border: 2px solid #2C2C2C;
     margin-left: auto;
     margin-right: auto;
@@ -12,22 +12,16 @@ body {
     width: 310px;
     position: relative;
 }
-#login_head {
+#form-head{
     text-align: center;
-}
-#login_top_bar {
     background: #2C2C2C;
     color: #E9E7D6;
     overflow: auto;
     padding: 0;
     width: 100%;
 }
-#login_main {
+#form-wrap{
     margin: 10px 15px;
-}
-#login_form {
-    margin-top: 1em;
-    padding: 0px;
 }
 #settings_container {
     border: 2px solid #302E2D;
@@ -40,13 +34,7 @@ body {
 }
 div.inputdata {
     vertical-align:middle;
-    border: 1px solid black;
     margin:15px;
-}
-div.inputdata label{
-    float:left;
-    padding:5px;
-    color: black;
 }
 div.inputdata span{
     display: block;
@@ -55,183 +43,25 @@ div.inputdata span{
 div.inputdata input{
     border: 1px;
     background:none;
+    border: 1px solid #2d2d2d;
     width: 100%;
     padding: 4px;
     margin: auto;
+}
+div.inputdata input:focus{
+    border-color: #8A9B0F;
 }
 .clear{
     clear:both;
 }
-.seperator{
-    height: 10px;
-}
 input[type=submit] {
     background :none;
+    clear: both;
     border: 1px solid #302e2d;
     font-weight: 700;
     color: #302e2d;
     font-size: 12;
-}
-#form_row{
-    float: left;
-    padding: 4px 0;
-    width: 100%;
-    color: 333333;
-    float: left;
-    font-size: 1em;
-    line-height: 2em;
-    padding-right: 0.5em;
-    text-align: right;
-    width: 80%;
-}
-#submit_row {
-    text-align: center;
-}
-#error-bar {
-    text-align: center;
-    color: red;
-}
-#footer {
-    margin-top: 100px;
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    margin-bottom: 10px;
-    padding-right: 10px;
-    z-index: -100;
-}
-.result_field {
-    width: 40px;
-}
-.tool_box {
-    font-size: 16px;
-    text-align: center;
-    padding: 2px;
-    width: 700px;
-    margin: auto;
-}
-.tool_box p {
-    font-weight: 700;
-    margin: 5px;
-}
-#tool_link {
-    color: inherit;
-    text-decoration: none;
-}
-#main_table{
-    display: table;
-    margin: auto;
-}
-#table {
-    text-align: center;
-    empty-cells: show;
-    border-collapse: collapse;
-    white-space: nowrap;
-    font-size: 16;
-    overflow: scroll;
-    margin-bottom: 20px;
-}
-#rez_data {
-    border: 1px solid black;
-    color: #E9E7D6;
-    font-weight: 700;
-}
-.outer {
-    background-color: #2C2C2C;
-    color: #E9E7D6;
-}
-.outer.name{
-    border: 1px solid black;  
-    padding-left: 8px;
-    padding-right: 8px;
-    padding-top: 2px;
-    padding-bottom: 2px;
-}
-.outer.place{
-    border: 1px solid black;
-}
-.hidden {
-    display: none;
-    position: absolute;
-    border: 2px solid #E9E7D6;
-    background-color: #2C2C2C;
-    color: #E9E7D6; 
-    padding: 4px;
-    z-index: 10;
-}
-.game_date {
-    border: 1px solid black;
-    background-color: #2C2C2C;
-}
-.mid {
-    border: 1px solid black;
-}
-.mid.result{
-    font-weight: 700;
-}
-.outer.name:hover  .hidden {
-    display: block;
-}
-.user {
-    font-weight: 700;
-}
-.user_place {
-    border: 1px solid black;
-    background-color: #E6683F;
-}
-.g_row td {
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-.p_row td {
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
-}
-.user_name {
-    border: 1px solid black;
-    color: #111111;
-    background-color: #E6683F;
-}
-.default_name {
-    border: 1px solid black;
-    color: #111111;
-    background-color: #CE4D45;
-}
-.happened {
-    background-color: #EBD1B0;
-}
-.not_happened {
-    background-color: #F2C777;
-}
-#recover_container {
-    width: 300px;
-    margin: auto;
-    margin-top: 40px;
-    text-align: justify;
-}
-.messages_cont{
-    width: 450px;
-    height: 200px;
-    margin: auto;
-    margin-top: 40px;
-    padding: 0px 20px;
-    text-align: justify;
-    overflow: auto;
-}
-.message_name{
-    text-align: left;
-    font-weight: 700;
-}
-.message_date{
-    text-align: right;
-    float: right;
-}
-.message_head{
-}
-.message_body{
-    clear: all;
+    margin-left: 16px;
 }
 #forgot_link{
     width: 310px;
@@ -241,4 +71,8 @@ input[type=submit] {
 #forgot_link a{
     text-decoration: none;
     color: #302E2D;
+}
+#error-bar {
+    text-align: center;
+    color: red;
 }

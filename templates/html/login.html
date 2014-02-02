@@ -1,4 +1,3 @@
-
 <html lang="en">
     <head>
         <title>Prisijungimas</title>
@@ -7,37 +6,38 @@
     </head>
 
     <body>
-        
-<div id="login_container">
-    <div id="login_top_bar">
-        <h1 id="login_head">Prisijungti</h1>
-    </div>
+        <div id="form-cont">
+            <div id="form-head">
+                <h1>Prisijungti</h1>
+            </div>
 
-    <div id="login_main">
-        <form id="login_form" action="/login/" method="post">
-            <div class="inputdata">
-                <span><input type="text" name="username" placeholder="Vart. vardas" value="{{.}}" id="username"></span>
-                <div class="clear"></div>
+            <div id="form-wrap">
+                <form action="/login/" method="post">
+                    <div class="inputdata">
+                        <span><input type="text" name="username" placeholder="Vart. vardas" value="{{.}}" id="username"></span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="inputdata">
+                        <span><input type="password" name="password" placeholder="Slaptažodis" id="password"></span>
+                        <div class="clear"></div>
+                    </div>
+                    <div>
+                        <input type="submit" value="Prisijungti!">
+                        <span style="float: right;">
+                            <input id="remember" type="checkbox" name="remember" value="1">
+                            <label style="color: #2d2d2d;" for="remember">Prisiminti?</label>
+                        </span>
+                        <div class="clear"></div>
+                    </div>
+                </form>
+                {{ if . }}<div id="error-bar">
+                        <p>Vartotojas neegzisuoja arba neteisingas slaptazodis.</p>
+                    </div>{{ end }}
             </div>
-            <div class="inputdata">
-                <span><input type="password" name="password" placeholder="Slaptažodis" id="password"></span>
-                <div class="clear"></div>
+            
             </div>
-            <div class="selectdata">
-                <span><input type="checkbox" name="remember" value="1"></span>
-                <div class="clear"></div>
+            <div id="forgot_link">
+                <a href="/forgot-password/">Pamiršau slaptažodį</a>
             </div>
-            <div id="submit_row">
-                <input type="submit" value="Prisijungti!">
-            </div>
-        </form>
-    </div>
-    
-
-    
-</div>
-<div id="forgot_link">
-    <a href="/forgot-password/">Pamiršau slaptažodį</a>
-</div>
     </body>
 </html>

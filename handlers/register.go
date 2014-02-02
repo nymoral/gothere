@@ -37,9 +37,9 @@ func RegisterPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     repeat := r.FormValue("repeat")
 
     if ! utils.UserValidate(user, repeat) {
-        templates.Render(w, "register", "Netinkami ivesti duomenys.")
+        templates.Render(w, "register", true)
     } else if database.GetPassword(db, user.Email) != "" {
-        templates.Render(w, "register", "Vartotojas jau egzistioja.")
+        templates.Render(w, "register", true)
     } else {
         // Creates a user in the db.
         user.Password = password.NewPassword(user.Password)
