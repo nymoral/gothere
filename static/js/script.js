@@ -16,9 +16,9 @@ function checkEmail(obj) {
         obj.style.borderColor="#FF0000";
 }
 
-function checkMatch(obj) {
+function checkMatch(obj, min) {
     s = document.getElementById("firstpassword").value;
-    if (obj.value === s) {
+    if (obj.value === s && obj.value.length >= min) {
         obj.style.borderColor="#8A9B0F";
     }
     else

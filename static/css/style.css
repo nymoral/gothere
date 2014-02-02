@@ -49,7 +49,7 @@ div.inputdata input{
     margin: auto;
 }
 div.inputdata input:focus{
-    border-color: #8A9B0F;
+    border-color: #444499;
 }
 .clear{
     clear:both;

@@ -10,6 +10,13 @@ import (
     "gothere/password"
 )
 
+type oldValues struct {
+    Flag        bool
+    Firstname   string
+    Lastname    string
+    Email       string
+}
+
 func RegisterGet(w http.ResponseWriter) {
     /*
      * /register GET method handler.
@@ -36,10 +43,17 @@ func RegisterPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
     repeat := r.FormValue("repeat")
 
+    var old oldValues
+    old.Flag = true
+    old.Firstname = user.Firstname
+    old.Lastname = user.Lastname
+    old.Email = user.Email
+
     if ! utils.UserValidate(user, repeat) {
-        templates.Render(w, "register", true)
+        templates.Render(w, "register", old)
     } else if database.GetPassword(db, user.Email) != "" {
-        templates.Render(w, "register", true)
+
+        templates.Render(w, "register", old)
     } else {
         // Creates a user in the db.
         user.Password = password.NewPassword(user.Password)

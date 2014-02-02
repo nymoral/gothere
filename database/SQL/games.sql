@@ -1,0 +1,11 @@
+CREATE TABLE games
+(
+  pk        BIGSERIAL PRIMARY KEY,
+  team1     VARCHAR(20) NOT NULL,
+  team2     VARCHAR(20) NOT NULL,
+  result1   INTEGER,
+  result12  INTEGER,
+  closed    BOOLEAN NOT NULL DEFAULT FALSE,
+  happened  BOOLEAN NOT NULL DEFAULT FALSE,
+  starts    TIMESTAMP NOT NULL
+);

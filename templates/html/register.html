@@ -14,30 +14,30 @@
             <div id="form-wrap">
                 <form onsubmit="return validateForm();" id="login_form" action="/register/" method="post">
                     <div class="inputdata">
-                        <span><input id="first" type="text" name="firstname" placeholder="Vardas" value="" onkeyup="checkLen(this, 1)" onclick="checkLen(this, 1)"></span>
+                        <span><input id="first" type="text" name="firstname" placeholder="Vardas" value="{{ .Firstname }}" onblur="checkLen(this, 1)"></span>
                         <div class="clear"></div>
                     </div>
                     <div class="inputdata">
-                        <span><input id="last" type="text" name="lastname" placeholder="Pavarde" value="" onkeyup="checkLen(this, 1)" onclick="checkLen(this, 1)"></span>
+                        <span><input id="last" type="text" name="lastname" placeholder="Pavarde" value="{{ .Lastname }}" onblur="checkLen(this, 1)"></span>
                         <div class="clear"></div>
                     </div>
                     <div class="inputdata">
-                        <span><input id="email" type="text" name="email" placeholder="El. pastas" value="" onkeyup="checkEmail(this)" onclick="checkEmail(this)"></span>
+                        <span><input id="email" type="text" name="email" placeholder="El. pastas" value="{{ .Email }}" onblur="checkEmail(this)"></span>
                         <div class="clear"></div>
                     </div>
                     <div class="inputdata">
-                        <span><input id="firstpassword" type="password" name="password" placeholder="Slaptažodis" onkeyup="checkLen(this, 6)" onclick="checkLen(this, 6)"></span>
+                        <span><input id="firstpassword" type="password" name="password" placeholder="Slaptažodis" onblur="checkLen(this, 6)"></span>
                         <div class="clear"></div>
                     </div>
                     <div class="inputdata">
-                        <span><input id="cpassword" type="password" name="repeat" placeholder="Ir dar karteli" onkeyup="checkMatch(this)" onclick="checkMatch(this)"></span>
+                        <span><input id="cpassword" type="password" name="repeat" placeholder="Ir dar karta" oninput="checkMatch(this, 6)"></span>
                         <div class="clear"></div>
                     </div>
                     <div id="submit_row">
                         <input type="submit" value="Registracija!">
                     </div>
                 </form>
-                {{ if . }}<div id="error-bar">
+                {{ if .Flag }}<div id="error-bar">
                         <p>Vartotojas su siuo el. pasto adresu jau egzistuoja.</p>
                     </div>{{ end }}
             </div>
