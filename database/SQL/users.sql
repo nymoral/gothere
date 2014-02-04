@@ -1,6 +1,6 @@
 CREATE TABLE users
 (
-  pk        BIGSERIAL PRIMARY KEY,
+  pk        BIGSERIAL   PRIMARY KEY,
   email     VARCHAR(50) NOT NULL,
   password  VARCHAR(100) NOT NULL,
   firstname VARCHAR(20) NOT NULL,

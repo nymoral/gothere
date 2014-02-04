@@ -8,7 +8,7 @@ import (
 )
 
 
-func CreateUser(db *sql.DB, user *models.User) {
+func CreateUser(db *sql.DB, user models.User) {
     /*
      * Adds a user to the database.
      * Assumes that model is correct

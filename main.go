@@ -38,6 +38,14 @@ func register(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     }
 }
 
+func admin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+    if r.Method == "GET" {
+        handlers.AdminGet(w)
+    } else {
+        handlers.AdminPost(w, r, db)
+    }
+}
+
 func main() {
 
     db, err := database.DbInit()
@@ -63,6 +71,7 @@ func main() {
     http.HandleFunc("/", home)
     http.HandleFunc("/login/", func (w http.ResponseWriter, r * http.Request) {login(w, r, db)} )
     http.HandleFunc("/register/", func (w http.ResponseWriter, r *http.Request){ register(w, r, db)})
+    http.HandleFunc("/admin/", func (w http.ResponseWriter, r *http.Request){ admin(w, r, db)})
     if config.ServeStatic {
         // In case go server needs to serve static files.
         // Specified in config file.

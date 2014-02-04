@@ -4,7 +4,7 @@ import (
     "gothere/models"
 )
 
-func UserValidate(user models.User, repeat string) (bool) {
+func UserValidate(user *models.User, repeat string) (bool) {
     /* 
      * Registration form validation.
      * Returns true/fales based on weather the form fits

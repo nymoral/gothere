@@ -49,7 +49,7 @@ func RegisterPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     old.Lastname = user.Lastname
     old.Email = user.Email
 
-    if ! utils.UserValidate(user, repeat) {
+    if ! utils.UserValidate(&user, repeat) {
         templates.Render(w, "register", old)
     } else if database.GetPassword(db, user.Email) != "" {
 
@@ -57,7 +57,7 @@ func RegisterPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     } else {
         // Creates a user in the db.
         user.Password = password.NewPassword(user.Password)
-        database.CreateUser(db, user)
+        database.CreateUser(db, &user)
         http.Redirect(w, r, "/login", http.StatusFound)
     }
 }
