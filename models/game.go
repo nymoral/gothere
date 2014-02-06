@@ -2,6 +2,7 @@ package models
 
 import (
     "time"
+    "fmt"
 )
 
 type Game struct {
@@ -17,4 +18,12 @@ type Game struct {
     Happened    bool
 
     Starts      time.Time
+}
+
+func (g *Game) ShortTime() (string) {
+    return fmt.Sprintf("%d-%d", g.Starts.Month(), g.Starts.Day())
+}
+
+func (g *Game) ListItem() (string) {
+    return fmt.Sprintf("<option value=\"%d\">%s %s : %s</option>", g.Pk, g.ShortTime(), g.Team1, g.Team2)
 }
