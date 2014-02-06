@@ -1,5 +1,5 @@
 body {
-    background-color: #E9E7D6;
+    background-color: #ece5ce;
     font-family: "Sans", "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     font-size: 12px;
 }
@@ -14,23 +14,14 @@ body {
 }
 #form-head{
     text-align: center;
-    background: #2C2C2C;
-    color: #E9E7D6;
+    background: #493736;
+    color: #ece5ce;
     overflow: auto;
     padding: 0;
     width: 100%;
 }
 #form-wrap{
     margin: 10px 15px;
-}
-#settings_container {
-    border: 2px solid #302E2D;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 100px;
-    min-width: 300px;
-    width: 310px;
-    position: relative;
 }
 div.inputdata {
     vertical-align:middle;
@@ -43,13 +34,14 @@ div.inputdata span{
 div.inputdata input{
     border: 1px;
     background:none;
-    border: 1px solid #2d2d2d;
+    border: 1px solid #493736;
     width: 100%;
     padding: 4px;
     margin: auto;
 }
 div.inputdata input:focus{
-    border-color: #444499;
+    outline: none !important;
+    border-color: #d3643b;
 }
 .clear{
     clear:both;
@@ -57,9 +49,8 @@ div.inputdata input:focus{
 input[type=submit] {
     background :none;
     clear: both;
-    border: 1px solid #302e2d;
+    border: 1px solid #493736;
     font-weight: 700;
-    color: #302e2d;
     font-size: 12;
     margin-left: 16px;
 }
@@ -70,7 +61,7 @@ input[type=submit] {
 }
 #forgot_link a{
     text-decoration: none;
-    color: #302E2D;
+    color: #493736;
 }
 #error-bar {
     text-align: center;

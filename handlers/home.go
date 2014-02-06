@@ -19,6 +19,8 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
     if username == "" {
         // Gorilla failed to decode it.
         http.Redirect(w, r, "/login/", http.StatusFound)
+    } else if username == "admin" {
+        http.Redirect(w, r, "/admin/", http.StatusFound)
     } else {
         templates.Render(w, "home", username)
     }

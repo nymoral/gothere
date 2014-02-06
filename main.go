@@ -40,7 +40,7 @@ func register(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 func admin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     if r.Method == "GET" {
-        handlers.AdminGet(w)
+        handlers.AdminGet(w, r)
     } else {
         handlers.AdminPost(w, r, db)
     }
@@ -69,6 +69,7 @@ func main() {
     }()
 
     http.HandleFunc("/", home)
+    http.HandleFunc("/logout/", handlers.Logout)
     http.HandleFunc("/login/", func (w http.ResponseWriter, r * http.Request) {login(w, r, db)} )
     http.HandleFunc("/register/", func (w http.ResponseWriter, r *http.Request){ register(w, r, db)})
     http.HandleFunc("/admin/", func (w http.ResponseWriter, r *http.Request){ admin(w, r, db)})

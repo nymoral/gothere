@@ -34,22 +34,28 @@ function validateForm() {
 
     if (fn.length < 1 || fn.length > 20) {
         alert("Vardas turi buti 1-20 simboliu ilgio.");
+        return false
     }
     if (ln.length < 1 || ln.length > 30) {
         alert("Pavarde turi buti 1-30 simboliu ilgio.");
+        return false
     }
     if (ln.length < 1 || ln.length > 30) {
         alert("Pavarde turi buti 1-30 simboliu ilgio.");
+        return false
     }
     var re = /[a-z0-9!#$%&'*+/=?^_{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
     if (! re.test(em)) {
         alert("Netinkamas el. pasto adresas.");
+        return false
     }
     if (ps.length < 6) {
         alert("Slaptazodis turi buti bent 6 simboliu ilgio.");
+        return false
     }
     if (ps !== cp) {
         alert("Slaptazodziai nesutampa");
+        return false
     }
     return true;
 }

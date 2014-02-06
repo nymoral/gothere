@@ -43,3 +43,19 @@ func SetSessionId(w http.ResponseWriter, sessionid string, remember bool) {
     http.SetCookie(w, &C)
 
 }
+
+func DeleteSessionId(w http.ResponseWriter) {
+    /* 
+     * Resets sessionId.
+     * When user logs out, his session id is set to
+     * none, and thus Gorila will not be able to decode
+     * the username of the user.
+     */
+
+    var C http.Cookie
+    C.Name = "sessionid"
+    C.Value = "none"
+    C.Path = "/"
+    http.SetCookie(w, &C)
+
+}
