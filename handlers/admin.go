@@ -16,6 +16,7 @@ func AdminGet(w http.ResponseWriter, r *http.Request) {
      * /admin GET method handler.
      * Just render's the form.
      */
+
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
 

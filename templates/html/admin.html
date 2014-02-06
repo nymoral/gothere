@@ -8,10 +8,11 @@
     <body>
         <div id="form-cont">
             <div id="form-head">
-                <h1>Rungtynes</h1>
+                <h1>Add</h1>
             </div>
             <div id="form-wrap">
                 <form id="login_form" action="/admin/" method="post">
+                    <input type="hidden" name="sending" value="addGame">
                     <div class="inputdata">
                         <span><input type="text" name="team1" placeholder="1"></span>
                         <div class="clear"></div>
@@ -28,8 +29,42 @@
                         <input type="submit" value="Siusti!">
                     </div>
                 </form>
-                {{ if . }}<div id="error-bar">
-                        <p>PAVYKO</p>
+                {{ if .AddF }}<div id="error-bar">
+                        <p>DONE</p>
+                    </div>{{ end }}
+            </div>
+        </div>
+
+        <div id="form-cont">
+            <div id="form-head">
+                <h1>Close</h1>
+            </div>
+            <div id="form-wrap">
+                <form id="login_form" action="/admin/" method="post">
+                    <input type="hidden" name="sending" value="close">
+                    <div id="submit_row">
+                        <input type="submit" value="Siusti!">
+                    </div>
+                </form>
+                {{ if .CloseF }}<div id="error-bar">
+                        <p>DONE</p>
+                    </div>{{ end }}
+            </div>
+        </div>
+
+        <div id="form-cont">
+            <div id="form-head">
+                <h1>End</h1>
+            </div>
+            <div id="form-wrap">
+                <form id="login_form" action="/admin/" method="post">
+                    <input type="hidden" name="sending" value="end">
+                    <div id="submit_row">
+                        <input type="submit" value="Siusti!">
+                    </div>
+                </form>
+                {{ if .EndF }}<div id="error-bar">
+                        <p>DONE</p>
                     </div>{{ end }}
             </div>
         </div>
