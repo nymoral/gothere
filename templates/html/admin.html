@@ -29,12 +29,8 @@
                         <input type="submit" value="Siusti!">
                     </div>
                 </form>
-                {{ if .AddF }}<div id="error-bar">
-                        <p>DONE</p>
-                    </div>{{ end }}
             </div>
         </div>
-
         <div id="form-cont">
             <div id="form-head">
                 <h1>Close</h1>
@@ -42,13 +38,17 @@
             <div id="form-wrap">
                 <form id="login_form" action="/admin/" method="post">
                     <input type="hidden" name="sending" value="close">
+                    <div class="inputdata">
+                        <span>
+                            <select name="close-game-id">
+                                {{range $game := .OpenGames}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
+                            </select>
+                        </span>
+                    </div>
                     <div id="submit_row">
                         <input type="submit" value="Siusti!">
                     </div>
                 </form>
-                {{ if .CloseF }}<div id="error-bar">
-                        <p>DONE</p>
-                    </div>{{ end }}
             </div>
         </div>
 
@@ -59,13 +59,16 @@
             <div id="form-wrap">
                 <form id="login_form" action="/admin/" method="post">
                     <input type="hidden" name="sending" value="end">
+                    <div class="inputdata">
+                        <span>
+                            <select name="finish-game-id">
+                            </select>
+                        </span>
+                    </div>
                     <div id="submit_row">
                         <input type="submit" value="Siusti!">
                     </div>
                 </form>
-                {{ if .EndF }}<div id="error-bar">
-                        <p>DONE</p>
-                    </div>{{ end }}
             </div>
         </div>
     </body>

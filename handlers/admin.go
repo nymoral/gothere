@@ -11,7 +11,13 @@ import (
     "gothere/cookies"
 )
 
-func AdminGet(w http.ResponseWriter, r *http.Request) {
+type FormReturn struct {
+    CloseF  bool
+    EndF    bool
+    OpenGames   []models.Game
+}
+
+func AdminGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     /*
      * /admin GET method handler.
      * Just render's the form.
@@ -23,15 +29,11 @@ func AdminGet(w http.ResponseWriter, r *http.Request) {
     if username != "admin" {
         http.Redirect(w, r, "/login/", http.StatusFound)
     } else {
-        templates.Render(w, "admin", nil)
+        var F FormReturn
+        F.OpenGames = database.OpenGames(db)
+        templates.Render(w, "admin", F)
     }
 
-}
-
-type FormReturn struct {
-    AddF    bool
-    CloseF  bool
-    EndF    bool
 }
 
 func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -44,7 +46,6 @@ func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
     option := r.FormValue("sending")
     var F FormReturn
-    F.AddF = false
     F.CloseF = false
     F.EndF = false
 
@@ -61,16 +62,17 @@ func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
                 log.Println(err)
             } else {
                 database.CreateGame(db, &game)
-                F.AddF = true
+                http.Redirect(w, r, "/admin", http.StatusFound)
             }
 
         case "close" :
-            F.CloseF = true
+            pk := r.FormValue("close-game-id")
+            database.CloseGame(db, pk)
+            http.Redirect(w, r, "/admin", http.StatusFound)
 
         case "end" :
-            F.EndF = true
+            http.Redirect(w, r, "/admin", http.StatusFound)
         }
-        templates.Render(w, "admin", F)
     } else {
         http.Redirect(w, r, "/login/", http.StatusFound)
     }

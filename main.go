@@ -40,7 +40,7 @@ func register(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 func admin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     if r.Method == "GET" {
-        handlers.AdminGet(w, r)
+        handlers.AdminGet(w, r, db)
     } else {
         handlers.AdminPost(w, r, db)
     }
