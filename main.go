@@ -73,6 +73,7 @@ func main() {
     http.HandleFunc("/login/", func (w http.ResponseWriter, r * http.Request) {login(w, r, db)} )
     http.HandleFunc("/register/", func (w http.ResponseWriter, r *http.Request){ register(w, r, db)})
     http.HandleFunc("/admin/", func (w http.ResponseWriter, r *http.Request){ admin(w, r, db)})
+    http.HandleFunc("/error/", func (w http.ResponseWriter, r *http.Request){ handlers.ErrorGet(w)})
     if config.ServeStatic {
         // In case go server needs to serve static files.
         // Specified in config file.

@@ -3,6 +3,7 @@ package handlers
 import (
     "time"
     "log"
+    "strconv"
     "net/http"
     "database/sql"
     "gothere/templates"
@@ -15,6 +16,7 @@ type FormReturn struct {
     CloseF  bool
     EndF    bool
     OpenGames   []models.Game
+    NotFinish   []models.Game
 }
 
 func AdminGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -30,10 +32,10 @@ func AdminGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
         http.Redirect(w, r, "/login/", http.StatusFound)
     } else {
         var F FormReturn
-        F.OpenGames = database.OpenGames(db)
+        F.OpenGames = database.GamesList(db, "open")
+        F.NotFinish = database.GamesList(db, "finish")
         templates.Render(w, "admin", F)
     }
-
 }
 
 func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -71,7 +73,17 @@ func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
             http.Redirect(w, r, "/admin", http.StatusFound)
 
         case "end" :
-            http.Redirect(w, r, "/admin", http.StatusFound)
+            t1 := r.FormValue("team1")
+            t2 := r.FormValue("team2")
+            pk := r.FormValue("finish-game-id")
+            n1, er1 := strconv.Atoi(t1)
+            n2, er2 := strconv.Atoi(t2)
+            if er1 != nil || er2 != nil {
+                http.Redirect(w, r, "/error", http.StatusFound)
+            } else {
+                database.FinishGame(db, pk, n1, n2)
+                http.Redirect(w, r, "/admin", http.StatusFound)
+            }
         }
     } else {
         http.Redirect(w, r, "/login/", http.StatusFound)

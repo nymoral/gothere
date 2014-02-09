@@ -26,7 +26,7 @@
                         <div class="clear"></div>
                     </div>
                     <div id="submit_row">
-                        <input type="submit" value="Siusti!">
+                        <input type="submit" value="Kurti!">
                     </div>
                 </form>
             </div>
@@ -46,7 +46,7 @@
                         </span>
                     </div>
                     <div id="submit_row">
-                        <input type="submit" value="Siusti!">
+                        <input type="submit" value="Uzdaryti!">
                     </div>
                 </form>
             </div>
@@ -62,11 +62,20 @@
                     <div class="inputdata">
                         <span>
                             <select name="finish-game-id">
+                                {{range $game := .NotFinish}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
                             </select>
                         </span>
                     </div>
+                    <div class="inputdata">
+                        <span><input type="text" name="team1" placeholder="1"></span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="inputdata">
+                        <span><input type="text" name="team2" placeholder="2"></span>
+                        <div class="clear"></div>
+                    </div>
                     <div id="submit_row">
-                        <input type="submit" value="Siusti!">
+                        <input type="submit" value="Baigti!">
                     </div>
                 </form>
             </div>
