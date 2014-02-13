@@ -69,7 +69,7 @@ func main() {
     }()
 
     http.HandleFunc("/",            func (w http.ResponseWriter, r *http.Request) {home(w, r, db)} )
-    http.HandleFunc("/logout/",     func (w http.ResponseWriter, r *http.Request) {handlers.Logout)} )
+    http.HandleFunc("/logout/",     func (w http.ResponseWriter, r *http.Request) {handlers.Logout(w, r)} )
     http.HandleFunc("/login/",      func (w http.ResponseWriter, r *http.Request) {login(w, r, db)} )
     http.HandleFunc("/register/",   func (w http.ResponseWriter, r *http.Request) {register(w, r, db)} )
     http.HandleFunc("/admin/",      func (w http.ResponseWriter, r *http.Request) {admin(w, r, db)} )

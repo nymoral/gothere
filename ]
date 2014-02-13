@@ -1,14 +1,13 @@
 package password
 
 import (
-    "fmt"
     "crypto/sha256"
     "encoding/hex"
+    "strings"
     "gothere/utils"
-    "gothere/config"
 )
 
-func hashPassword(plain, salt string, cycles int) string {
+func hashPassword(plain, salt string) string {
     /* 
      * Main password hashing function.
      * It takes plain-text password and a salt to use
@@ -16,6 +15,7 @@ func hashPassword(plain, salt string, cycles int) string {
      * Uses SHA256.
      */
 
+    cycles := 1000
     hashed := plain
     for i := 0; i < cycles; i++ {
         hash := sha256.New()
@@ -37,10 +37,9 @@ func NewPassword(plain string) (string) {
      * Uses hashPassword() func from this package.
      * Formated as "SALT|HASH"
      */
-    cycles := config.HashCycles
 
     salt := utils.RandomStr(16)
-    return fmt.Sprintf("%d %s %s", cycles, salt, hashPassword(plain, salt, cycles))
+    return salt+"|"+hashPassword(plain, salt)
 }
 
 func Authenticate(plain, hashed string) bool{
@@ -53,14 +52,11 @@ func Authenticate(plain, hashed string) bool{
      */
 
     if hashed == "" {
-        // No user in the db.
         return false
     }
-    var cycles int
-    var s, h string
-    nr, err := fmt.Sscanf(hashed, "%d %s %s", &cycles, &s, &h)
-    if nr != 3 || err != nil {
+    split := strings.Split(hashed, "|")
+    if len(split) != 2 {
         return false
     }
-    return h == hashPassword(plain, s, cycles)
+    return split[1] == hashPassword(plain, split[0])
 }
