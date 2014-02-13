@@ -27,6 +27,8 @@ func login(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 func home(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     if r.Method == "GET" {
         handlers.HomeGet(w, r, db)
+    } else {
+        handlers.HomePost(w, r, db)
     }
 }
 

@@ -6,7 +6,7 @@ CREATE TABLE guesses
   user_pk   BIGSERIAL REFERENCES users (pk),
 
   result1   INTEGER,
-  result12  INTEGER,
+  result2   INTEGER,
   points    INTEGER,
   total     INTEGER,
   given     TIMESTAMP NOT NULL DEFAULT NOW()

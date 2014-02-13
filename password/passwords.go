@@ -11,7 +11,7 @@ import (
 func hashPassword(plain, salt string, cycles int) string {
     /* 
      * Main password hashing function.
-     * It takes plain-text password and a salt to use
+     * It takes plain-text password a salt and nr of cycles
      * and returns hashed password.
      * Uses SHA256.
      */
@@ -35,7 +35,7 @@ func NewPassword(plain string) (string) {
      * Generates a random salt and hashes given password
      * to be stored in DB.
      * Uses hashPassword() func from this package.
-     * Formated as "SALT|HASH"
+     * Formated as "CYCLE SALT HASH"
      */
     cycles := config.HashCycles
 
@@ -59,7 +59,10 @@ func Authenticate(plain, hashed string) bool{
     var cycles int
     var s, h string
     nr, err := fmt.Sscanf(hashed, "%d %s %s", &cycles, &s, &h)
+    // Extracts nr of cycles, salt and a hash from db data.
     if nr != 3 || err != nil {
+        // Bad formating of a password.
+        // Should never happen.
         return false
     }
     return h == hashPassword(plain, s, cycles)
