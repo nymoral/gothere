@@ -9,4 +9,5 @@ const DbPass        string = "Some DB Password. Leave blank for none"
 const Secret1       string = "Some random 32 char lenght string"
 const Secret2       string = "Some other random 32 char lenght string"
 const TemplateDir   string = "/home/aivaras/Documents/go/src/gothere/templates/html/"
+const HashCycles    int    = 1000
 

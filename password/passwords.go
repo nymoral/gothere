@@ -19,7 +19,7 @@ func hashPassword(plain, salt string, cycles int) string {
     hashed := plain
     for i := 0; i < cycles; i++ {
         hash := sha256.New()
-        hash.Write([]byte(hashed))
+        hash.Write([]byte(salt+hashed))
         md := hash.Sum(nil)
         hashed = hex.EncodeToString(md)
     }
