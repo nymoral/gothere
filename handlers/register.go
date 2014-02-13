@@ -51,14 +51,18 @@ func RegisterPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
     if ! utils.UserValidate(&user, repeat) {
         templates.Render(w, "register", old)
-    } else if database.GetPassword(db, user.Email) != "" {
-
-        templates.Render(w, "register", old)
-    } else {
-        // Creates a user in the db.
-        user.Password = password.NewPassword(user.Password)
-        database.CreateUser(db, &user)
-        http.Redirect(w, r, "/login", http.StatusFound)
+        return
     }
+
+    pass, _ := database.GetPassword(db, user.Email)
+    if pass != "" {
+        templates.Render(w, "register", old)
+        return
+    }
+
+    // Creates a user in the db.
+    user.Password = password.NewPassword(user.Password)
+    database.CreateUser(db, &user)
+    http.Redirect(w, r, "/login", http.StatusFound)
 }
 

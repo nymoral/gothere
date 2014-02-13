@@ -27,8 +27,9 @@ func AdminGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
+    _, is_admin := database.GetPassword(db, username)
 
-    if username != "admin" {
+    if ! is_admin {
         http.Redirect(w, r, "/login/", http.StatusFound)
     } else {
         var F FormReturn
@@ -45,13 +46,14 @@ func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
+    _, is_admin := database.GetPassword(db, username)
 
     option := r.FormValue("sending")
     var F FormReturn
     F.CloseF = false
     F.EndF = false
 
-    if username == "admin" {
+    if is_admin {
         switch option {
         case "addGame" :
             var game models.Game

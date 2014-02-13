@@ -25,7 +25,7 @@ func CreateUser(db *sql.DB, user *models.User) {
     }
 }
 
-func GetPassword(db *sql.DB, email string) (string) {
+func GetPassword(db *sql.DB, email string) (string, bool) {
     /*
      * Fetches hashed users password from the DB.
      * Used to check if user is in the db
@@ -33,11 +33,12 @@ func GetPassword(db *sql.DB, email string) (string) {
      */
 
     var password string
-    R := db.QueryRow("SELECT password FROM users WHERE email=$1;", email)
-    err := R.Scan(&password)
+    var is_admin bool
+    R := db.QueryRow("SELECT password, admin FROM users WHERE email=$1;", email)
+    err := R.Scan(&password, &is_admin)
     if err != nil {
         // Usualy not found.
-        return ""
+        return "", false
     }
-    return password
+    return password, is_admin
 }

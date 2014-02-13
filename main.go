@@ -24,9 +24,9 @@ func login(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     }
 }
 
-func home(w http.ResponseWriter, r *http.Request) {
+func home(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     if r.Method == "GET" {
-        handlers.HomeGet(w, r)
+        handlers.HomeGet(w, r, db)
     }
 }
 
@@ -68,12 +68,12 @@ func main() {
         }
     }()
 
-    http.HandleFunc("/", home)
-    http.HandleFunc("/logout/", handlers.Logout)
-    http.HandleFunc("/login/", func (w http.ResponseWriter, r * http.Request) {login(w, r, db)} )
-    http.HandleFunc("/register/", func (w http.ResponseWriter, r *http.Request){ register(w, r, db)})
-    http.HandleFunc("/admin/", func (w http.ResponseWriter, r *http.Request){ admin(w, r, db)})
-    http.HandleFunc("/error/", func (w http.ResponseWriter, r *http.Request){ handlers.ErrorGet(w)})
+    http.HandleFunc("/",            func (w http.ResponseWriter, r *http.Request) {home(w, r, db)} )
+    http.HandleFunc("/logout/",     func (w http.ResponseWriter, r *http.Request) {handlers.Logout)} )
+    http.HandleFunc("/login/",      func (w http.ResponseWriter, r *http.Request) {login(w, r, db)} )
+    http.HandleFunc("/register/",   func (w http.ResponseWriter, r *http.Request) {register(w, r, db)} )
+    http.HandleFunc("/admin/",      func (w http.ResponseWriter, r *http.Request) {admin(w, r, db)} )
+    http.HandleFunc("/error/",      func (w http.ResponseWriter, r *http.Request) {handlers.ErrorGet(w)} )
     if config.ServeStatic {
         // In case go server needs to serve static files.
         // Specified in config file.

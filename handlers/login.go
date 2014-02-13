@@ -29,7 +29,7 @@ func LoginPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     username := r.FormValue("username")
     pass := r.FormValue("password")
     remember := r.FormValue("remember") == "1"
-    hashed := database.GetPassword(db, username)
+    hashed, _ := database.GetPassword(db, username)
 
     if password.Authenticate(pass, hashed) {
         // Valid password.
