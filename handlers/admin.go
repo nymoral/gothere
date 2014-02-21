@@ -5,7 +5,6 @@ import (
     "log"
     "strconv"
     "net/http"
-    "database/sql"
     "gothere/templates"
     "gothere/models"
     "gothere/database"
@@ -19,12 +18,11 @@ type FormReturn struct {
     NotFinish   []models.Game
 }
 
-func AdminGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func AdminGet(w http.ResponseWriter, r *http.Request) {
     /*
      * /admin GET method handler.
      * Just render's the form.
      */
-
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
     _, is_admin := database.GetPassword(db, username)
@@ -39,7 +37,7 @@ func AdminGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
     }
 }
 
-func AdminPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func AdminPost(w http.ResponseWriter, r *http.Request) {
     /*
      * /admin POST method handler.
      */

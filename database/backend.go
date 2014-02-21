@@ -7,8 +7,7 @@ import (
     "gothere/config"
 )
 
-
-func DbInit() (*sql.DB, error) {
+func DbInit() (*sql.DB) {
     /*
      * Opens a connection to a postgresql databalse
      * and returns a pointer to sql.DB object and error.
@@ -31,23 +30,5 @@ func DbInit() (*sql.DB, error) {
         log.Fatal(err)
     }
 
-    err = db.Ping()
-
-    return db, err
-
+    return db
 }
-
-func DbClose(db *sql.DB) {
-    /* 
-     * Closes a connectio to a given sql.DB.
-     */
-
-    err := db.Close();
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    log.Println("Closing connection")
-}
-
-

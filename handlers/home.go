@@ -3,7 +3,6 @@ package handlers
 import (
     "fmt"
     "net/http"
-    "database/sql"
     "gothere/templates"
     "gothere/cookies"
     "gothere/database"
@@ -16,7 +15,7 @@ type context struct {
 
 }
 
-func HomeGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func HomeGet(w http.ResponseWriter, r *http.Request) {
     /*
      * / handler for GET method request.
      * Renders a page only for users with valid sessionid cookie.
@@ -41,7 +40,8 @@ func HomeGet(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 }
 
-func HomePost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func HomePost(w http.ResponseWriter, r *http.Request) {
+
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
 

@@ -2,7 +2,6 @@ package handlers
 
 import (
     "net/http"
-    "database/sql"
     "gothere/templates"
     "gothere/models"
     "gothere/database"
@@ -26,7 +25,7 @@ func RegisterGet(w http.ResponseWriter) {
     templates.Render(w, "register", nil)
 }
 
-func RegisterPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func RegisterPost(w http.ResponseWriter, r *http.Request) {
     /*
      * /register POST method handler.
      * Validates the form,

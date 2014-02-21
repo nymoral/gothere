@@ -3,10 +3,6 @@ package main
 import (
     "net/http"
     "log"
-    "os"
-    "os/signal"
-    "database/sql"
-    "gothere/database"
     "gothere/config"
     "gothere/handlers"
 )
@@ -16,66 +12,46 @@ import (
  * and request methods.
  */
 
-func login(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func login(w http.ResponseWriter, r *http.Request) {
     if r.Method == "GET" {
         handlers.LoginGet(w)
     } else {
-        handlers.LoginPost(w, r, db)
+        handlers.LoginPost(w, r)
     }
 }
 
-func home(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func home(w http.ResponseWriter, r *http.Request) {
     if r.Method == "GET" {
-        handlers.HomeGet(w, r, db)
+        handlers.HomeGet(w, r)
     } else {
-        handlers.HomePost(w, r, db)
+        handlers.HomePost(w, r)
     }
 }
 
-func register(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func register(w http.ResponseWriter, r *http.Request) {
     if r.Method == "GET" {
         handlers.RegisterGet(w)
     } else {
-        handlers.RegisterPost(w, r, db)
+        handlers.RegisterPost(w, r)
     }
 }
 
-func admin(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func admin(w http.ResponseWriter, r *http.Request) {
     if r.Method == "GET" {
-        handlers.AdminGet(w, r, db)
+        handlers.AdminGet(w, r)
     } else {
-        handlers.AdminPost(w, r, db)
+        handlers.AdminPost(w, r)
     }
 }
 
 func main() {
-
-    db, err := database.DbInit()
-    // Connection to the db.
-
-    if err != nil {
-        // No db - no site.
-        log.Fatal(err)
-    }
-
-    // Handle ctrl-c
-    // to close db connection.
-    c := make(chan os.Signal, 1)
-    signal.Notify(c, os.Interrupt)
-    go func(){
-        for sig := range c {
-            database.DbClose(db)
-            _ = sig
-            os.Exit(1)
-        }
-    }()
-
-    http.HandleFunc("/",            func (w http.ResponseWriter, r *http.Request) {home(w, r, db)} )
+    http.HandleFunc("/",            func (w http.ResponseWriter, r *http.Request) {home(w, r)} )
     http.HandleFunc("/logout/",     func (w http.ResponseWriter, r *http.Request) {handlers.Logout(w, r)} )
-    http.HandleFunc("/login/",      func (w http.ResponseWriter, r *http.Request) {login(w, r, db)} )
-    http.HandleFunc("/register/",   func (w http.ResponseWriter, r *http.Request) {register(w, r, db)} )
-    http.HandleFunc("/admin/",      func (w http.ResponseWriter, r *http.Request) {admin(w, r, db)} )
+    http.HandleFunc("/login/",      func (w http.ResponseWriter, r *http.Request) {login(w, r)} )
+    http.HandleFunc("/register/",   func (w http.ResponseWriter, r *http.Request) {register(w, r)} )
+    http.HandleFunc("/admin/",      func (w http.ResponseWriter, r *http.Request) {admin(w, r)} )
     http.HandleFunc("/error/",      func (w http.ResponseWriter, r *http.Request) {handlers.ErrorGet(w)} )
+
     if config.ServeStatic {
         // In case go server needs to serve static files.
         // Specified in config file.

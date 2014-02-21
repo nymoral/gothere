@@ -2,7 +2,6 @@ package handlers
 
 import (
     "net/http"
-    "database/sql"
     "gothere/templates"
     "gothere/cookies"
     "gothere/database"
@@ -18,14 +17,13 @@ func LoginGet(w http.ResponseWriter) {
     templates.Render(w, "login", nil)
 }
 
-func LoginPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+func LoginPost(w http.ResponseWriter, r *http.Request) {
     /*
      * /login handler for POST request.
      * Tries to validate user.
      * If email / password is OK,
      * new sessionid cookie is set and user is redirected to / .
      */
-
     username := r.FormValue("username")
     pass := r.FormValue("password")
     remember := r.FormValue("remember") == "1"
@@ -40,6 +38,3 @@ func LoginPost(w http.ResponseWriter, r *http.Request, db *sql.DB) {
         templates.Render(w, "login", username)
     }
 }
-
-
-

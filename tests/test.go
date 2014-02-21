@@ -80,15 +80,13 @@ func dbTest() {
 
     database.DbInit()
 
-    db, err := database.DbInit()
+    db := database.DbInit()
+    err := db.Ping()
     if err != nil {
         fmt.Printf("FAILED: ")
         fmt.Println(err)
     } else {
         fmt.Printf("PASSED\n")
-
-        fmt.Printf("Closing connection to DB.\n")
-        database.DbClose(db)
     }
 
     fmt.Println("<-- DB TEST END -->")
