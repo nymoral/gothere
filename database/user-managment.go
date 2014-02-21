@@ -36,8 +36,7 @@ func GetPassword(db *sql.DB, email string) (string, bool) {
     var is_admin bool
     R := db.QueryRow("SELECT password, admin FROM users WHERE email=$1;", email)
     err := R.Scan(&password, &is_admin)
-    if err != nil {
-        // Usualy not found.
+    if err = sql.ErrNoRows{
         return "", false
     }
     return password, is_admin
@@ -49,7 +48,7 @@ func GetUserId(db *sql.DB, username string) (int) {
     var pk int
     R := db.QueryRow("SELECT pk FROM users WHERE email=$1;", username)
     err := R.Scan(&pk)
-    if err != nil {
+    if err == ErrNoRows {
         // Usualy not found.
         return -1
     }
