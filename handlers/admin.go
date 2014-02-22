@@ -2,7 +2,6 @@ package handlers
 
 import (
     "time"
-    "log"
     "strconv"
     "net/http"
     "gothere/templates"
@@ -61,7 +60,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
             game.Starts, err = time.Parse("2006-01-02 15:04", r.FormValue("starts"))
 
             if err != nil {
-                log.Println(err)
+                http.Redirect(w, r, "/error", http.StatusFound)
             } else {
                 database.CreateGame(db, &game)
                 http.Redirect(w, r, "/admin", http.StatusFound)

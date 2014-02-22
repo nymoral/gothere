@@ -1,7 +1,6 @@
 package templates
 
 import (
-    "log"
     "io"
     "html/template"
     "gothere/config"
@@ -19,6 +18,7 @@ var adminTemplate, _ = template.ParseFiles(dir + "admin.html")
 
 var errorTemplate, _ = template.ParseFiles(dir + "error.html")
 
+var guessesTemplate, _ = template.ParseFiles(dir + "guesses.html")
 
 func Render(wr io.Writer, name string, data interface{}) {
     /*
@@ -37,12 +37,12 @@ func Render(wr io.Writer, name string, data interface{}) {
             t = registerTemplate
         case "error":
             t = errorTemplate
-
-        log.Fatal("Template isn't loaded")
+        case "guesses":
+            t = guessesTemplate
     }
 
     err := t.Execute(wr, data)
     if err != nil {
-        log.Fatal(err)
+        Render(wr, "error", nil)
     }
 }

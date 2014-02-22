@@ -1,0 +1,31 @@
+
+<html lang="en">
+    <head>
+        <title>Futbolas</title>
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+    <div id="guess-table-wrap">
+        <table>
+            <tr>
+                <td>Rungtynės</td>
+                <td>Resultatas</td>
+            </tr>
+            {{range $guess := .Guesses}}<tr>
+                <td>{{$guess.Name}}</td>
+                <td>{{$guess.Result}}</td>
+            </tr>{{end}}
+        </table>
+    </div>
+
+        <form action="/" method="post">
+<select name="game-id">
+    {{range $game := .OpenGames}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
+</select>
+        <input type="number" name="result_1" value="" class="result_field">
+        <input type="number" name="result_2" value="" class="result_field">
+        <input type="submit" value="Pateikti">
+        </form>
+        </body>
+</html>

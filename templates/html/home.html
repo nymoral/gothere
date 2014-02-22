@@ -1,4 +1,3 @@
-
 <html lang="en">
     <head>
         <title>Futbolas</title>
@@ -6,13 +5,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body>
-        <form action="/" method="post">
-<select name="game-id">
-    {{range $game := .OpenGames}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
-</select>
-        <input type="number" name="result_1" value="" class="result_field">
-        <input type="number" name="result_2" value="" class="result_field">
-        <input type="submit" value="Pateikti">
-        </form>
-        </body>
+        <div>
+            some text
+        </div>
+    </body>
 </html>

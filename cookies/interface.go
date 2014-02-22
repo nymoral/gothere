@@ -2,7 +2,6 @@ package cookies
 
 import (
     "net/http"
-    "log"
     "time"
 )
 
@@ -14,12 +13,7 @@ func GetCookieVal(r *http.Request, name string) (string) {
 
     c, err := r.Cookie(name)
     if err != nil {
-        if err == http.ErrNoCookie {
-            return ""
-        } else {
-            log.Println(err)
-            return ""
-        }
+        return ""
     }
 
     return c.Value

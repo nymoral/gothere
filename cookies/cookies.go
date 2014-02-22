@@ -26,6 +26,7 @@ func GenerateSessionId(username string) (string) {
     */
 
     encoded_cookie, err := secCookie.Encode("sessionid", username)
+    // This should always work independant of input.
     if err != nil {
         log.Fatal(err)
     }

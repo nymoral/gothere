@@ -7,13 +7,14 @@ import (
     "gothere/models"
 )
 
+// log.Fatal only when executing queries.
+// If error occurs need to check connection to DB.
+
 func CreateGame(db *sql.DB, game *models.Game) {
     /*
      * Adds a game to the database.
      * Assumes that model is correct
      * and has required fields.
-     * It only should fail if connection to the DB is no more,
-     * therefor it log.Fatal()'s.
      */
 
     _, err := db.Exec("INSERT INTO games (team1, team2, starts) "+
@@ -44,7 +45,6 @@ func ToFinish(db *sql.DB) (*sql.Rows) {
         log.Fatal(err)
     }
     return rows
-
 }
 
 func GamesList(db *sql.DB, flag string) ([]models.Game) {
@@ -62,14 +62,11 @@ func GamesList(db *sql.DB, flag string) ([]models.Game) {
     var G models.Game
     for rows.Next() {
         err := rows.Scan(&G.Pk, &G.Team1, &G.Team2, &G.StartsStr)
-        if err != nil {
-            log.Println(err)
-        } else {
+        if err == nil {
             games = append(games, G)
         }
     }
     if err := rows.Err(); err != nil {
-        log.Println(err)
         return nil
     } else {
         return games

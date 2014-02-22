@@ -16,7 +16,6 @@ func GiveResult(db *sql.DB, guess *models.Guess) {
      * It only should fail if connection to the DB is no more,
      * therefor it log.Fatal()'s.
      */
-     log.Printf("%d %d\n", guess.Gamepk, guess.Userpk)
 
     row := db.QueryRow("SELECT pk FROM guesses WHERE game_pk=$1 AND user_pk=$2;",
                                 guess.Gamepk, guess.Userpk)
@@ -40,3 +39,22 @@ func GiveResult(db *sql.DB, guess *models.Guess) {
         }
     }
 }
+
+func UsersGuesses(db *sql.DB, pk int) ([]models.GuessWithNames) {
+    guesses := make([]models.GuessWithNames, 0) 
+    var G models.GuessWithNames
+    rows, err := db.Query("SELECT games.team1, games.team2, guesses.result1, guesses.result2 " +
+                            "FROM games LEFT JOIN (SELECT game_pk, result1, result2 FROM guesses " +
+                            "WHERE user_pk=$1) as guesses on games.pk=guesses.game_pk ORDER BY games.starts;", pk)
+    if err != nil {
+        log.Fatal(err)
+    }
+    for rows.Next() {
+        err := rows.Scan(&G.Team1, &G.Team2, &G.Result1, &G.Result2)
+        if err == nil {
+            guesses = append(guesses, G)
+        }
+    }
+    return guesses
+}
+
