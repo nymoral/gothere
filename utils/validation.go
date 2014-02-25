@@ -1,8 +1,15 @@
 package utils
 
 import (
+    "regexp"
     "gothere/models"
 )
+
+const emailRegex = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+func emailValidation(mail string) (bool) {
+    rp := regexp.MustCompile(emailRegex)
+    return rp.MatchString(mail)
+}
 
 func UserValidate(user *models.User, repeat string) (bool) {
     /* 
@@ -24,7 +31,7 @@ func UserValidate(user *models.User, repeat string) (bool) {
         return false
     }
 
-    if len(user.Email) < 4 || len(user.Email) > 50 {
+    if ! emailValidation(user.Email) || len(user.Email) > 50 {
         // To check if not empty and fits in the db.
         // TODO regex check if this is valid email address.
         return false
