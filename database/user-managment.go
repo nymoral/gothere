@@ -41,19 +41,6 @@ func GetPassword(db *sql.DB, email string) (string, bool) {
     return password, is_admin
 }
 
-func GetUserId(db *sql.DB, username string) (int) {
-    // Fetches users pk from the dm.
-
-    var pk int
-    R := db.QueryRow("SELECT pk FROM users WHERE email=$1;", username)
-    err := R.Scan(&pk)
-    if err == sql.ErrNoRows {
-        // Usualy not found.
-        return -1
-    }
-    return pk
-}
-
 func GetPkAdmin(db *sql.DB, username string) (int, bool) {
     var pk int
     var admin bool

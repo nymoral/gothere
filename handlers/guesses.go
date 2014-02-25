@@ -41,7 +41,7 @@ func GuessesPost(w http.ResponseWriter, r *http.Request) {
     username := cookies.UsernameFromCookie(sessionid)
 
     var guess models.Guess
-    guess.Userpk = database.GetUserId(db, username)
+    guess.Userpk, _ = database.GetPkAdmin(db, username)
 
     var F models.GuessContext
     F.OpenGames = database.GamesList(db, "open")

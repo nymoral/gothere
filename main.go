@@ -1,10 +1,10 @@
 package main
 
 import (
-	"gothere/config"
-	"gothere/handlers"
 	"log"
 	"net/http"
+	"gothere/config"
+	"gothere/handlers"
 )
 
 /*

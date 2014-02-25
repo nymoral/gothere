@@ -9,13 +9,6 @@ import (
     "gothere/password"
 )
 
-type oldValues struct {
-    Flag        bool
-    Firstname   string
-    Lastname    string
-    Email       string
-}
-
 func RegisterGet(w http.ResponseWriter) {
     /*
      * /register GET method handler.
@@ -42,7 +35,7 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
 
     repeat := r.FormValue("repeat")
 
-    var old oldValues
+    var old models.RegisterContext
     old.Flag = true
     old.Firstname = user.Firstname
     old.Lastname = user.Lastname
