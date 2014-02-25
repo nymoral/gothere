@@ -66,11 +66,8 @@ func GamesList(db *sql.DB, flag string) ([]models.Game) {
             games = append(games, G)
         }
     }
-    if err := rows.Err(); err != nil {
-        return nil
-    } else {
-        return games
-    }
+
+    return games
 }
 
 func CloseGame(db *sql.DB, pk string) {
