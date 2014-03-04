@@ -18,8 +18,18 @@ func init() {
         // to main channel.
         DbChannel <- DbInit()
     }
+
+    db := GetConnection()
+    defer RecycleConnection(db)
+    err := db.Ping()
+    // Testing db connectivity.
+    if err != nil {
+        log.Fatal(err)
+    } else {
+        log.Printf("Starting %d db connections.\n", config.MaxConnections)
+    }
+
     log.Println("Loading queries.")
-    log.Printf("Starting %d db connections.\n", config.MaxConnections)
 }
 
 func GetConnection() (*sql.DB) {
