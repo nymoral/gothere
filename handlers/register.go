@@ -10,24 +10,24 @@ import (
 )
 
 func RegisterGet(w http.ResponseWriter) {
-    /*
-     * /register GET method handler.
-     * Just render's the form.
-     */
+    // /register GET method handler.
+    // Just render's the form.
 
     templates.Render(w, "register", nil)
 }
 
 func RegisterPost(w http.ResponseWriter, r *http.Request) {
-    /*
-     * /register POST method handler.
-     * Validates the form,
-     * check's if username is availible,
-     * and then creates a user and redirects to
-     * /login .
-     */
+    // /register POST method handler.
+    // Validates the form,
+    // check's if username is availible,
+    // and then creates a user and redirects to
+    // /login .
+
+    db := database.GetConnection()
+    defer database.RecycleConnection(db)
 
     var user models.User
+    // Model out of form data.
     user.Email = r.FormValue("email")
     user.Password = r.FormValue("password")
     user.Firstname = r.FormValue("firstname")
@@ -36,6 +36,8 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     repeat := r.FormValue("repeat")
 
     var old models.RegisterContext
+    // Model for return form.
+    // In case there the data wasn't valid
     old.Flag = true
     old.Firstname = user.Firstname
     old.Lastname = user.Lastname
@@ -47,14 +49,15 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     }
 
     pass, _ := database.GetPassword(db, user.Email)
+    // Checks if user exists.
     if pass != "" {
         templates.Render(w, "register", old)
         return
     }
 
-    // Creates a user in the db.
     user.Password = password.NewPassword(user.Password)
     database.CreateUser(db, &user)
+    // Creates a user in the db.
     http.Redirect(w, r, "/login", http.StatusFound)
 }
 

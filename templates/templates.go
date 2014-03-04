@@ -2,6 +2,7 @@ package templates
 
 import (
     "io"
+    "log"
     "html/template"
     "gothere/config"
 )
@@ -20,10 +21,13 @@ var errorTemplate, _ = template.ParseFiles(dir + "error.html")
 
 var guessesTemplate, _ = template.ParseFiles(dir + "guesses.html")
 
+func init() {
+    log.Println("Loading templates.")
+}
+
 func Render(wr io.Writer, name string, data interface{}) {
-    /*
-     * Renders html template to the response writer.
-     */
+    // Renders html template to the response writer.
+
     var t *template.Template
 
     switch name {
@@ -43,6 +47,7 @@ func Render(wr io.Writer, name string, data interface{}) {
 
     err := t.Execute(wr, data)
     if err != nil {
+        log.Println(err)
         Render(wr, "error", nil)
     }
 }

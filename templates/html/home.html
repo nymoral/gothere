@@ -6,7 +6,23 @@
     </head>
     <body>
         <div>
-            some text
+            <table id="main-table">
+                <tr>
+                    <td rowspan="2">Vieta</td>
+                    <td rowspan="2">Vardas</td>
+                {{ range $game := .Games }}
+                <td>{{ $game.NameFmt }}</td>
+                {{end}}</tr>
+
+                <tr>{{ range $game := .Games }}
+                <td>{{ $game.ResultDate }}<div class="hidden">{{ $game.ResultDate }}</div></td>
+                {{end}}</tr>
+            </tr>
+            {{ range $user := .Users }}<tr>
+                <td rowspan="2">{{ $user.Place }}</td>
+                <td rowspan="2">{{ $user.ShortNameFmt }}</td>
+            </tr><tr></tr>{{ end }}
+            </table>
         </div>
     </body>
 </html>

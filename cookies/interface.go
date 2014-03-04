@@ -6,10 +6,8 @@ import (
 )
 
 func GetCookieVal(r *http.Request, name string) (string) {
-    /*
-     * From a given http.Request gets a cookie value.
-     * Returns a string (empty one if there is no such cookie).
-     */
+    // From a given http.Request gets a cookie value.
+    // Returns a string (empty one if there is no such cookie).
 
     c, err := r.Cookie(name)
     if err != nil {
@@ -20,12 +18,10 @@ func GetCookieVal(r *http.Request, name string) (string) {
 }
 
 func SetSessionId(w http.ResponseWriter, sessionid string, remember bool) {
-    /* 
-     * Writes a new (rewrites) cookie to set a sessionid.
-     * If remember is false, cookie's expire field is not set
-     * and cookie will expire when the session ends.
-     * Otherwise it exipres in 2 weeks.
-     */
+    // Writes a new (rewrites) cookie to set a sessionid.
+    // If remember is false, cookies expire field is not set
+    // and cookie will expire when the session ends.
+    // Otherwise it exipres in 2 weeks.
 
     var C http.Cookie
     C.Name = "sessionid"
@@ -35,21 +31,17 @@ func SetSessionId(w http.ResponseWriter, sessionid string, remember bool) {
         C.Expires = time.Now().AddDate(0, 0, 14)
     }
     http.SetCookie(w, &C)
-
 }
 
 func DeleteSessionId(w http.ResponseWriter) {
-    /* 
-     * Resets sessionId.
-     * When user logs out, his session id is set to
-     * none, and thus Gorila will not be able to decode
-     * the username of the user.
-     */
+    // Resets sessionId.
+    // When user logs out, his session id is set to
+    // none, and thus Gorila will not be able to decode
+    // the username of the user.
 
     var C http.Cookie
     C.Name = "sessionid"
     C.Value = "none"
     C.Path = "/"
     http.SetCookie(w, &C)
-
 }

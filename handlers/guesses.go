@@ -10,22 +10,27 @@ import (
 )
 
 func GuessesGet(w http.ResponseWriter, r *http.Request) {
-    /*
-     * / handler for GET method request.
-     * Renders a page only for users with valid sessionid cookie.
-     * All the rest are redirected to /login .
-     */
+    // /guesses handler for GET method request.
+    // Renders a page only for users with valid sessionid cookie.
+    // All the rest are redirected to /login .
+
+    db := database.GetConnection()
+    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
     pk, is_admin := database.GetPkAdmin(db, username)
 
-    if username == "" {
+    if username == "" || pk == -1 {
         // Gorilla failed to decode it.
+        // Or encoded username does not exist in db.
         http.Redirect(w, r, "/login/", http.StatusFound)
     } else if is_admin {
         http.Redirect(w, r, "/admin/", http.StatusFound)
     } else {
+        // Fetches users guesses from the db and gets data for
+        // result submit dropbox.
+
         var F models.GuessContext
         F.OpenGames = database.GamesList(db, "open")
         F.Guesses = database.UsersGuesses(db, pk)
@@ -36,6 +41,11 @@ func GuessesGet(w http.ResponseWriter, r *http.Request) {
 }
 
 func GuessesPost(w http.ResponseWriter, r *http.Request) {
+    // /guesses POST method.
+    // Checks if user trying to submit is in valid.
+
+    db := database.GetConnection()
+    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)

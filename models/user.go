@@ -1,6 +1,7 @@
 package models
 
 import (
+    "fmt"
     "time"
 )
 
@@ -21,4 +22,10 @@ type User struct {
 
     Points      int
     Correct     int
+
+    Place       int
+}
+
+func (u *User) ShortNameFmt() (string) {
+    return fmt.Sprintf("%s %s.", u.Firstname, u.Lastname)
 }

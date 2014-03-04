@@ -29,7 +29,6 @@ func (g *GuessWithNames) Result() (string) {
     }
 }
 
-
 type GuessContext struct {
     // Complete model for guess template.
     OpenGames   []Game
@@ -45,3 +44,14 @@ type RegisterContext struct {
     Email       string
 }
 
+type HomeContext struct {
+    Games       []Game
+    Users       []User
+}
+
+type AdminContext struct {
+    CloseF  bool
+    EndF    bool
+    OpenGames   []Game
+    NotFinish   []Game
+}

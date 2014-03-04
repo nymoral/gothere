@@ -9,12 +9,10 @@ import (
 )
 
 func hashPassword(plain, salt string, cycles int) string {
-    /* 
-     * Main password hashing function.
-     * It takes plain-text password a salt and nr of cycles
-     * and returns hashed password.
-     * Uses SHA256.
-     */
+    // Main password hashing function.
+    // It takes plain-text password a salt and nr of cycles
+    // and returns hashed password.
+    // Uses SHA256.
 
     hashed := plain
     for i := 0; i < cycles; i++ {
@@ -31,12 +29,11 @@ func hashPassword(plain, salt string, cycles int) string {
 }
 
 func NewPassword(plain string) (string) {
-    /* 
-     * Generates a random salt and hashes given password
-     * to be stored in DB.
-     * Uses hashPassword() func from this package.
-     * Formated as "CYCLE SALT HASH"
-     */
+    //  Generates a random salt and hashes given password
+    // to be stored in DB.
+    // Uses hashPassword() func from this package.
+    // Formated as "CYCLE SALT HASH"
+
     cycles := config.HashCycles
 
     salt := utils.RandomStr(16)
@@ -44,13 +41,11 @@ func NewPassword(plain string) (string) {
 }
 
 func Authenticate(plain, hashed string) bool{
-    /* 
-     * Returns true if passwords match,
-     * false otherwise.
-     * Checks if a given password matches
-     * hashed one retrieved from a DB,
-     * Uses hashPassword() from this package.
-     */
+    // Returns true if passwords match,
+    // false otherwise.
+    // Checks if a given password matches
+    // hashed one retrieved from a DB,
+    // Uses hashPassword() from this package.
 
     if hashed == "" {
         // No user in the db.

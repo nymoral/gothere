@@ -6,17 +6,16 @@ import (
 )
 
 const emailRegex = "[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?"
+
 func emailValidation(mail string) (bool) {
     rp := regexp.MustCompile(emailRegex)
     return rp.MatchString(mail)
 }
 
 func UserValidate(user *models.User, repeat string) (bool) {
-    /* 
-     * Registration form validation.
-     * Returns true/fales based on weather the form fits
-     * requirements.
-     */
+    // Registration form validation.
+    // Returns true/fales based on weather the form fits
+    // requirements.
 
     if user.Password != repeat {
         // Password don't math.
@@ -33,7 +32,6 @@ func UserValidate(user *models.User, repeat string) (bool) {
 
     if ! emailValidation(user.Email) || len(user.Email) > 50 {
         // To check if not empty and fits in the db.
-        // TODO regex check if this is valid email address.
         return false
     }
     return true

@@ -74,9 +74,10 @@ func main() {
 		// In case go server needs to serve static files.
 		// Specified in config file.
 		http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir(config.Static))))
+        log.Println("Serving static content.")
 	}
 
-	log.Println("Server starting")
+	log.Println("Http server starting.")
 	http.ListenAndServe(":"+config.Port, nil)
 	// Start http server.
 }

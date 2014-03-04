@@ -9,21 +9,21 @@ import (
 )
 
 func LoginGet(w http.ResponseWriter) {
-    /*
-     * /login handler for GET request.
-     * Just renders blank form.
-     */
+    // /login handler for GET request.
+    // Just renders blank form.
 
     templates.Render(w, "login", nil)
 }
 
 func LoginPost(w http.ResponseWriter, r *http.Request) {
-    /*
-     * /login handler for POST request.
-     * Tries to validate user.
-     * If email / password is OK,
-     * new sessionid cookie is set and user is redirected to / .
-     */
+    // /login handler for POST request.
+    // Tries to validate user.
+    // If email / password is OK,
+    // new sessionid cookie is set and user is redirected to / .
+
+    db := database.GetConnection()
+    defer database.RecycleConnection(db)
+
     username := r.FormValue("username")
     pass := r.FormValue("password")
     remember := r.FormValue("remember") == "1"
