@@ -76,7 +76,7 @@ func GuessesPost(w http.ResponseWriter, r *http.Request) {
         } else {
             // Submit a guess.
             database.GiveResult(db, &guess)
-            http.Redirect(w, r, "/", http.StatusFound)
+            http.Redirect(w, r, "/guesses/", http.StatusFound)
         }
     }
 

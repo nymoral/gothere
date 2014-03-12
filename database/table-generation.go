@@ -57,4 +57,28 @@ func GetUsers(db *sql.DB) ([]models.User) {
     return users
 }
 
-//func GetGuesses(db *sql.DB) ([]models
+func GetGuesses(db *sql.DB, pk int, subsize int, size int) ([][]models.GuessWithPoints) {
+    // Returns a slice of models.
+    // It will consist of groups of all games for each user.
+    rows, err := db.Query(qGetTable, pk)
+    if err != nil {
+        log.Fatal(err)
+    }
+    var G models.GuessWithPoints
+    guesses := make([][]models.GuessWithPoints, size)
+
+    for j := 0; j < size; j++ {
+        guesses[j] = make([]models.GuessWithPoints, subsize)
+
+        for i := 0; i < subsize; i++ {
+            rows.Next()
+            err := rows.Scan(&G.Result1, &G.Result2, &G.Points, &G.Total, &G.Happened)
+            if err == nil {
+                guesses[j][i] = G
+            } else {
+                log.Println(err)
+            }
+        }
+    }
+    return guesses
+}

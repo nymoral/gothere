@@ -19,7 +19,7 @@
         </table>
     </div>
 
-        <form action="/" method="post">
+        <form action="/guesses/" method="post">
 <select name="game-id">
     {{range $game := .OpenGames}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
 </select>

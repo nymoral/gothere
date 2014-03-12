@@ -77,7 +77,7 @@ func main() {
         log.Println("Serving static content.")
 	}
 
-	log.Println("Http server starting.")
+	log.Printf("Http server starting at port %s", config.Port)
 	http.ListenAndServe(":"+config.Port, nil)
 	// Start http server.
 }

@@ -97,4 +97,5 @@ var (
     qCreateUser     = getQuery("CreateUser")
     qGetPassword    = getQuery("GetPassword")
     qGetPkAdmin     = getQuery("GetPkAdmin")
+    qGetTable       = getQuery("GetTable")
 )

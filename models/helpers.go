@@ -47,11 +47,42 @@ type RegisterContext struct {
 type HomeContext struct {
     Games       []Game
     Users       []User
+    Guesses     [][]GuessWithPoints
+
+    GamesNr     int
+    UsersNr     int
 }
+
 
 type AdminContext struct {
     CloseF  bool
     EndF    bool
     OpenGames   []Game
     NotFinish   []Game
+}
+
+type GuessWithPoints struct {
+    Result1     interface{}
+    Result2     interface{}
+
+    Points      interface{}
+    Total       interface{}
+
+    Happened    bool
+}
+
+func (g *GuessWithPoints) ResultFmt() (string) {
+    if g.Result1 == nil {
+        return " "
+    } else {
+        return fmt.Sprintf("%d : %d", g.Result1, g.Result2)
+    }
+}
+
+func (g *GuessWithPoints) PointsFmt() (string) {
+    if g.Happened {
+        return fmt.Sprintf("%d / %d", g.Points, g.Total)
+    } else {
+        return " "
+    }
 }

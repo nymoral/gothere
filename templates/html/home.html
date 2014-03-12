@@ -10,18 +10,24 @@
                 <tr>
                     <td rowspan="2">Vieta</td>
                     <td rowspan="2">Vardas</td>
-                {{ range $game := .Games }}
-                <td>{{ $game.NameFmt }}</td>
-                {{end}}</tr>
+                    {{ range $game := .Games }}<td>{{ $game.NameFmt }}</td>{{end}}
+                </tr>
 
-                <tr>{{ range $game := .Games }}
-                <td>{{ $game.ResultDate }}<div class="hidden">{{ $game.ResultDate }}</div></td>
-                {{end}}</tr>
-            </tr>
-            {{ range $user := .Users }}<tr>
+                <tr>
+                    {{ range $game := .Games }}<td>{{ $game.ResultDate }}<div class="hidden">{{ $game.ResultDate }}</div></td>{{end}}
+                </tr>
+            {{ $GGG := .Guesses }}
+            {{ range $uindex, $user := .Users }}<tr>
                 <td rowspan="2">{{ $user.Place }}</td>
                 <td rowspan="2">{{ $user.ShortNameFmt }}</td>
-            </tr><tr></tr>{{ end }}
+                {{ range $guess := index $GGG $uindex }}
+                <td>{{ $guess.ResultFmt }}</td>
+                {{ end }}
+            </tr><tr>
+                {{ range $guess := index $GGG $uindex }}
+                <td>{{ $guess.PointsFmt }}</td>
+                {{ end }}
+            </tr>{{ end }}
             </table>
         </div>
     </body>

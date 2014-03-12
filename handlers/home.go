@@ -33,6 +33,9 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
         var context models.HomeContext
         context.Games = database.GetGames(db)
         context.Users = database.GetUsers(db)
+        context.GamesNr = len(context.Games)
+        context.UsersNr = len(context.Users)
+        context.Guesses = database.GetGuesses(db, pk, context.GamesNr, context.UsersNr)
         templates.Render(w, "home", context)
     }
 }
