@@ -1,12 +1,12 @@
-package utils
+package games
 
 func HasShortName(name string) (bool) {
     _, flag := gamesMap[name]
     return flag
 }
 
-func ShortAndLong(name string) (string, string) {
-    return gamesMap[name], name
+func GetShortNames(name1, name2 string) (string, string) {
+    return gamesMap[name1], gamesMap[name2]
 }
 
 var gamesMap = map[string]string {
@@ -56,7 +56,7 @@ var gamesMap = map[string]string {
     "Kolumbija": "Co",
     "Kroatija": "Hr",
     "Kuba": "C",
-    "Latvija ": "Lv",
+    "Latvija": "Lv",
     "Lenkija": "Pl",
     "Lietuva": "Lt",
     "Liuksemburgas": "L",

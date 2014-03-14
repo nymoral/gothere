@@ -67,6 +67,35 @@ input[type=submit] {
     text-align: center;
     color: red;
 }
+
+#main-table {
+    text-align: center;
+    empty-cells: show;
+    border-collapse: collapse;
+    white-space: nowrap;
+    font-size: 16;
+    overflow: scroll;
+    margin-bottom: 20px;
+}
+#rez_data {
+    border: 1px solid black;
+    color: #E9E7D6;
+    font-weight: 700;
+}
+.outer {
+    background-color: #2C2C2C;
+    color: #E9E7D6;
+}
+.outer.name{
+    border: 1px solid black;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.outer.place{
+    border: 1px solid black;
+}
 .hidden {
     display: none;
     position: absolute;
@@ -76,10 +105,49 @@ input[type=submit] {
     padding: 4px;
     z-index: 10;
 }
-#main-table {
+.game_date {
     border: 1px solid black;
-    overflow: scroll;
+    background-color: #2C2C2C;
 }
-#main-table td {
+.mid {
     border: 1px solid black;
+}
+.mid.result{
+    font-weight: 700;
+}
+.outer.name:hover .hidden {
+    display: block;
+}
+.user {
+    font-weight: 700;
+}
+.user_place {
+    border: 1px solid black;
+    background-color: #E6683F;
+}
+.g_row td {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.p_row td {
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.user_name {
+    border: 1px solid black;
+    color: #111111;
+    background-color: #E6683F;
+}
+.default_name {
+    border: 1px solid black;
+    color: #111111;
+    background-color: #CE4D45;
+}
+.happened {
+    background-color: #EBD1B0;
+}
+.not_happened {
+    background-color: #F2C777;
 }

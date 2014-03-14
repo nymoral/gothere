@@ -4,7 +4,7 @@ import (
     "time"
     "strconv"
     "net/http"
-    "gothere/utils"
+    "gothere/utils/games"
     "gothere/models"
     "gothere/templates"
     "gothere/database"
@@ -60,7 +60,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
             game.Starts, err = time.Parse("2006-01-02 15:04", r.FormValue("starts"))
             // Need to parse a string from request.
 
-            if err != nil || ! utils.HasShortName(game.Team1) || ! utils.HasShortName(game.Team2) {
+            if err != nil || ! games.HasShortName(game.Team1) || ! games.HasShortName(game.Team2) {
                 // Checks if teams names are valid.
                 http.Redirect(w, r, "/error", http.StatusFound)
             } else {

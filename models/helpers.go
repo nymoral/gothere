@@ -81,8 +81,18 @@ func (g *GuessWithPoints) ResultFmt() (string) {
 
 func (g *GuessWithPoints) PointsFmt() (string) {
     if g.Happened {
-        return fmt.Sprintf("%d / %d", g.Points, g.Total)
+        if g.Points == nil {
+            return "-"
+        } else {
+            return fmt.Sprintf("%d / %d", g.Points, g.Total)
+        }
     } else {
         return " "
     }
+}
+func (g *GuessWithPoints) Style() (string) {
+    if g.Happened {
+        return "happened"
+    }
+    return "not_happened"
 }

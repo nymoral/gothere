@@ -6,27 +6,21 @@
     </head>
     <body>
         <div>
-            <table id="main-table">
-                <tr>
-                    <td rowspan="2">Vieta</td>
-                    <td rowspan="2">Vardas</td>
-                    {{ range $game := .Games }}<td>{{ $game.NameFmt }}</td>{{end}}
+            <table id="main-table" class="not_happend">
+                <tr id="top_table_row">
+                    <td colspan="2" rowspan="2" class="outer empty" style="border: 1px solid black;">Rezultatas/Data</td>
+                    {{ range $game := .Games }}<td class="outer name">{{ $game.NameFmt }}<div class="hidden">{{ $game.FullName }}</div></td>{{end}}
                 </tr>
-
-                <tr>
-                    {{ range $game := .Games }}<td>{{ $game.ResultDate }}<div class="hidden">{{ $game.ResultDate }}</div></td>{{end}}
+                <tr id="mid_table_row">
+                    {{ range $game := .Games }}<td class="outer mid {{ $game.Style }}">{{ $game.ResultDate }}</td>{{end}}
                 </tr>
             {{ $GGG := .Guesses }}
-            {{ range $uindex, $user := .Users }}<tr>
-                <td rowspan="2">{{ $user.Place }}</td>
-                <td rowspan="2">{{ $user.ShortNameFmt }}</td>
-                {{ range $guess := index $GGG $uindex }}
-                <td>{{ $guess.ResultFmt }}</td>
-                {{ end }}
-            </tr><tr>
-                {{ range $guess := index $GGG $uindex }}
-                <td>{{ $guess.PointsFmt }}</td>
-                {{ end }}
+            {{ range $uindex, $user := .Users }}<tr class="g_row {{ $user.Style }}">
+                <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Place }}</td>
+                <td rowspan="2" class="{{ $user.NameStyle }}">{{ $user.ShortNameFmt }}</td>
+                {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.ResultFmt }}</td>{{ end }}
+            </tr><tr class="p_row {{ $user.Style }}">
+                {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.PointsFmt }}</td>{{ end }}
             </tr>{{ end }}
             </table>
         </div>

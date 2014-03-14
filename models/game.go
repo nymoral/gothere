@@ -3,6 +3,7 @@ package models
 import (
     "fmt"
     "time"
+    "gothere/utils/games"
 )
 
 type Game struct {
@@ -22,7 +23,8 @@ type Game struct {
 }
 
 func (g *Game) NameFmt() (string) {
-    return fmt.Sprintf("%s - %s", g.Team1, g.Team2)
+    n1, n2 := games.GetShortNames(g.Team1, g.Team2)
+    return fmt.Sprintf("%s - %s", n1, n2)
 }
 
 func (g *Game) ResultDate() (string) {
@@ -30,9 +32,19 @@ func (g *Game) ResultDate() (string) {
     // Need to return date of the game.
     // It hasn't yet taken place.
         return g.StartsStr
-    } else {
-        return fmt.Sprintf("%d - %d", g.Result1, g.Result2)
     }
+    return fmt.Sprintf("%d - %d", g.Result1, g.Result2)
 }
+
+func (g *Game) FullName() (string) {
+    return fmt.Sprintf("%s - %s", g.Team1, g.Team2)
+}
+func (g *Game) Style() (string) {
+    if g.Happened {
+        return "result"
+    }
+    return "date"
+}
+
 
 

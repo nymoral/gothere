@@ -24,8 +24,31 @@ type User struct {
     Correct     int
 
     Place       int
+
+    LoggedIn    bool
 }
 
 func (u *User) ShortNameFmt() (string) {
     return fmt.Sprintf("%s %s.", u.Firstname, u.Lastname)
+}
+
+func (u *User) Style() (string) {
+    if u.LoggedIn {
+        return "user"
+    }
+    return "default"
+}
+
+func (u *User) PlaceStyle() (string) {
+    if u.LoggedIn {
+        return "user_place"
+    }
+    return "outer place"
+}
+
+func (u *User) NameStyle() (string) {
+    if u.LoggedIn {
+        return "user_name"
+    }
+    return "default_name"
 }

@@ -19,7 +19,7 @@ func GetGames(db *sql.DB) ([]models.Game) {
     games := make([]models.Game, 0)
 
     for rows.Next() {
-        err := rows.Scan(&G.Team1, &G.Team2, &G.Result1, &G.Result2, &G.StartsStr)
+        err := rows.Scan(&G.Team1, &G.Team2, &G.Result1, &G.Result2, &G.StartsStr, &G.Happened, &G.Closed)
         if err == nil {
             games = append(games, G)
         } else {
@@ -29,7 +29,7 @@ func GetGames(db *sql.DB) ([]models.Game) {
     return games
 }
 
-func GetUsers(db *sql.DB) ([]models.User) {
+func GetUsers(db *sql.DB, pk int) ([]models.User) {
     // Generates a list of all the users (not admin).
     // It will be in the left-hand side of main table.
     rows, err := db.Query(qGetUsers)
@@ -44,8 +44,9 @@ func GetUsers(db *sql.DB) ([]models.User) {
     // Calculating place out of db.
 
     for rows.Next() {
-        err := rows.Scan(&U.Firstname, &U.Lastname)
+        err := rows.Scan(&U.Firstname, &U.Lastname, &U.Pk)
         U.Place = place
+        U.LoggedIn = U.Pk == pk
         place += 1
 
         if err == nil {
