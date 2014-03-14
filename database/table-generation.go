@@ -80,5 +80,6 @@ func GetGuesses(db *sql.DB, pk int, subsize int, size int) ([][]models.GuessWith
             }
         }
     }
+    rows.Close()
     return guesses
 }

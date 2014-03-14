@@ -21,6 +21,7 @@ func init() {
 
     db := GetConnection()
     defer RecycleConnection(db)
+
     err := db.Ping()
     // Testing db connectivity.
     if err != nil {
