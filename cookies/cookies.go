@@ -10,17 +10,17 @@ func generateCookie() (*securecookie.SecureCookie) {
     // Generates SecureCookie type object and returns a pointer to it.
     // It is used to Encode/Decode plain data to/from a cookie.
 
-    S := securecookie.New([]byte(config.Secret1), []byte(config.Secret1))
+    S := securecookie.New([]byte(config.Config.Secret1), []byte(config.Config.Secret1))
     return S
 }
 
-var cookiesChan = make(chan *securecookie.SecureCookie, config.NrOfCookies)
+var cookiesChan = make(chan *securecookie.SecureCookie, config.Config.NrOfCookies)
 
 func init() {
-    for i := 0; i < config.NrOfCookies; i++ {
+    for i := 0; i < config.Config.NrOfCookies; i++ {
         cookiesChan <- generateCookie()
     }
-    log.Printf("Generating %d secure cookies.\n", config.NrOfCookies)
+    log.Printf("Generating %d secure cookies.\n", config.Config.NrOfCookies)
 }
 
 func getCookie() (*securecookie.SecureCookie) {

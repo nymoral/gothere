@@ -34,7 +34,7 @@ func NewPassword(plain string) (string) {
     // Uses hashPassword() func from this package.
     // Formated as "CYCLE SALT HASH"
 
-    cycles := config.HashCycles
+    cycles := config.Config.HashCycles
 
     salt := utils.RandomStr(16)
     return fmt.Sprintf("%d %s %s", cycles, salt, hashPassword(plain, salt, cycles))

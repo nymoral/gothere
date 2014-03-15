@@ -70,14 +70,14 @@ func main() {
 	http.HandleFunc("/admin/",      func(w http.ResponseWriter, r *http.Request) { admin(w, r)      })
 	http.HandleFunc("/error/",      func(w http.ResponseWriter, r *http.Request) { errorHand(w)     })
 
-	if config.ServeStatic {
+	if config.Config.ServeStatic {
 		// In case go server needs to serve static files.
 		// Specified in config file.
-		http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir(config.Static))))
+		http.Handle("/static/", http.StripPrefix("/static", http.FileServer(http.Dir(config.Config.Static))))
         log.Println("Serving static content.")
 	}
 
-	log.Printf("Http server starting at port %s", config.Port)
-	http.ListenAndServe(":"+config.Port, nil)
+	log.Printf("Http server starting at port %s", config.Config.Port)
+	http.ListenAndServe(":"+config.Config.Port, nil)
 	// Start http server.
 }

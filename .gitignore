@@ -1,4 +1,4 @@
-config/config.go
 *.bin
 *.swp
+config.json
 # To keep secret things secret.

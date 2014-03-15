@@ -7,7 +7,7 @@ import (
     "gothere/config"
 )
 
-const dir = config.TemplateDir
+var dir = config.Config.TemplateDir
 
 var homeTemplate, _ = template.ParseFiles(dir + "home.html")
 

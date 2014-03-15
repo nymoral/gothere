@@ -1,0 +1,16 @@
+{
+    "Port"          : "8054",
+    "Static"        : "/home/user/go/src/gothere/static/",
+    "ServeStatic"   : true,
+    "DbUser"        : "Some DB username",
+    "DbName"        : "DB name",
+    "DbPass"        : "DB password. Leave blank for none.",
+    "Secret1"       : "32 chars lenght secret string.",
+    "Secret2"       : "Another 32 chars lenght secret string.",
+    "TemplateDir"   : "/home/user/go/src/gothere/templates/html/",
+    "SqlQueriesDir" : "/home/user/go/src/gothere/database/SQL/Queries/",
+    "HashCycles"    : 1000,
+    "MaxConnections": 3,
+    "NrOfCookies"   : 4
+}
+

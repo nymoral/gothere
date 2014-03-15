@@ -9,11 +9,11 @@ import (
     "gothere/config"
 )
 
-var DbChannel = make(chan *sql.DB, config.MaxConnections)
+var DbChannel = make(chan *sql.DB, config.Config.MaxConnections)
 // All availible db connections will be stored here.
 
 func init() {
-    for i := 0; i < config.MaxConnections; i++ {
+    for i := 0; i < config.Config.MaxConnections; i++ {
         // Creating and pushing db connections
         // to main channel.
         DbChannel <- DbInit()
@@ -27,7 +27,7 @@ func init() {
     if err != nil {
         log.Fatal(err)
     } else {
-        log.Printf("Starting %d db connections.\n", config.MaxConnections)
+        log.Printf("Starting %d db connections.\n", config.Config.MaxConnections)
     }
 
     log.Println("Loading queries.")
@@ -49,13 +49,13 @@ func DbInit() (*sql.DB) {
     // Opens a connection to a postgresql databalse
     // and returns a pointer to sql.DB object.
 
-    uname := " user=" + config.DbUser
-    dname := " dbname=" + config.DbName
+    uname := " user=" + config.Config.DbUser
+    dname := " dbname=" + config.Config.DbName
 
     var pass string
 
-    if config.DbPass != "" {
-        pass = " password=" + config.DbPass
+    if config.Config.DbPass != "" {
+        pass = " password=" + config.Config.DbPass
     } else {
         pass = ""
     }
@@ -71,7 +71,7 @@ func DbInit() (*sql.DB) {
 
 func getQuery(name string) (string) {
     // Reads a SQL querie string from a file and returns it.
-    dir := config.SqlQueriesDir
+    dir := config.Config.SqlQueriesDir
     filename := fmt.Sprintf("%s%s.sql", dir, name)
     buffer, err := ioutil.ReadFile(filename)
     if err == nil {
