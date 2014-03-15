@@ -99,4 +99,10 @@ var (
     qGetPassword    = getQuery("GetPassword")
     qGetPkAdmin     = getQuery("GetPkAdmin")
     qGetTable       = getQuery("GetTable")
+
+    qGetResult      = getQuery("GetResult")
+    qGetPoints      = getQuery("GetPoints")
+    qUpdatePoints   = getQuery("UpdatePoints")
+    qUpdateGuessPoints  = getQuery("UpdateGuessPoints")
+    qInsertGuessPoints  = getQuery("InsertGuessPoints")
 )

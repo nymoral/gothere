@@ -75,7 +75,11 @@ func (g *GuessWithPoints) ResultFmt() (string) {
     if g.Result1 == nil {
         return " "
     } else {
-        return fmt.Sprintf("%d : %d", g.Result1, g.Result2)
+        if g.Result1.(int64) >= 0 {
+            return fmt.Sprintf("%d : %d", g.Result1, g.Result2)
+        } else {
+            return "-"
+        }
     }
 }
 
@@ -95,4 +99,14 @@ func (g *GuessWithPoints) Style() (string) {
         return "happened"
     }
     return "not_happened"
+}
+
+type Points struct {
+    UserPk  int
+    Points  int
+    Result1 interface{}
+    Result2 interface{}
+
+    Given   bool
+    Total   int
 }

@@ -83,11 +83,13 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
             pk := r.FormValue("finish-game-id")
             n1, er1 := strconv.Atoi(t1)
             n2, er2 := strconv.Atoi(t2)
-            if er1 != nil || er2 != nil {
+            intPk, er3 := strconv.Atoi(pk)
+            if er1 != nil || er2 != nil || er3 != nil {
                 // Checks form data.
                 http.Redirect(w, r, "/error", http.StatusFound)
             } else {
                 database.FinishGame(db, pk, n1, n2)
+                database.CalcPoints(db, intPk, n1, n2)
                 http.Redirect(w, r, "/admin", http.StatusFound)
             }
         }
