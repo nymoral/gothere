@@ -60,7 +60,6 @@ func errorHand(w http.ResponseWriter) {
     handlers.ErrorGet(w)
 }
 
-
 func main() {
 	http.HandleFunc("/",            func(w http.ResponseWriter, r *http.Request) { home(w, r)       })
 	http.HandleFunc("/guesses/",    func(w http.ResponseWriter, r *http.Request) { guesses(w, r)    })

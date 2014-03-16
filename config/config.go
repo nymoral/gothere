@@ -20,7 +20,6 @@ func init() {
     if err != nil {
         log.Fatal(err)
     }
-    log.Println(Config)
 }
 
 type configType struct {

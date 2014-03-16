@@ -1,8 +1,8 @@
 package cookies
 
 import (
-    "net/http"
     "time"
+    "net/http"
 )
 
 func GetCookieVal(r *http.Request, name string) (string) {
