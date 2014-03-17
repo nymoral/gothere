@@ -20,7 +20,6 @@ func init() {
     for i := 0; i < config.Config.NrOfCookies; i++ {
         cookiesChan <- generateCookie()
     }
-    log.Printf("Generating %d secure cookies.\n", config.Config.NrOfCookies)
 }
 
 func getCookie() (*securecookie.SecureCookie) {

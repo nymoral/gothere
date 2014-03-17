@@ -2,7 +2,6 @@ package database
 
 import (
     "log"
-    "fmt"
     "io/ioutil"
     "database/sql"
     _ "github.com/lib/pq"
@@ -29,8 +28,6 @@ func init() {
     } else {
         log.Printf("Starting %d db connections.\n", config.Config.MaxConnections)
     }
-
-    log.Println("Loading queries.")
 }
 
 func GetConnection() (*sql.DB) {
@@ -72,7 +69,7 @@ func DbInit() (*sql.DB) {
 func getQuery(name string) (string) {
     // Reads a SQL querie string from a file and returns it.
     dir := config.Config.SqlQueriesDir
-    filename := fmt.Sprintf("%s%s.sql", dir, name)
+    filename := dir +  name + ".sql"
     buffer, err := ioutil.ReadFile(filename)
     if err == nil {
         return string(buffer)
@@ -84,25 +81,25 @@ func getQuery(name string) (string) {
 
 var (
     // All the SQL queries are loaded into string variables.
-    qCreateGame     = getQuery("CreateGame")
-    qOpenGames      = getQuery("OpenGames")
-    qToFinish       = getQuery("ToFinish")
-    qCloseGame      = getQuery("CloseGame")
-    qFinishGame     = getQuery("FinishGame")
-    qCheckGuess     = getQuery("CheckGuess")
-    qInsertGuess    = getQuery("InsertGuess")
-    qUpdateGuess    = getQuery("UpdateGuess")
-    qUsersGuesses   = getQuery("UsersGuesses")
-    qGetGames       = getQuery("GetGames")
-    qGetUsers       = getQuery("GetUsers")
-    qCreateUser     = getQuery("CreateUser")
-    qGetPassword    = getQuery("GetPassword")
-    qGetPkAdmin     = getQuery("GetPkAdmin")
-    qGetTable       = getQuery("GetTable")
+    qCreateGame         = getQuery("CreateGame")
+    qOpenGames          = getQuery("OpenGames")
+    qToFinish           = getQuery("ToFinish")
+    qCloseGame          = getQuery("CloseGame")
+    qFinishGame         = getQuery("FinishGame")
+    qCheckGuess         = getQuery("CheckGuess")
+    qInsertGuess        = getQuery("InsertGuess")
+    qUpdateGuess        = getQuery("UpdateGuess")
+    qUsersGuesses       = getQuery("UsersGuesses")
+    qGetGames           = getQuery("GetGames")
+    qGetUsers           = getQuery("GetUsers")
+    qCreateUser         = getQuery("CreateUser")
+    qGetPassword        = getQuery("GetPassword")
+    qGetPkAdmin         = getQuery("GetPkAdmin")
+    qGetTable           = getQuery("GetTable")
 
-    qGetResult      = getQuery("GetResult")
-    qGetPoints      = getQuery("GetPoints")
-    qUpdatePoints   = getQuery("UpdatePoints")
+    qGetResult          = getQuery("GetResult")
+    qGetPoints          = getQuery("GetPoints")
+    qUpdatePoints       = getQuery("UpdatePoints")
     qUpdateGuessPoints  = getQuery("UpdateGuessPoints")
     qInsertGuessPoints  = getQuery("InsertGuessPoints")
 )
