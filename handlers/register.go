@@ -24,7 +24,6 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     // /login .
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     var user models.User
     // Model out of form data.

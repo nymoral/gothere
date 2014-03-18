@@ -45,4 +45,5 @@ type configType struct {
     HashCycles     int
     MaxConnections int
     NrOfCookies    int
+    Logging        bool
 }

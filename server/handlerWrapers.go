@@ -2,15 +2,23 @@
 package server
 
 import (
+    "log"
 	"net/http"
 	"gothere/handlers"
+    "gothere/config"
 )
-/*
- * These functions manage aditional arguments for handlers
- * and request methods.
- */
+
+// These functions manage aditional arguments for handlers
+// and request methods.
+
+func logRequest(r *http.Request) {
+    if config.Config.Logging {
+        log.Printf("%s %s %s\n", r.RemoteAddr, r.Method, r.URL)
+    }
+}
 
 func login(w http.ResponseWriter, r *http.Request) {
+    logRequest(r)
 	if r.Method == "GET" {
 		handlers.LoginGet(w)
 	} else {
@@ -19,6 +27,7 @@ func login(w http.ResponseWriter, r *http.Request) {
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
+    logRequest(r)
 	if r.Method == "GET" {
 		handlers.HomeGet(w, r)
 	} else {
@@ -27,6 +36,7 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func guesses(w http.ResponseWriter, r *http.Request) {
+    logRequest(r)
 	if r.Method == "GET" {
 		handlers.GuessesGet(w, r)
 	} else {
@@ -35,6 +45,7 @@ func guesses(w http.ResponseWriter, r *http.Request) {
 }
 
 func register(w http.ResponseWriter, r *http.Request) {
+    logRequest(r)
 	if r.Method == "GET" {
 		handlers.RegisterGet(w)
 	} else {
@@ -43,6 +54,7 @@ func register(w http.ResponseWriter, r *http.Request) {
 }
 
 func admin(w http.ResponseWriter, r *http.Request) {
+    logRequest(r)
 	if r.Method == "GET" {
 		handlers.AdminGet(w, r)
 	} else {
@@ -51,10 +63,12 @@ func admin(w http.ResponseWriter, r *http.Request) {
 }
 
 func logout(w http.ResponseWriter, r *http.Request) {
+    logRequest(r)
     handlers.Logout(w, r)
 }
 
-func errorHand(w http.ResponseWriter) {
+func errorHand(w http.ResponseWriter, r * http.Request) {
+    logRequest(r)
     handlers.ErrorGet(w)
 }
 

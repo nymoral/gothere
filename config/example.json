@@ -11,6 +11,7 @@
     "SqlQueriesDir" : "/home/user/go/src/gothere/database/SQL/Queries/",
     "HashCycles"    : 1000,
     "MaxConnections": 3,
-    "NrOfCookies"   : 4
+    "NrOfCookies"   : 4,
+    "Logging"       : false
 }
 

@@ -16,7 +16,6 @@ func AdminGet(w http.ResponseWriter, r *http.Request) {
     // Just render's the form.
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
@@ -36,7 +35,6 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
     // /admin POST method handler.
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)

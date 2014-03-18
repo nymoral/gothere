@@ -15,7 +15,6 @@ func GuessesGet(w http.ResponseWriter, r *http.Request) {
     // All the rest are redirected to /login .
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
@@ -45,7 +44,6 @@ func GuessesPost(w http.ResponseWriter, r *http.Request) {
     // Checks if user trying to submit is in valid.
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)

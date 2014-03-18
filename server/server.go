@@ -7,13 +7,13 @@ import (
 )
 
 func ServerInit() {
-	http.HandleFunc("/",            func(w http.ResponseWriter, r *http.Request) { home(w, r)       })
-	http.HandleFunc("/guesses/",    func(w http.ResponseWriter, r *http.Request) { guesses(w, r)    })
-	http.HandleFunc("/logout/",     func(w http.ResponseWriter, r *http.Request) { logout(w, r)     })
-	http.HandleFunc("/login/",      func(w http.ResponseWriter, r *http.Request) { login(w, r)      })
-	http.HandleFunc("/register/",   func(w http.ResponseWriter, r *http.Request) { register(w, r)   })
-	http.HandleFunc("/admin/",      func(w http.ResponseWriter, r *http.Request) { admin(w, r)      })
-	http.HandleFunc("/error/",      func(w http.ResponseWriter, r *http.Request) { errorHand(w)     })
+	http.HandleFunc("/",            home)
+	http.HandleFunc("/guesses/",    guesses)
+	http.HandleFunc("/logout/",     logout)
+	http.HandleFunc("/login/",      login)
+	http.HandleFunc("/register/",   register)
+	http.HandleFunc("/admin/",      admin)
+	http.HandleFunc("/error/",      errorHand)
 
 	if config.Config.ServeStatic {
 		// In case go server needs to serve static files.

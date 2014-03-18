@@ -14,7 +14,6 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
     // All the rest are redirected to /login .
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
@@ -42,10 +41,6 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
 
 func HomePost(w http.ResponseWriter, r *http.Request) {
     // /home POST handler.
-    // TODO :
-
-    //db := database.GetConnection()
-    //defer database.RecycleConnection(db)
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)

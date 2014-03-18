@@ -8,41 +8,32 @@ import (
     "gothere/config"
 )
 
-var DbChannel = make(chan *sql.DB, config.Config.MaxConnections)
-// All availible db connections will be stored here.
+var dbConnection *sql.DB
+// A connection to the db.
 
 func init() {
-    for i := 0; i < config.Config.MaxConnections; i++ {
-        // Creating and pushing db connections
-        // to main channel.
-        DbChannel <- DbInit()
-    }
+    dbConnection = dbInit()
+    dbConnection.SetMaxOpenConns(config.Config.MaxConnections)
+    dbConnection.SetMaxIdleConns(config.Config.MaxConnections)
+    // Establish the connection.
 
     db := GetConnection()
-    defer RecycleConnection(db)
 
     err := db.Ping()
     // Testing db connectivity.
     if err != nil {
         log.Fatal(err)
     } else {
-        log.Printf("Starting %d db connections.\n", config.Config.MaxConnections)
+        log.Printf("Starting db connections. Max open/idle connections: %d\n", config.Config.MaxConnections)
     }
 }
 
 func GetConnection() (*sql.DB) {
-    // Takes a connection from a channel or
-    // waits for an availible one.
-    return <- DbChannel
+    // Passes a connection to a handler.
+    return dbConnection
 }
 
-func RecycleConnection(con *sql.DB) {
-    // After a function that user a connection
-    // exits, used connection is returned to the channel.
-    DbChannel <- con
-}
-
-func DbInit() (*sql.DB) {
+func dbInit() (*sql.DB) {
     // Opens a connection to a postgresql databalse
     // and returns a pointer to sql.DB object.
 

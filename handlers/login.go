@@ -22,7 +22,6 @@ func LoginPost(w http.ResponseWriter, r *http.Request) {
     // new sessionid cookie is set and user is redirected to / .
 
     db := database.GetConnection()
-    defer database.RecycleConnection(db)
 
     username := r.FormValue("username")
     pass := r.FormValue("password")
