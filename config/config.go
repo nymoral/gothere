@@ -14,7 +14,7 @@ func init() {
     var jsonFile string
     if len(args) < 2 {
         log.Println("Configuration file not provided.")
-        jsonFile = "./config.json"
+        jsonFile = "./config/config.json"
     } else {
         jsonFile = args[1]
     }

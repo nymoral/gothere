@@ -5,7 +5,6 @@ import (
     "gothere/templates"
     "gothere/models"
     "gothere/database"
-    "gothere/utils"
     "gothere/password"
 )
 
@@ -42,7 +41,7 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     old.Lastname = user.Lastname
     old.Email = user.Email
 
-    if ! utils.UserValidate(&user, repeat) {
+    if ! user.UserValidate(repeat) {
         templates.Render(w, "register", old)
         return
     }

@@ -16,16 +16,7 @@ func init() {
     dbConnection.SetMaxOpenConns(config.Config.MaxConnections)
     dbConnection.SetMaxIdleConns(config.Config.MaxConnections)
     // Establish the connection.
-
-    db := GetConnection()
-
-    err := db.Ping()
-    // Testing db connectivity.
-    if err != nil {
-        log.Fatal(err)
-    } else {
-        log.Printf("Starting db connections. Max open/idle connections: %d\n", config.Config.MaxConnections)
-    }
+    log.Printf("Starting db connections. Max open/idle connections: %d\n", config.Config.MaxConnections)
 }
 
 func GetConnection() (*sql.DB) {

@@ -7,7 +7,6 @@ import (
     "gothere/models"
 )
 
-
 func CreateUser(db *sql.DB, user *models.User) {
     // Adds a user to the database.
     // Assumes that model is correct
@@ -35,6 +34,9 @@ func GetPassword(db *sql.DB, email string) (string, bool) {
     if err == sql.ErrNoRows{
         return "", false
     }
+    if err != nil {
+        log.Fatal(err)
+    }
     return password, is_admin
 }
 
@@ -50,6 +52,9 @@ func GetPkAdmin(db *sql.DB, username string) (int, bool) {
     if err == sql.ErrNoRows {
         // Usualy not found.
         return -1, false
+    }
+    if err != nil {
+        log.Fatal(err)
     }
     return pk, admin
 }

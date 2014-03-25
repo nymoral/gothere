@@ -3,7 +3,9 @@ package models
 import (
     "fmt"
     "time"
+    "gothere/utils"
 )
+
 
 type User struct {
     // User mode.
@@ -51,4 +53,29 @@ func (u *User) NameStyle() (string) {
         return "user_name"
     }
     return "default_name"
+}
+
+func (user *User) UserValidate(repeat string) (bool) {
+    // Registration form validation.
+    // Returns true/fales based on weather the form fits
+    // requirements.
+
+    if user.Password != repeat {
+        // Password don't math.
+        return false
+    }
+    if len(repeat) < 6{
+        // Password lenght.
+        return false
+    }
+    if len(user.Firstname) < 1 || len(user.Lastname) < 1 || len(user.Firstname) > 20 || len(user.Lastname) > 30 {
+        // To check if not empty and fits in the db.
+        return false
+    }
+
+    if ! utils.EmailValidation(user.Email) || len(user.Email) > 50 {
+        // To check if not empty and fits in the db.
+        return false
+    }
+    return true
 }

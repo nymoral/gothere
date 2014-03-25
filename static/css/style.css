@@ -1,7 +1,14 @@
 body {
-    background-color: #ece5ce;
+    background-color: #f4f4f4;
     font-family: "Sans", "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     font-size: 12px;
+    height: 100%;
+}
+#body-wrap {
+    height: 100%;
+}
+#footer {
+    height: 50px;
 }
 #form-cont{
     border: 2px solid #2C2C2C;
@@ -15,7 +22,7 @@ body {
 #form-head{
     text-align: center;
     background: #493736;
-    color: #ece5ce;
+    color: #f4f4f4;
     overflow: auto;
     padding: 0;
     width: 100%;
@@ -68,6 +75,12 @@ input[type=submit] {
     color: red;
 }
 
+#table-wrap {
+    max-width: 80%;
+    margin: 20px auto ;
+    overflow: auto;
+    max-height: 100%;
+}
 #main-table {
     text-align: center;
     empty-cells: show;
@@ -75,7 +88,7 @@ input[type=submit] {
     white-space: nowrap;
     font-size: 16;
     overflow: scroll;
-    margin-bottom: 20px;
+    margin: auto;
 }
 #rez_data {
     border: 1px solid black;
