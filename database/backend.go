@@ -16,6 +16,10 @@ func init() {
     dbConnection.SetMaxOpenConns(config.Config.MaxConnections)
     dbConnection.SetMaxIdleConns(config.Config.MaxConnections)
     // Establish the connection.
+    _, err := dbConnection.Exec("SELECT pk FROM users WHERE email='admin';")
+    if err != nil {
+        log.Fatal(err)
+    }
     log.Printf("Starting db connections. Max open/idle connections: %d\n", config.Config.MaxConnections)
 }
 
@@ -28,19 +32,14 @@ func dbInit() (*sql.DB) {
     // Opens a connection to a postgresql databalse
     // and returns a pointer to sql.DB object.
 
-    uname := " user=" + config.Config.DbUser
-    dname := " dbname=" + config.Config.DbName
+    statement := "postgres://"
+    statement += config.Config.DbUser + ":"
+    statement += config.Config.DbPass + "@"
+    statement += config.Config.DbIp + "/"
+    statement += config.Config.DbName + "?"
+    statement += "sslmode=disable"
 
-    var pass string
-
-    if config.Config.DbPass != "" {
-        pass = " password=" + config.Config.DbPass
-    } else {
-        pass = ""
-    }
-
-    openStatement := "sslmode=disable" + dname + uname + pass
-    db, err := sql.Open("postgres", openStatement)
+    db, err := sql.Open("postgres", statement)
     if err != nil {
         log.Fatal(err)
     }

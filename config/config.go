@@ -38,6 +38,7 @@ type configType struct {
     DbUser         string
     DbName         string
     DbPass         string
+    DbIp           string
     Secret1        string
     Secret2        string
     TemplateDir    string

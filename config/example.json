@@ -5,6 +5,7 @@
     "DbUser"        : "Some DB username",
     "DbName"        : "DB name",
     "DbPass"        : "DB password. Leave blank for none.",
+    "DbIp"          : "localhost:5432",
     "Secret1"       : "32 chars lenght secret string.",
     "Secret2"       : "Another 32 chars lenght secret string.",
     "TemplateDir"   : "/home/user/go/src/gothere/templates/html/",
