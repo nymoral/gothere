@@ -2,4 +2,6 @@
 bin
 *.swp
 config.json
+.*
+transfer
 # To keep secret things secret.

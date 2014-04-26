@@ -49,6 +49,13 @@ func admin(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func settings(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		handlers.SettingsGet(w)
+	} else {
+		handlers.SettingsPost(w, r)
+	}
+}
 func logout(w http.ResponseWriter, r *http.Request) {
     handlers.Logout(w, r)
 }

@@ -74,6 +74,7 @@ var (
     qGetGames           = getQuery("GetGames")
     qGetUsers           = getQuery("GetUsers")
     qCreateUser         = getQuery("CreateUser")
+    qChangePassword     = getQuery("ChangePassword")
     qGetPassword        = getQuery("GetPassword")
     qGetPkAdmin         = getQuery("GetPkAdmin")
     qGetTable           = getQuery("GetTable")

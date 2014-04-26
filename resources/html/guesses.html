@@ -6,26 +6,38 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     </head>
     <body>
+        <div id="header">
+            <a href="/">Grįžti</a>
+            <a href="/settings/">Nustatymai</a>
+            <a href="/logout/">Išeiti</a>
+        </div>
     <div id="guess-table-wrap">
-        <table>
-            <tr>
-                <td>Rungtynės</td>
-                <td>Resultatas</td>
-            </tr>
-            {{range $guess := .Guesses}}<tr>
-                <td>{{$guess.Name}}</td>
-                <td>{{$guess.Result}}</td>
-            </tr>{{end}}
-        </table>
+        <form action="/guesses/" method="post">
+            <table>
+                <tr>
+                    <td class="outer mid result">Rungtynės</td>
+                    <td colspan="2" class="outer mid result">Resultatas</td>
+                </tr>
+                {{range $guess := .Guesses}}<tr>
+                    <td class="outer name">{{$guess.Name}}</td>
+                    <td class="happened" colspan="2" style="text-align: center;">{{$guess.Result}}</td>
+                </tr>{{end}}
+                <tr>
+                    <td>
+                        <select name="game-id" class="default_name" >
+                            {{range $game := .OpenGames}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
+                        </select>
+                    </td>
+                    <td>
+                        <input type="number" name="result_1" value="" class="result_field" style="border-right:none;">
+                    </td>
+                    <td>
+                        <input type="number" name="result_2" value="" class="result_field" style="border-left:none;">
+                    </td>
+            </table>
+            <input type="submit" value="Pateikti" style="margin-top: 20px;">
+        </form>
     </div>
 
-        <form action="/guesses/" method="post">
-<select name="game-id">
-    {{range $game := .OpenGames}}<option value="{{$game.Pk}}">{{$game.StartsStr}} {{$game.Team1}}-{{$game.Team2}}</option>{{end}}
-</select>
-        <input type="number" name="result_1" value="" class="result_field">
-        <input type="number" name="result_2" value="" class="result_field">
-        <input type="submit" value="Pateikti">
-        </form>
         </body>
 </html>

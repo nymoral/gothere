@@ -164,3 +164,33 @@ input[type=submit] {
 .not_happened {
     background-color: #F2C777;
 }
+
+#header {
+    height: 40px;
+    padding-right: 30px;
+    text-align: right;
+}
+#header a {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #493736;
+    font-size: 150%;
+    margin: auto 2px;
+}
+
+#guess-table-wrap {
+    margin-left: 20px;
+}
+#guess-table-wrap table {
+    border-collapse: collapse;
+}
+
+#guess-table-wrap td {
+    border: 1px solid black;
+}
+
+.result_field {
+    width: 40px;
+}

@@ -7,13 +7,14 @@ import (
 )
 
 func ServerInit() {
-	http.HandleFunc("/",            home)
 	http.HandleFunc("/guesses/",    guesses)
 	http.HandleFunc("/logout/",     logout)
 	http.HandleFunc("/login/",      login)
 	http.HandleFunc("/register/",   register)
 	http.HandleFunc("/admin/",      admin)
 	http.HandleFunc("/error/",      errorHand)
+	http.HandleFunc("/settings/",   settings)
+	http.HandleFunc("/",            home)
 
 	if config.Config.ServeStatic {
 		// In case go server needs to serve static files.

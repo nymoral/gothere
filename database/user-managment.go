@@ -58,3 +58,10 @@ func GetPkAdmin(db *sql.DB, username string) (int, bool) {
     }
     return pk, admin
 }
+
+func ChangePassword(db *sql.DB, username, newP string) {
+    _, err := db.Exec(qChangePassword, username, newP)
+    if err != nil {
+        log.Fatal(err)
+    }
+}

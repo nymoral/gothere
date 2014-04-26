@@ -1,43 +1,24 @@
 package password
 
 import (
-    "fmt"
-    "crypto/sha256"
-    "encoding/hex"
-    "gothere/utils"
-    "gothere/config"
+    "log"
+    "code.google.com/p/go.crypto/bcrypt"
 )
 
-func hashPassword(plain, salt string, cycles int) string {
-    // Main password hashing function.
-    // It takes plain-text password a salt and nr of cycles
-    // and returns hashed password.
-    // Uses SHA256.
-
-    hashed := plain
-    for i := 0; i < cycles; i++ {
-        hash := sha256.New()
-        hash.Write([]byte(salt+hashed))
-        md := hash.Sum(nil)
-        hashed = hex.EncodeToString(md)
+func hashBC(plain string) string {
+    hashed, err := bcrypt.GenerateFromPassword([]byte(plain), 10)
+    var hashedStr string
+    if err != nil {
+        log.Println(err)
+        return ""
+    } else {
+        hashedStr = string(hashed)
+        return hashedStr
     }
-
-    hash := sha256.New()
-    hash.Write([]byte(salt+hashed))
-    md := hash.Sum(nil)
-    return hex.EncodeToString(md)
 }
 
 func NewPassword(plain string) (string) {
-    //  Generates a random salt and hashes given password
-    // to be stored in DB.
-    // Uses hashPassword() func from this package.
-    // Formated as "CYCLE SALT HASH"
-
-    cycles := config.Config.HashCycles
-
-    salt := utils.RandomStr(16)
-    return fmt.Sprintf("%d %s %s", cycles, salt, hashPassword(plain, salt, cycles))
+    return hashBC(plain)
 }
 
 func Authenticate(plain, hashed string) bool{
@@ -45,20 +26,19 @@ func Authenticate(plain, hashed string) bool{
     // false otherwise.
     // Checks if a given password matches
     // hashed one retrieved from a DB,
-    // Uses hashPassword() from this package.
+    // Uses bcrypts own comparison.
 
     if hashed == "" {
         // No user in the db.
         return false
     }
-    var cycles int
-    var s, h string
-    nr, err := fmt.Sscanf(hashed, "%d %s %s", &cycles, &s, &h)
-    // Extracts nr of cycles, salt and a hash from db data.
-    if nr != 3 || err != nil {
-        // Bad formating of a password.
-        // Should never happen.
+    hashBytes :=  []byte(hashed)
+    plainBytes := []byte(plain)
+
+    err := bcrypt.CompareHashAndPassword(hashBytes, plainBytes)
+    if err != nil {
+        log.Println(err)
         return false
     }
-    return h == hashPassword(plain, s, cycles)
+    return true
 }
