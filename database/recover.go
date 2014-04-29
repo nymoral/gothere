@@ -54,7 +54,7 @@ func CheckRecover(db *sql.DB, key string) (bool) {
 }
 
 func DoRecover(db *sql.DB, key string, password string) {
-    r, err := db.Exec(qChangeForKey, password, key)
+    _, err := db.Exec(qChangeForKey, password, key)
     if err != nil {
         log.Fatal(err)
     }
