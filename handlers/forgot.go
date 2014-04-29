@@ -19,7 +19,7 @@ func ForgotGet(w http.ResponseWriter, r *http.Request) {
     if forgotKey == "" {
         // A simple GET for the form.
         templates.Render(w, "forgot", nil)
-    } else if database.CheckRecover(db, forgotKey) {
+    } else if database.CheckRecovery(db, forgotKey) {
         // Render recover page.
         templates.Render(w, "recover", forgotKey)
     } else {
