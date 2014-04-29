@@ -13,5 +13,9 @@
     "HashCycles"    : 1000,
     "MaxConnections": 3,
     "NrOfCookies"   : 4
+    "MailUsername"  : "",
+    "MailPassword"  : "",
+    "MailHost"      : "smtp.live.com",
+    "MailPort"      : "587"
 }
 
