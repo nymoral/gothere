@@ -56,6 +56,15 @@ func settings(w http.ResponseWriter, r *http.Request) {
 		handlers.SettingsPost(w, r)
 	}
 }
+
+func forgot(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "GET" {
+		handlers.ForgotGet(w, r)
+	} else {
+        handlers.ForgotPost(w, r)
+    }
+}
+
 func logout(w http.ResponseWriter, r *http.Request) {
     handlers.Logout(w, r)
 }

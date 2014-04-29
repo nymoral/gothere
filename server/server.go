@@ -14,6 +14,7 @@ func ServerInit() {
 	http.HandleFunc("/admin/",      admin)
 	http.HandleFunc("/error/",      errorHand)
 	http.HandleFunc("/settings/",   settings)
+	http.HandleFunc("/forgot/",     forgot)
 	http.HandleFunc("/",            home)
 
 	if config.Config.ServeStatic {

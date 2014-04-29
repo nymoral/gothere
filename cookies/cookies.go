@@ -1,8 +1,8 @@
 package cookies
 
 import (
-    "github.com/gorilla/securecookie"
     "log"
+    "github.com/gorilla/securecookie"
     "gothere/config"
 )
 

@@ -18,6 +18,8 @@ var adminTemplate *template.Template
 var errorTemplate *template.Template
 var guessesTemplate *template.Template
 var settingsTemplate *template.Template
+var forgotTemplate *template.Template
+var recoverTemplate *template.Template
 
 
 func loadTemplates() {
@@ -28,6 +30,8 @@ func loadTemplates() {
     errorTemplate, _ = template.ParseFiles(dir + "error.html")
     guessesTemplate, _ = template.ParseFiles(dir + "guesses.html")
     settingsTemplate, _ = template.ParseFiles(dir + "settings.html")
+    forgotTemplate, _ = template.ParseFiles(dir + "forgotInit.html")
+    recoverTemplate, _ = template.ParseFiles(dir + "recover.html")
 }
 
 func init() {
@@ -57,6 +61,10 @@ func Render(wr io.Writer, name string, data interface{}) {
             t = guessesTemplate
         case "settings":
             t = settingsTemplate
+        case "forgot":
+            t = forgotTemplate
+        case "recover":
+            t = recoverTemplate
     }
 
     err := t.Execute(wr, data)

@@ -16,3 +16,7 @@ func RandomStr(L  int) string {
     return string(bytes)
 }
 
+func GenRecoveryKey() (string) {
+    const keyLen = 64
+    return RandomStr(keyLen)
+}

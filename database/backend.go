@@ -2,7 +2,6 @@ package database
 
 import (
     "log"
-    "io/ioutil"
     "database/sql"
     _ "github.com/lib/pq"
     "gothere/config"
@@ -18,6 +17,7 @@ func init() {
     // Establish the connection.
     _, err := dbConnection.Exec("SELECT pk FROM users WHERE email='admin';")
     if err != nil {
+        log.Println("Test query failed")
         log.Fatal(err)
     }
     log.Printf("Starting db connections. Max open/idle connections: %d\n", config.Config.MaxConnections)
@@ -41,47 +41,10 @@ func dbInit() (*sql.DB) {
 
     db, err := sql.Open("postgres", statement)
     if err != nil {
+        log.Println("Initial connection to the db failed.")
         log.Fatal(err)
     }
 
     return db
 }
 
-func getQuery(name string) (string) {
-    // Reads a SQL querie string from a file and returns it.
-    dir := config.Config.SqlQueriesDir
-    filename := dir +  name + ".sql"
-    buffer, err := ioutil.ReadFile(filename)
-    if err == nil {
-        return string(buffer)
-    } else {
-        log.Fatal(err)
-    }
-    return ""
-}
-
-var (
-    // All the SQL queries are loaded into string variables.
-    qCreateGame         = getQuery("CreateGame")
-    qOpenGames          = getQuery("OpenGames")
-    qToFinish           = getQuery("ToFinish")
-    qCloseGame          = getQuery("CloseGame")
-    qFinishGame         = getQuery("FinishGame")
-    qCheckGuess         = getQuery("CheckGuess")
-    qInsertGuess        = getQuery("InsertGuess")
-    qUpdateGuess        = getQuery("UpdateGuess")
-    qUsersGuesses       = getQuery("UsersGuesses")
-    qGetGames           = getQuery("GetGames")
-    qGetUsers           = getQuery("GetUsers")
-    qCreateUser         = getQuery("CreateUser")
-    qChangePassword     = getQuery("ChangePassword")
-    qGetPassword        = getQuery("GetPassword")
-    qGetPkAdmin         = getQuery("GetPkAdmin")
-    qGetTable           = getQuery("GetTable")
-
-    qGetResult          = getQuery("GetResult")
-    qGetPoints          = getQuery("GetPoints")
-    qUpdatePoints       = getQuery("UpdatePoints")
-    qUpdateGuessPoints  = getQuery("UpdateGuessPoints")
-    qInsertGuessPoints  = getQuery("InsertGuessPoints")
-)

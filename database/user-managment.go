@@ -65,3 +65,10 @@ func ChangePassword(db *sql.DB, username, newP string) {
         log.Fatal(err)
     }
 }
+
+const (
+    qCreateUser = "INSERT INTO users (email, password, firstname, lastname) VALUES ($1, $2, $3, $4);"
+    qGetPassword = "SELECT password, admin FROM users WHERE email=$1;"
+    qGetPkAdmin = "SELECT pk, admin FROM users WHERE email=$1;"
+    qChangePassword = "UPDATE users SET password=$2 WHERE email=$1;"
+)
