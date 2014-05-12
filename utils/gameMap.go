@@ -1,4 +1,4 @@
-package games
+package utils
 
 func HasShortName(name string) (bool) {
     _, flag := gamesMap[name]

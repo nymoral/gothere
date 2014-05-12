@@ -1,0 +1,18 @@
+{{define "base"}}<html lang="en">
+    <head>
+        {{template "head" .}}
+        <link rel="stylesheet" type="text/css" href="/static/css/style.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    </head>
+    <body>
+        <div id="body-wrap">
+            {{template "body" .}}
+            <!--<div id="push"></div>-->
+        </div>
+        <div id="footer">
+            <a href="mailto:aivaras.saulius@gmail.com"><img src="/static/images/mail.png"></img></a>
+            <a href="http://golang.org"><img src="/static/images/smallGopher.png"></img></a>
+            <a href="https://github.com/ishallsmiteyou/gothere"><img src="/static/images/github.png"></img></a>
+        </div>
+    </body>
+</html>{{end}}

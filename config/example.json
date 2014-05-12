@@ -2,6 +2,7 @@
     "Port"          : "8054",
     "Static"        : "/home/user/go/src/gothere/static/",
     "ServeStatic"   : true,
+    "DynamicTemplates", false,
     "DbUser"        : "Some DB username",
     "DbName"        : "DB name",
     "DbPass"        : "DB password. Leave blank for none.",

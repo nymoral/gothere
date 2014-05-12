@@ -1,0 +1,204 @@
+body {
+    background-color: #FFFFFF;
+    font-family: "Sans", "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
+    font-size: 12px;
+    height: 100%;
+}
+#body-wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+}
+#footer, #push {
+    height: 50px;
+    clear: both;
+}
+#footer a {
+    float: right;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+#form-cont{
+    border: 2px solid #2C2C2C;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    min-width: 300px;
+    width: 310px;
+    position: relative;
+}
+#form-head{
+    text-align: center;
+    background: #2C2C2C;
+    color: #FFFFFF;
+    overflow: auto;
+    padding: 0;
+    width: 100%;
+}
+#form-wrap{
+    margin: 10px 15px;
+}
+div.inputdata {
+    vertical-align:middle;
+    margin:15px;
+}
+div.inputdata span{
+    display: block;
+    overflow: hidden;
+}
+div.inputdata input{
+    border: 1px;
+    background:none;
+    border: 1px solid #2C2C2C;
+    width: 100%;
+    padding: 4px;
+    margin: auto;
+}
+div.inputdata input:focus{
+    outline: none !important;
+    border-color: #D3643B;
+}
+.clear{
+    clear:both;
+}
+input[type=submit] {
+    background :none;
+    clear: both;
+    border: 1px solid #2C2C2C;
+    font-weight: 700;
+    font-size: 12;
+    margin-left: 16px;
+}
+#forgot_link{
+    width: 310px;
+    margin: 10px auto 0;
+    text-align: right;
+}
+#forgot_link a{
+    text-decoration: none;
+    color: #2C2C2C;
+}
+#error-bar {
+    text-align: center;
+    color: red;
+}
+
+#table-wrap {
+    max-width: 80%;
+    margin: 20px auto ;
+    overflow: auto;
+    max-height: 100%;
+}
+#main-table {
+    text-align: center;
+    empty-cells: show;
+    border-collapse: collapse;
+    white-space: nowrap;
+    font-size: 16;
+    overflow: scroll;
+    margin: auto;
+}
+#rez_data {
+    border: 1px solid black;
+    color: #E9E7D6;
+    font-weight: 700;
+}
+.outer {
+    background-color: #2C2C2C;
+    color: #E9E7D6;
+}
+.outer.name{
+    border: 1px solid black;
+    padding-left: 8px;
+    padding-right: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+.outer.place{
+    border: 1px solid black;
+}
+.hidden {
+    display: none;
+    position: absolute;
+    border: 2px solid #E9E7D6;
+    background-color: #2C2C2C;
+    color: #E9E7D6;
+    padding: 4px;
+    z-index: 10;
+}
+.game_date {
+    border: 1px solid black;
+    background-color: #2C2C2C;
+}
+.mid {
+    border: 1px solid black;
+}
+.mid.result{
+    font-weight: 700;
+}
+.outer.name:hover .hidden {
+    display: block;
+}
+.user {
+    font-weight: 700;
+}
+.user_place {
+    border: 1px solid black;
+    background-color: #D15A40;
+}
+.g_row td {
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.p_row td {
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+.user_name {
+    border: 1px solid black;
+    color: #111111;
+    background-color: #D15A40;
+}
+.default_name {
+    border: 1px solid black;
+    color: #111111;
+    background-color: #B84A40;
+}
+.happened {
+    background-color: #FFFCF6;
+}
+.not_happened {
+    background-color: #F9F5E9;
+}
+
+#header {
+    height: 40px;
+    padding-right: 30px;
+    text-align: right;
+}
+#header a {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    text-decoration: none;
+    color: #2C2C2C;
+    font-size: 150%;
+    margin: auto 2px;
+}
+
+#guess-table-wrap {
+    margin-left: 20px;
+}
+#guess-table-wrap table {
+    border-collapse: collapse;
+}
+
+#guess-table-wrap td {
+    border: 1px solid black;
+}
+
+.result_field {
+    width: 60px;
+}

@@ -33,6 +33,7 @@ func recovery(db *sql.DB, msg utils.Message, pk int, key string) {
     if err != nil {
         log.Println(err)
     } else {
+        // Create a record only if the email succeeds.
         database.CreateRecovery(db, key, pk)
     }
 }
@@ -55,9 +56,11 @@ func ForgotPost(w http.ResponseWriter, r *http.Request) {
                 log.Printf("An email was sent to %s\n", email)
                 templates.Render(w, "forgot", nil)
            } else {
+                // The recovery already exists. 
                 templates.Render(w, "forgot", nil)
            }
        } else {
+            //  User non existing.
             templates.Render(w, "forgot", nil)
        }
     } else {

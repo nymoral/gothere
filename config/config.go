@@ -35,6 +35,7 @@ type configType struct {
     Port           string
     Static         string
     ServeStatic    bool
+    DynamicTemplates bool
     DbUser         string
     DbName         string
     DbPass         string

@@ -7,31 +7,24 @@ import (
     "gothere/config"
 )
 
-const dynamicTemplates = true
+var dynamicTemplates = config.Config.DynamicTemplates
 
 var dir = config.Config.TemplateDir
 
-var homeTemplate *template.Template
-var loginTemplate *template.Template
-var registerTemplate *template.Template
-var adminTemplate *template.Template
-var errorTemplate *template.Template
-var guessesTemplate *template.Template
-var settingsTemplate *template.Template
-var forgotTemplate *template.Template
-var recoverTemplate *template.Template
-
+var temps = make(map[string]*template.Template)
 
 func loadTemplates() {
-    homeTemplate, _ = template.ParseFiles(dir + "home.html")
-    loginTemplate, _ = template.ParseFiles(dir + "login.html")
-    registerTemplate, _ = template.ParseFiles(dir + "register.html")
-    adminTemplate, _ = template.ParseFiles(dir + "admin.html")
-    errorTemplate, _ = template.ParseFiles(dir + "error.html")
-    guessesTemplate, _ = template.ParseFiles(dir + "guesses.html")
-    settingsTemplate, _ = template.ParseFiles(dir + "settings.html")
-    forgotTemplate, _ = template.ParseFiles(dir + "forgotInit.html")
-    recoverTemplate, _ = template.ParseFiles(dir + "recover.html")
+    base := dir + "base.html"
+
+    temps["home"]     = template.Must(template.ParseFiles(dir + "home.html",      base))
+    temps["admin"]    = template.Must(template.ParseFiles(dir + "admin.html",     base))
+    temps["login"]    = template.Must(template.ParseFiles(dir + "login.html",     base))
+    temps["guesses"]  = template.Must(template.ParseFiles(dir + "guesses.html",   base))
+    temps["settings"] = template.Must(template.ParseFiles(dir + "settings.html",  base))
+    temps["register"] = template.Must(template.ParseFiles(dir + "register.html",  base))
+    temps["error"]    = template.Must(template.ParseFiles(dir + "error.html",     base))
+    temps["forgot"]   = template.Must(template.ParseFiles(dir + "forgot.html",    base))
+    temps["recover"]  = template.Must(template.ParseFiles(dir + "recover.html",   base))
 }
 
 func init() {
@@ -39,35 +32,15 @@ func init() {
         loadTemplates()
     }
 }
+
 func Render(wr io.Writer, name string, data interface{}) {
     // Renders html template to the response writer.
     if dynamicTemplates {
         loadTemplates()
     }
-    var t *template.Template
+    t := temps[name]
 
-    switch name {
-        case "home":
-            t = homeTemplate
-        case "admin":
-            t = adminTemplate
-        case "login":
-            t = loginTemplate
-        case "register":
-            t = registerTemplate
-        case "error":
-            t = errorTemplate
-        case "guesses":
-            t = guessesTemplate
-        case "settings":
-            t = settingsTemplate
-        case "forgot":
-            t = forgotTemplate
-        case "recover":
-            t = recoverTemplate
-    }
-
-    err := t.Execute(wr, data)
+    err := t.ExecuteTemplate(wr, "base", data)
     if err != nil {
         log.Println(err)
         Render(wr, "error", nil)

@@ -3,7 +3,7 @@ package models
 import (
     "fmt"
     "time"
-    "gothere/utils/games"
+    "gothere/utils"
 )
 
 type Game struct {
@@ -23,7 +23,7 @@ type Game struct {
 }
 
 func (g *Game) NameFmt() (string) {
-    n1, n2 := games.GetShortNames(g.Team1, g.Team2)
+    n1, n2 := utils.GetShortNames(g.Team1, g.Team2)
     return fmt.Sprintf("%s - %s", n1, n2)
 }
 
