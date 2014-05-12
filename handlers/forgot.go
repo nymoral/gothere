@@ -6,9 +6,9 @@ import (
     "net/http"
     "database/sql"
     "gothere/utils"
-    "gothere/templates"
     "gothere/password"
     "gothere/database"
+    "gothere/templates"
 )
 
 func ForgotGet(w http.ResponseWriter, r *http.Request) {
@@ -74,6 +74,7 @@ func ForgotPost(w http.ResponseWriter, r *http.Request) {
             hashed := password.NewPassword(newPassword)
             database.DoRecover(db, forgotKey, hashed)
             http.Redirect(w, r, "/login", http.StatusFound)
+            log.Printf("KEY (%s) RESET PASSWORD\n", forgotKey)
         }
     }
 }

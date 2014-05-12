@@ -1,12 +1,13 @@
 package handlers
 
 import (
+    "log"
     "fmt"
     "net/http"
-    "gothere/templates"
+    "gothere/models"
     "gothere/cookies"
     "gothere/database"
-    "gothere/models"
+    "gothere/templates"
 )
 
 func GuessesGet(w http.ResponseWriter, r *http.Request) {
@@ -75,6 +76,7 @@ func GuessesPost(w http.ResponseWriter, r *http.Request) {
             // Submit a guess.
             database.GiveResult(db, &guess)
             http.Redirect(w, r, "/guesses/", http.StatusFound)
+            log.Printf("GUESS BY (%d). GAME (%d)\n", guess.Userpk, guess.Gamepk)
         }
     }
 

@@ -1,11 +1,12 @@
 package handlers
 
 import (
+    "log"
     "net/http"
-    "gothere/templates"
     "gothere/cookies"
     "gothere/database"
     "gothere/password"
+    "gothere/templates"
 )
 
 func LoginGet(w http.ResponseWriter) {
@@ -33,6 +34,7 @@ func LoginPost(w http.ResponseWriter, r *http.Request) {
         sessionid := cookies.GenerateSessionId(username)
         cookies.SetSessionId(w, sessionid, remember)
         http.Redirect(w, r, "/", http.StatusFound)
+        log.Printf("LOGGED IN (%s)\n", username)
     } else {
         templates.Render(w, "login", username)
     }

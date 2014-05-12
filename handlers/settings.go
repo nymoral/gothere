@@ -1,11 +1,12 @@
 package handlers
 
 import (
+    "log"
     "net/http"
     "gothere/cookies"
-    "gothere/templates"
     "gothere/database"
     "gothere/password"
+    "gothere/templates"
 )
 
 func SettingsGet(w http.ResponseWriter) {
@@ -34,6 +35,7 @@ func SettingsPost(w http.ResponseWriter, r *http.Request) {
         if password.Authenticate(oldPassword, pass) && len(newPassword) > 5 && newPassword == repeat{
             hashed := password.NewPassword(newPassword)
             database.ChangePassword(db, username, hashed)
+            log.Printf("USER (%s) CHANGED PASSWORD\n", username)
         }
     }
 

@@ -1,14 +1,15 @@
 package handlers
 
 import (
+    "log"
     "time"
     "strconv"
     "net/http"
     "gothere/utils"
     "gothere/models"
-    "gothere/templates"
-    "gothere/database"
     "gothere/cookies"
+    "gothere/database"
+    "gothere/templates"
 )
 
 func AdminGet(w http.ResponseWriter, r *http.Request) {
@@ -64,6 +65,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
             } else {
                 database.CreateGame(db, &game)
                 http.Redirect(w, r, "/admin", http.StatusFound)
+                log.Printf("GAME [%s - %s] ADDED\n", game.Team1, game.Team2)
             }
 
         case "close" :
@@ -71,10 +73,10 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
             pk := r.FormValue("close-game-id")
             database.CloseGame(db, pk)
             http.Redirect(w, r, "/admin", http.StatusFound)
+            log.Printf("GAME (%d) CLOSED\n", pk)
 
         case "end" :
             // Finishes a game.
-            // TODO Recalculate scores.
 
             t1 := r.FormValue("team1")
             t2 := r.FormValue("team2")
@@ -89,6 +91,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
                 database.FinishGame(db, pk, n1, n2)
                 database.CalcPoints(db, intPk, n1, n2)
                 http.Redirect(w, r, "/admin", http.StatusFound)
+                log.Printf("GAME (%d) FINISHED\n", pk)
             }
         }
     } else {

@@ -3,9 +3,9 @@ package handlers
 import (
     "net/http"
     "gothere/models"
-    "gothere/templates"
     "gothere/cookies"
     "gothere/database"
+    "gothere/templates"
 )
 
 func HomeGet(w http.ResponseWriter, r *http.Request) {

@@ -44,7 +44,6 @@ type configType struct {
     Secret2        string
     TemplateDir    string
     SqlQueriesDir  string
-    HashCycles     int
     MaxConnections int
     NrOfCookies    int
 

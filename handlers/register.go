@@ -1,11 +1,12 @@
 package handlers
 
 import (
+    "log"
     "net/http"
-    "gothere/templates"
     "gothere/models"
     "gothere/database"
     "gothere/password"
+    "gothere/templates"
 )
 
 func RegisterGet(w http.ResponseWriter) {
@@ -57,5 +58,6 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     database.CreateUser(db, &user)
     // Creates a user in the db.
     http.Redirect(w, r, "/login", http.StatusFound)
+    log.Printf("USER CREATED (%s)\n", user.Email)
 }
 
