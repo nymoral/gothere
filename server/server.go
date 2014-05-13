@@ -10,7 +10,9 @@ func ServerInit() {
 	http.HandleFunc("/guesses/",    guesses)
 	http.HandleFunc("/logout/",     logout)
 	http.HandleFunc("/login/",      login)
-	http.HandleFunc("/register/",   register)
+    if config.Config.Register {
+        http.HandleFunc("/register/",   register)
+    }
 	http.HandleFunc("/admin/",      admin)
 	http.HandleFunc("/error/",      errorHand)
 	http.HandleFunc("/settings/",   settings)
@@ -25,7 +27,7 @@ func ServerInit() {
 	}
 
     log.Printf("Starting HTTP server at port %s\n", config.Config.Port)
-	http.ListenAndServe(":"+config.Config.Port, nil)
+	http.ListenAndServe(":" + config.Config.Port, nil)
 	// Start http server.
 }
 

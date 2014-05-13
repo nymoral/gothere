@@ -38,7 +38,7 @@ type GuessContext struct {
 }
 
 type RegisterContext struct {
-    Flag        bool
+    Flag        string
     Firstname   string
     Lastname    string
     Email       string

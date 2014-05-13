@@ -8,15 +8,15 @@
         <div id="form-wrap">
             <form onsubmit="return validateForm();" id="login_form" action="/register/" method="post">
                 <div class="inputdata">
-                    <span><input id="first" type="text" name="firstname" placeholder="Vardas" value="{{ .Data.Firstname }}" onblur="checkLen(this, 1)"></span>
+                    <span><input id="first" type="text" name="firstname" placeholder="Vardas" value="{{ .Firstname }}" onblur="checkLen(this, 1)"></span>
                     <div class="clear"></div>
                 </div>
                 <div class="inputdata">
-                    <span><input id="last" type="text" name="lastname" placeholder="Pavardė" value="{{ .Data.Lastname }}" onblur="checkLen(this, 1)"></span>
+                    <span><input id="last" type="text" name="lastname" placeholder="Pavardė" value="{{ .Lastname }}" onblur="checkLen(this, 1)"></span>
                     <div class="clear"></div>
                 </div>
                 <div class="inputdata">
-                    <span><input id="email" type="text" name="email" placeholder="El. pašto adresas" value="{{ .Data.Email }}" onblur="checkEmail(this)"></span>
+                    <span><input id="email" type="text" name="email" placeholder="El. pašto adresas" value="{{ .Email }}" onblur="checkEmail(this)"></span>
                     <div class="clear"></div>
                 </div>
                 <div class="inputdata">
@@ -31,11 +31,8 @@
                     <input type="submit" value="Registracija!">
                 </div>
             </form>
-            {{ if .Data.Flag }}<div id="error-bar">
-                <p>Greičiausiai vartotojas su šiuo el. pašto adresu jau egzistuoja.</p>
-                <p>Patikrinkite, ar visi laukai užpildyti.</p>
-                <p>Vardas turi neviršyti 20, pavardė - 30 simbolių.</p>
-                <p>Slaptažodis turi būti bent 6 simbolių ilgio.</p>
+            {{ if .Flag }}<div id="error-bar">
+                <p>{{ .Flag }}</p>
                 </div>{{ end }}
         </div>
     </div>{{end}}

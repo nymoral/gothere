@@ -10,58 +10,58 @@ import (
 // and request methods.
 
 func login(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.LoginGet(w)
-	} else {
+	if r.Method == "POST" {
 		handlers.LoginPost(w, r)
+	} else {
+		handlers.LoginGet(w)
 	}
 }
 
 func home(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.HomeGet(w, r)
-	} else {
+	if r.Method == "POST" {
 		handlers.HomePost(w, r)
+	} else {
+		handlers.HomeGet(w, r)
 	}
 }
 
 func guesses(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.GuessesGet(w, r)
-	} else {
+	if r.Method == "POST" {
 		handlers.GuessesPost(w, r)
+	} else {
+		handlers.GuessesGet(w, r)
 	}
 }
 
 func register(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.RegisterGet(w)
-	} else {
+	if r.Method == "POST" {
 		handlers.RegisterPost(w, r)
+	} else {
+		handlers.RegisterGet(w)
 	}
 }
 
 func admin(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.AdminGet(w, r)
-	} else {
+	if r.Method == "POST" {
 		handlers.AdminPost(w, r)
+	} else {
+		handlers.AdminGet(w, r)
 	}
 }
 
 func settings(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.SettingsGet(w)
-	} else {
+	if r.Method == "POST" {
 		handlers.SettingsPost(w, r)
+	} else {
+		handlers.SettingsGet(w)
 	}
 }
 
 func forgot(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
-		handlers.ForgotGet(w, r)
-	} else {
+	if r.Method == "POST" {
         handlers.ForgotPost(w, r)
+	} else {
+		handlers.ForgotGet(w, r)
     }
 }
 

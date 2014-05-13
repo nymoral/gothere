@@ -51,4 +51,6 @@ type configType struct {
     MailPassword   string
     MailHost       string
     MailPort       string
+
+    Register       bool
 }

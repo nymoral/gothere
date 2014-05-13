@@ -16,6 +16,7 @@
     "MailUsername"  : "",
     "MailPassword"  : "",
     "MailHost"      : "smtp.live.com",
-    "MailPort"      : "587"
+    "MailPort"      : "587",
+    "Register"      : true
 }
 

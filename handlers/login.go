@@ -3,17 +3,24 @@ package handlers
 import (
     "log"
     "net/http"
+    "gothere/config"
     "gothere/cookies"
     "gothere/database"
     "gothere/password"
     "gothere/templates"
 )
 
+type loginContext struct {
+    Username string
+    Register bool
+    Error bool
+}
+
 func LoginGet(w http.ResponseWriter) {
     // /login handler for GET request.
     // Just renders blank form.
-
-    templates.Render(w, "login", nil)
+    context := loginContext {"", config.Config.Register, false }
+    templates.Render(w, "login", context)
 }
 
 func LoginPost(w http.ResponseWriter, r *http.Request) {
@@ -36,6 +43,7 @@ func LoginPost(w http.ResponseWriter, r *http.Request) {
         http.Redirect(w, r, "/", http.StatusFound)
         log.Printf("LOGGED IN (%s)\n", username)
     } else {
-        templates.Render(w, "login", username)
+        context := loginContext {username, config.Config.Register, true }
+        templates.Render(w, "login", context)
     }
 }

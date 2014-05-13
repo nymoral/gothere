@@ -55,27 +55,27 @@ func (u *User) NameStyle() (string) {
     return "default_name"
 }
 
-func (user *User) UserValidate(repeat string) (bool) {
+func (user *User) UserValidate(repeat string) (string) {
     // Registration form validation.
     // Returns true/fales based on weather the form fits
     // requirements.
 
-    if user.Password != repeat {
-        // Password don't math.
-        return false
+    if len(user.Firstname) < 1 || len(user.Lastname) < 1 || len(user.Firstname) > 20 || len(user.Lastname) > 30 {
+        // To check if not empty and fits in the db.
+        return "Vardas turi būti 1-20, pavardė 1-30 simbolių ilgio."
+    }
+    if ! utils.EmailValidation(user.Email) || len(user.Email) > 50 {
+        // To check if not empty and fits in the db.
+        return "El. pašto adresas turi būti validus ir iki 50 simbolių ilgio"
     }
     if len(repeat) < 6{
         // Password lenght.
-        return false
+        return "Slatažodis turi būti bent šešių (6) simbolių ilgio"
     }
-    if len(user.Firstname) < 1 || len(user.Lastname) < 1 || len(user.Firstname) > 20 || len(user.Lastname) > 30 {
-        // To check if not empty and fits in the db.
-        return false
+    if user.Password != repeat {
+        // Password don't math.
+        return "Slaptažodžiai nesutampa."
     }
 
-    if ! utils.EmailValidation(user.Email) || len(user.Email) > 50 {
-        // To check if not empty and fits in the db.
-        return false
-    }
-    return true
+    return ""
 }

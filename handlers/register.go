@@ -37,12 +37,12 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     var old models.RegisterContext
     // Model for return form.
     // In case there the data wasn't valid
-    old.Flag = true
     old.Firstname = user.Firstname
     old.Lastname = user.Lastname
     old.Email = user.Email
+    old.Flag =  user.UserValidate(repeat)
 
-    if ! user.UserValidate(repeat) {
+    if  old.Flag != "" {
         templates.Render(w, "register", old)
         return
     }
@@ -50,6 +50,7 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     pass, _ := database.GetPassword(db, user.Email)
     // Checks if user exists.
     if pass != "" {
+        old.Flag = "Vartotojas su šiuo el. pašto adresu jau egzistuoja."
         templates.Render(w, "register", old)
         return
     }
