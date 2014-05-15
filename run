@@ -1,0 +1,4 @@
+#! /bin/bash
+
+python ./resources/utils/template.py ./resources/static/css/source.css ./resources/static/css/style.css &&
+go run main.go
