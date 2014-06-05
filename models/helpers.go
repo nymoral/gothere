@@ -13,6 +13,8 @@ type GuessWithNames struct {
     Team2   string
     Result1 interface{}
     Result2 interface{}
+
+    Date    string
 }
 
 func (g *GuessWithNames) Name() (string) {

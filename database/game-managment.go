@@ -81,10 +81,28 @@ func FinishGame(db *sql.DB, pk string, t1, t2 int) {
     }
 }
 
+func GamesToClose(db *sql.DB) ([]string) {
+    // Returns a slice of games pks that should be closed.
+
+    l := make([]string, 0)
+    var i string
+    rows, err := db.Query(qToClose)
+    if err != nil {
+        log.Fatal(err)
+    }
+    for rows.Next() {
+        err = rows.Scan(&i)
+        l = append(l, i)
+    }
+    return l
+}
+
 const (
     qCreateGame = "INSERT INTO games (team1, team2, starts) VALUES ($1, $2, $3);"
     qOpenGames = "SELECT pk, team1, team2, to_char(starts, 'MM-DD') FROM games WHERE closed=false ORDER BY starts;"
     qToFinish = "SELECT pk, team1, team2, to_char(starts, 'MM-DD') FROM games WHERE happened=false AND closed=true ORDER BY starts;"
     qCloseGame = "UPDATE games SET closed = TRUE WHERE pk=$1;"
     qFinishGame = "UPDATE games SET closed = TRUE, happened = TRUE, result1=$1, result2=$2 WHERE pk=$3;"
+    qToClose = "SELECT pk FROM games WHERE (starts - (now() + interval '3 hours')) < interval '15 minutes' AND closed = false;"
 )
+

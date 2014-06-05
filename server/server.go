@@ -7,6 +7,8 @@ import (
 )
 
 func ServerInit() {
+    go runAuto()
+
 	http.HandleFunc("/guesses/",    guesses)
 	http.HandleFunc("/logout/",     logout)
 	http.HandleFunc("/login/",      login)

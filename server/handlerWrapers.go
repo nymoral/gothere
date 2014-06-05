@@ -2,6 +2,7 @@
 package server
 
 import (
+    "time"
 	"net/http"
 	"gothere/handlers"
 )
@@ -9,6 +10,12 @@ import (
 // These functions manage aditional arguments for handlers
 // and request methods.
 
+func runAuto() {
+    for true {
+        handlers.AutoGameClose()
+        time.Sleep(1 * time.Minute)
+    }
+}
 func login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
 		handlers.LoginPost(w, r)

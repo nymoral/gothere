@@ -13,7 +13,7 @@
                     <td colspan="2" class="outer mid result">Rezultatas</td>
                 </tr>
                 {{range $guess := .Guesses}}<tr>
-                    <td class="outer name">{{$guess.Name}}</td>
+                    <td class="outer name">{{ $guess.Date }} | {{$guess.Name}}</td>
                     <td class="happened" colspan="2" style="text-align: center;">{{$guess.Result}}</td>
                 </tr>{{end}}
                 <tr>
