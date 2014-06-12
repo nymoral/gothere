@@ -2,6 +2,7 @@ package handlers
 
 import (
     "log"
+    "strings"
     "net/http"
     "gothere/config"
     "gothere/cookies"
@@ -32,6 +33,7 @@ func LoginPost(w http.ResponseWriter, r *http.Request) {
     db := database.GetConnection()
 
     username := r.FormValue("username")
+    username = strings.ToLower(username)
     pass := r.FormValue("password")
     remember := r.FormValue("remember") == "1"
     hashed, _ := database.GetPassword(db, username)

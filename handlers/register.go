@@ -2,6 +2,7 @@ package handlers
 
 import (
     "log"
+    "strings"
     "net/http"
     "gothere/models"
     "gothere/database"
@@ -28,9 +29,16 @@ func RegisterPost(w http.ResponseWriter, r *http.Request) {
     var user models.User
     // Model out of form data.
     user.Email = r.FormValue("email")
+    user.Email = strings.ToLower(user.Email)
     user.Password = r.FormValue("password")
     user.Firstname = r.FormValue("firstname")
+    if len(user.Firstname) > 0 {
+        user.Firstname = strings.ToUpper(user.Firstname[0:1]) + strings.ToLower(user.Firstname[1:])
+    }
     user.Lastname = r.FormValue("lastname")
+    if len(user.Lastname) > 0 {
+        user.Lastname= strings.ToUpper(user.Lastname[0:1]) + strings.ToLower(user.Lastname[1:])
+    }
 
     repeat := r.FormValue("repeat")
 
