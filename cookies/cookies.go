@@ -12,7 +12,7 @@ func generateCookie() (*securecookie.SecureCookie) {
     // Generates SecureCookie type object and returns a pointer to it.
     // It is used to Encode/Decode plain data to/from a cookie.
 
-    S := securecookie.New([]byte(config.Config.Secret1), []byte(config.Config.Secret1))
+    S := securecookie.New([]byte(config.Config.Secret1), []byte(config.Config.Secret2))
     return S
 }
 

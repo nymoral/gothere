@@ -1,8 +1,8 @@
 CREATE TABLE games
 (
   pk        BIGSERIAL PRIMARY KEY,
-  team1     VARCHAR(20) NOT NULL,
-  team2     VARCHAR(20) NOT NULL,
+  team1     VARCHAR(40) NOT NULL,
+  team2     VARCHAR(40) NOT NULL,
   result1   INTEGER,
   result2   INTEGER,
   closed    BOOLEAN NOT NULL DEFAULT FALSE,
