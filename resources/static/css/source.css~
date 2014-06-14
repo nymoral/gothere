@@ -1,5 +1,5 @@
 body {
-    background-color: #FFFFFF;
+    background-color: [[background]];
     font-family: "Sans", "Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     font-size: 12px;
     height: 100%;
@@ -20,7 +20,7 @@ body {
     margin-left: 5px;
 }
 #form-cont{
-    border: 2px solid #2C2C2C;
+    border: 2px solid [[dark-fg]];
     margin-left: auto;
     margin-right: auto;
     margin-top: 100px;
@@ -30,8 +30,8 @@ body {
 }
 #form-head{
     text-align: center;
-    background: #2C2C2C;
-    color: #FFFFFF;
+    background: [[dark-fg]];
+    color: [[background]];
     overflow: auto;
     padding: 0;
     width: 100%;
@@ -50,14 +50,14 @@ div.inputdata span{
 div.inputdata input{
     border: 1px;
     background:none;
-    border: 1px solid #2C2C2C;
+    border: 1px solid [[dark-fg]];
     width: 100%;
     padding: 4px;
     margin: auto;
 }
 div.inputdata input:focus{
     outline: none !important;
-    border-color: #D3643B;
+    border-color: [[focus-border]];
 }
 .clear{
     clear:both;
@@ -65,7 +65,7 @@ div.inputdata input:focus{
 input[type=submit] {
     background :none;
     clear: both;
-    border: 1px solid #2C2C2C;
+    border: 1px solid [[dark-fg]];
     font-weight: 700;
     font-size: 12;
     margin-left: 16px;
@@ -77,7 +77,7 @@ input[type=submit] {
 }
 #forgot_link a{
     text-decoration: none;
-    color: #2C2C2C;
+    color: [[dark-fg]];
 }
 #error-bar {
     text-align: center;
@@ -100,16 +100,16 @@ input[type=submit] {
     margin: auto;
 }
 #rez_data {
-    border: 1px solid black;
-    color: #E9E7D6;
+    border: 1px solid [[table-border]];
+    color: [[outer]];
     font-weight: 700;
 }
 .outer {
-    background-color: #2C2C2C;
-    color: #E9E7D6;
+    background-color: [[dark-fg]];
+    color: [[outer]];
 }
 .outer.name{
-    border: 1px solid black;
+    border: 1px solid [[table-border]];
     padding-left: 8px;
     padding-right: 8px;
     padding-top: 2px;
@@ -117,23 +117,23 @@ input[type=submit] {
 }
 .outer.place{
     text-align: right;
-    border: 1px solid black;
+    border: 1px solid [[table-border]];
 }
 .hidden {
     display: none;
     position: absolute;
-    border: 2px solid #E9E7D6;
-    background-color: #2C2C2C;
-    color: #E9E7D6;
+    border: 2px solid [[outer]];
+    background-color: [[dark-fg]];
+    color: [[outer]];
     padding: 4px;
     z-index: 10;
 }
 .game_date {
-    border: 1px solid black;
-    background-color: #2C2C2C;
+    border: 1px solid [[table-border]];
+    background-color: [[dark-fg]];
 }
 .mid {
-    border: 1px solid black;
+    border: 1px solid [[table-border]];
 }
 .mid.result{
     font-weight: 700;
@@ -145,35 +145,35 @@ input[type=submit] {
     font-weight: 700;
 }
 .user_place {
-    border: 1px solid black;
-    background-color: #D15A40;
+    border: 1px solid [[table-border]];
+    background-color: [[user-bg]];
     text-align: right;
 }
 .g_row td {
-    border-top: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-top: 1px solid [[table-border]];
+    border-left: 1px solid [[table-border]];
+    border-right: 1px solid [[table-border]];
 }
 .p_row td {
-    border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    border-bottom: 1px solid [[table-border]];
+    border-left: 1px solid [[table-border]];
+    border-right: 1px solid [[table-border]];
 }
 .user_name {
-    border: 1px solid black;
-    color: #111111;
-    background-color: #D15A40;
+    border: 1px solid [[table-border]];
+    color: [[dark-text]];
+    background-color: [[user-bg]];
 }
 .default_name {
-    border: 1px solid black;
-    color: #111111;
-    background-color: #B84A40;
+    border: 1px solid [[table-border]];
+    color: [[dark-text]];
+    background-color: [[default-name-bg]];
 }
 .happened {
-    background-color: #FFFCF6;
+    background-color: [[game-h]];
 }
 .not_happened {
-    background-color: #F9F5E9;
+    background-color: [[game-nh]];
 }
 
 #header {
@@ -186,7 +186,7 @@ input[type=submit] {
     top: 50%;
     transform: translateY(-50%);
     text-decoration: none;
-    color: #2C2C2C;
+    color: [[dark-fg]];
     font-size: 150%;
     margin: auto 4px;
 }
@@ -199,7 +199,7 @@ input[type=submit] {
 }
 
 #guess-table-wrap td {
-    border: 1px solid black;
+    border: 1px solid [[table-border]];
 }
 
 .result_field {
@@ -208,7 +208,4 @@ input[type=submit] {
 }
 #warning {
     margin: 5px 30px;
-}
-.last {
-    font-weight : 700;
 }

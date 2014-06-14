@@ -85,7 +85,7 @@ input[type=submit] {
 }
 
 #table-wrap {
-    max-width: 80%;
+    max-width: 85%;
     margin: 20px auto ;
     overflow: auto;
     max-height: 100%;
@@ -116,6 +116,7 @@ input[type=submit] {
     padding-bottom: 2px;
 }
 .outer.place{
+    text-align: right;
     border: 1px solid [[table-border]];
 }
 .hidden {
@@ -146,6 +147,7 @@ input[type=submit] {
 .user_place {
     border: 1px solid [[table-border]];
     background-color: [[user-bg]];
+    text-align: right;
 }
 .g_row td {
     border-top: 1px solid [[table-border]];
@@ -186,7 +188,7 @@ input[type=submit] {
     text-decoration: none;
     color: [[dark-fg]];
     font-size: 150%;
-    margin: auto 2px;
+    margin: auto 4px;
 }
 
 #guess-table-wrap {
@@ -202,4 +204,11 @@ input[type=submit] {
 
 .result_field {
     width: 60px;
+    padding: 1px;
+}
+#warning {
+    margin: 5px 30px;
+}
+.last {
+    font-weight : 700;
 }

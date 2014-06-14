@@ -73,7 +73,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
             pk := r.FormValue("close-game-id")
             database.CloseGame(db, pk)
             http.Redirect(w, r, "/admin", http.StatusFound)
-            log.Printf("GAME (%d) CLOSED\n", pk)
+            log.Printf("GAME (%s) CLOSED\n", pk)
 
         case "end" :
             // Finishes a game.
@@ -91,7 +91,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
                 database.FinishGame(db, pk, n1, n2)
                 database.CalcPoints(db, intPk, n1, n2)
                 http.Redirect(w, r, "/admin", http.StatusFound)
-                log.Printf("GAME (%d) FINISHED\n", pk)
+                log.Printf("GAME (%s) FINISHED\n", pk)
             }
         }
     } else {

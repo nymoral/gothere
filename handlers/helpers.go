@@ -5,6 +5,7 @@ import (
     "gothere/database"
 )
 
+
 func AutoGameClose() {
     db := database.GetConnection()
     toClose := database.GamesToClose(db)

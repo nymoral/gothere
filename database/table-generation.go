@@ -58,7 +58,8 @@ func GetUsers(db *sql.DB, pk int) ([]models.User) {
     return users
 }
 
-func GetGuesses(db *sql.DB, pk int, subsize int, size int) ([][]models.GuessWithPoints) {
+func GetGuesses(db *sql.DB, pk int, subsize int, size int, last int) ([][]models.GuessWithPoints) {
+    //                              ^^ games     ^^ users
     // Returns a slice of models.
     // It will consist of groups of all games for each user.
     rows, err := db.Query(qGetTable, pk)
@@ -72,12 +73,14 @@ func GetGuesses(db *sql.DB, pk int, subsize int, size int) ([][]models.GuessWith
         guesses[j] = make([]models.GuessWithPoints, subsize)
 
         for i := 0; i < subsize; i++ {
-            rows.Next()
-            err := rows.Scan(&G.Result1, &G.Result2, &G.Points, &G.Total, &G.Happened)
-            if err == nil {
-                guesses[j][i] = G
-            } else {
-                log.Println(err)
+            if rows.Next() {
+                err := rows.Scan(&G.Result1, &G.Result2, &G.Points, &G.Total, &G.Happened)
+                if err == nil {
+                    G.Last = last == i
+                    guesses[j][i] = G
+                } else {
+                    log.Println(err)
+                }
             }
         }
     }
@@ -87,6 +90,6 @@ func GetGuesses(db *sql.DB, pk int, subsize int, size int) ([][]models.GuessWith
 
 const (
     qGetGames = "SELECT team1, team2, result1, result2, to_char(starts, 'MM-DD'), happened, closed FROM games ORDER BY starts;"
-    qGetUsers = "SELECT firstname, substr(lastname, 1, 1), pk FROM users WHERE admin=false ORDER BY points ASC, correct, pk;"
+    qGetUsers = "SELECT firstname, lastname, pk FROM users WHERE admin=false ORDER BY points ASC, correct, pk;"
     qGetTable = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM games G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct, U.pk, G.starts;"
 )

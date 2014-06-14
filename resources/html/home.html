@@ -1,7 +1,7 @@
 {{define "head"}}<title>Futbolas</title>{{end}}
 {{define "body"}}
     <div id="header">
-        <a href="/guesses/">Mano Spėjimai</a>
+        <a href="/guesses/">Mano spėjimai</a>
         <a href="/settings/">Nustatymai</a>
         <a href="/logout/">Išeiti</a>
     </div>
@@ -20,7 +20,7 @@
             <td rowspan="2" class="{{ $user.NameStyle }}">{{ $user.ShortNameFmt }}</td>
             {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.ResultFmt }}</td>{{ end }}
         </tr><tr class="p_row {{ $user.Style }}">
-            {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.PointsFmt }}</td>{{ end }}
+            {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.PointsFmt }} <a class="{{ $guess.PointsStyle }}">{{ $guess.TotalFmt }}</a></td>{{ end }}
         </tr>{{ end }}
         </table>
     </div>{{end}}

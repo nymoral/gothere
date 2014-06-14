@@ -31,10 +31,11 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
         // Render home.
         var context models.HomeContext
         context.Games = database.GetGames(db)
+        lastGame := models.LastGame(context.Games)
         context.Users = database.GetUsers(db, pk)
         context.GamesNr = len(context.Games)
         context.UsersNr = len(context.Users)
-        context.Guesses = database.GetGuesses(db, pk, context.GamesNr, context.UsersNr)
+        context.Guesses = database.GetGuesses(db, pk, context.GamesNr, context.UsersNr, lastGame)
         templates.Render(w, "home", context)
     }
 }

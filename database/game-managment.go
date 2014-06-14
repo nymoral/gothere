@@ -92,7 +92,9 @@ func GamesToClose(db *sql.DB) ([]string) {
     }
     for rows.Next() {
         err = rows.Scan(&i)
-        l = append(l, i)
+        if err == nil {
+            l = append(l, i)
+        }
     }
     return l
 }

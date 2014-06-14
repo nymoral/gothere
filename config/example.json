@@ -10,7 +10,6 @@
     "Secret1"       : "32 chars lenght secret string.",
     "Secret2"       : "Another 32 chars lenght secret string.",
     "TemplateDir"   : "/home/user/go/src/gothere/templates/html/",
-    "SqlQueriesDir" : "/home/user/go/src/gothere/database/SQL/Queries/",
     "MaxConnections": 3,
     "NrOfCookies"   : 4,
     "MailUsername"  : "",

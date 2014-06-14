@@ -15,6 +15,7 @@ type GuessWithNames struct {
     Result2 interface{}
 
     Date    string
+
 }
 
 func (g *GuessWithNames) Name() (string) {
@@ -71,6 +72,8 @@ type GuessWithPoints struct {
     Total       interface{}
 
     Happened    bool
+
+    Last    bool
 }
 
 func (g *GuessWithPoints) ResultFmt() (string) {
@@ -90,7 +93,25 @@ func (g *GuessWithPoints) PointsFmt() (string) {
         if g.Points == nil {
             return "-"
         } else {
-            return fmt.Sprintf("%d / %d", g.Points, g.Total)
+            return fmt.Sprintf("%d /", g.Points)
+        }
+    } else {
+        return " "
+    }
+}
+
+func (g *GuessWithPoints) PointsStyle() (string) {
+    if g.Last {
+        return "last"
+    }
+    return ""
+}
+func (g *GuessWithPoints) TotalFmt() (string) {
+    if g.Happened {
+        if g.Points == nil {
+            return "-"
+        } else {
+            return fmt.Sprintf("%d", g.Total)
         }
     } else {
         return " "

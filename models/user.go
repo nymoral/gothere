@@ -31,7 +31,11 @@ type User struct {
 }
 
 func (u *User) ShortNameFmt() (string) {
-    return fmt.Sprintf("%s %s.", u.Firstname, u.Lastname)
+    suffix := ""
+    if len(u.Lastname) > 0 {
+        suffix = u.Lastname[:1]
+    }
+    return fmt.Sprintf("%s %s.", u.Firstname, suffix)
 }
 
 func (u *User) Style() (string) {

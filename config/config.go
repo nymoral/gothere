@@ -43,7 +43,6 @@ type configType struct {
     Secret1        string
     Secret2        string
     TemplateDir    string
-    SqlQueriesDir  string
     MaxConnections int
     NrOfCookies    int
 

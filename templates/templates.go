@@ -42,9 +42,16 @@ func Render(wr io.Writer, name string, data interface{}) {
     }
     t := temps[name]
 
-    err := t.ExecuteTemplate(wr, "base", data)
+    t, err := t.Clone()
+    if err != nil {
+        t = template.Must(template.ParseFiles(dir + "error.html", "base.html"))
+    }
+
+
+    err = t.ExecuteTemplate(wr, "base", data)
     if err != nil {
         log.Println(err)
-        Render(wr, "error", nil)
+        t = template.Must(template.ParseFiles(dir + "error.html", "base.html"))
+        _ = t.ExecuteTemplate(wr, "base", data)
     }
 }

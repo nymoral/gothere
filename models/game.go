@@ -46,5 +46,12 @@ func (g *Game) Style() (string) {
     return "date"
 }
 
-
+func LastGame(games []Game) (int) {
+    for i, g := range games {
+        if ! g.Happened {
+            return i - 1
+        }
+    }
+    return len(games) - 1
+}
 

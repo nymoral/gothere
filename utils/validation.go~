@@ -31,7 +31,6 @@ func ExtractResult(s string, f1, f2 *int) (bool) {
     } else {
         fmt.Sscanf(sl[1], "%d", f1)
         fmt.Sscanf(sl[2], "%d", f2)
-        return true
     }
     
 }
