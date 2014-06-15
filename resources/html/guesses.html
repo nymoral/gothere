@@ -12,9 +12,9 @@
                     <td class="outer mid result">Rungtynės</td>
                     <td colspan="2" class="outer mid result">Rezultatas</td>
                 </tr>
-                {{range $guess := .Guesses}}<tr>
-                    <td class="outer name">{{ $guess.Date }} | {{$guess.Name}}</td>
-                    <td class="happened" colspan="2" style="text-align: center;">{{$guess.Result}}</td>
+                {{range $guess := .Guesses}}<tr class="{{ $guess.Style }}">
+                    <td>{{ $guess.Date }} | {{$guess.Name}}</td>
+                    <td colspan="2" style="text-align: center;">{{$guess.Result}}</td>
                 </tr>{{end}}
                 <tr>
                     <td>

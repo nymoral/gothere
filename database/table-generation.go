@@ -44,7 +44,7 @@ func GetUsers(db *sql.DB, pk int) ([]models.User) {
     // Calculating place out of db.
 
     for rows.Next() {
-        err := rows.Scan(&U.Firstname, &U.Lastname, &U.Pk)
+        err := rows.Scan(&U.Firstname, &U.Lastname, &U.Pk, &U.Points)
         U.Place = place
         U.LoggedIn = U.Pk == pk
         place += 1
@@ -88,8 +88,36 @@ func GetGuesses(db *sql.DB, pk int, subsize int, size int, last int) ([][]models
     return guesses
 }
 
+func GetSmall(db *sql.DB, pk int, nrUsers, offset int, nr int, last int) ([][]models.GuessWithPoints) {
+
+    rows, err := db.Query(qGetSmall, pk, nr, offset)
+    if err != nil {
+        log.Fatal(err)
+    }
+    var G models.GuessWithPoints
+    guesses := make([][]models.GuessWithPoints, nrUsers)
+
+    for j := 0; j < nrUsers; j++ {
+        guesses[j] = make([]models.GuessWithPoints, nr)
+
+        for i := 0; i < nr; i++ {
+            if rows.Next() {
+                err := rows.Scan(&G.Result1, &G.Result2, &G.Points, &G.Total, &G.Happened)
+                if err == nil {
+                    G.Last = last == i
+                    guesses[j][i] = G
+                } else {
+                    log.Println(err)
+                }
+            }
+        }
+    }
+    rows.Close()
+    return guesses
+}
 const (
     qGetGames = "SELECT team1, team2, result1, result2, to_char(starts, 'MM-DD'), happened, closed FROM games ORDER BY starts;"
-    qGetUsers = "SELECT firstname, lastname, pk FROM users WHERE admin=false ORDER BY points ASC, correct, pk;"
+    qGetUsers = "SELECT firstname, lastname, pk, points FROM users WHERE admin=false ORDER BY points ASC, correct, pk;"
     qGetTable = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM games G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct, U.pk, G.starts;"
+    qGetSmall = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM (SELECT * FROM games ORDER BY starts LIMIT $2 OFFSET $3) as G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct, U.pk, G.starts;"
 )

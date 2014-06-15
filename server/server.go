@@ -20,6 +20,7 @@ func ServerInit() {
 	http.HandleFunc("/settings/",   settings)
 	http.HandleFunc("/forgot/",     forgot)
 	http.HandleFunc("/",            home)
+	http.HandleFunc("/change/",     changeSize)
 
 	if config.Config.ServeStatic {
 		// In case go server needs to serve static files.

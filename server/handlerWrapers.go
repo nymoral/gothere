@@ -79,3 +79,6 @@ func logout(w http.ResponseWriter, r *http.Request) {
 func errorHand(w http.ResponseWriter, r * http.Request) {
     handlers.ErrorGet(w)
 }
+func changeSize(w http.ResponseWriter, r * http.Request) {
+    handlers.ChangeSize(w, r)
+}

@@ -203,7 +203,7 @@ input[type=submit] {
 }
 
 .result_field {
-    width: 60px;
+    width: 40px;
     padding: 1px;
 }
 #warning {
@@ -211,4 +211,12 @@ input[type=submit] {
 }
 .last {
     font-weight : 700;
+}
+.closed {
+    background-color: [[closed-guess-bg]];
+    color: [[dark-fg]];
+}
+.open{
+    background-color: [[open-guess-bg]];
+    color: [[dark-fg]];
 }

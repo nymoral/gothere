@@ -33,7 +33,7 @@ func (g *Game) ResultDate() (string) {
     // It hasn't yet taken place.
         return g.StartsStr
     }
-    return fmt.Sprintf("%d - %d", g.Result1, g.Result2)
+    return fmt.Sprintf("%d : %d", g.Result1, g.Result2)
 }
 
 func (g *Game) FullName() (string) {

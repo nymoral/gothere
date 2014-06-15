@@ -25,6 +25,7 @@ func loadTemplates() {
     temps["error"]    = template.Must(template.ParseFiles(dir + "error.html",     base))
     temps["forgot"]   = template.Must(template.ParseFiles(dir + "forgot.html",    base))
     temps["recover"]  = template.Must(template.ParseFiles(dir + "recover.html",   base))
+    temps["small"]    = template.Must(template.ParseFiles(dir + "small.html",     base))
 
     log.Printf("Templates loaded\n")
 }

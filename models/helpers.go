@@ -16,6 +16,8 @@ type GuessWithNames struct {
 
     Date    string
 
+    Closed  bool
+
 }
 
 func (g *GuessWithNames) Name() (string) {
@@ -29,6 +31,15 @@ func (g *GuessWithNames) Result() (string) {
         return fmt.Sprintf("%d - %d", g.Result1, g.Result2)
     } else {
         return " "
+    }
+}
+
+func (g *GuessWithNames) Style() (string) {
+    // Result formating
+    if g.Closed {
+        return "closed"
+    } else {
+        return "open"
     }
 }
 
@@ -100,6 +111,18 @@ func (g *GuessWithPoints) PointsFmt() (string) {
     }
 }
 
+func (g *GuessWithPoints) PointsSmallFmt() (string) {
+    if g.Happened {
+        if g.Points == nil {
+            return "-"
+        } else {
+            return fmt.Sprintf("%d", g.Points)
+        }
+    } else {
+        return " "
+    }
+}
+
 func (g *GuessWithPoints) PointsStyle() (string) {
     if g.Last {
         return "last"
@@ -117,6 +140,7 @@ func (g *GuessWithPoints) TotalFmt() (string) {
         return " "
     }
 }
+
 func (g *GuessWithPoints) Style() (string) {
     if g.Happened {
         return "happened"

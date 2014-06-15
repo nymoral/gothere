@@ -1,0 +1,29 @@
+{{define "head"}}<title>Futbolas</title>{{end}}
+{{define "body"}}
+    <div id="header">
+        <a href="/guesses/">Mano spėjimai</a>
+        <a href="/settings/">Nustatymai</a>
+        <a href="/change/">Pilna lentelė</a>
+        <a href="/logout/">Išeiti</a>
+    </div>
+    <div id="table-wrap">
+        <table id="main-table" class="not_happend">
+            <tr id="top_table_row">
+                <td colspan="3" rowspan="2" class="outer empty" style="border: 1px solid black;">Rezultatas/Data</td>
+                {{ range $game := .Games }}<td class="outer name">{{ $game.NameFmt }}<div class="hidden">{{ $game.FullName }}</div></td>{{end}}
+            </tr>
+            <tr id="mid_table_row">
+                {{ range $game := .Games }}<td class="outer mid {{ $game.Style }}">{{ $game.ResultDate }}</td>{{end}}
+            </tr>
+        {{ $GGG := .Guesses }}
+        {{ range $uindex, $user := .Users }}<tr class="g_row {{ $user.Style }}">
+            <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Place }}</td>
+            <td rowspan="2" class="{{ $user.NameStyle }}">{{ $user.ShortNameFmt }}</td>
+            <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Points}}</td>
+            {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.ResultFmt }}</td>{{ end }}
+        </tr><tr class="p_row {{ $user.Style }}">
+            {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.PointsSmallFmt }}</td>{{ end }}
+        </tr>{{ end }}
+        </table>
+    </div>{{end}}
+

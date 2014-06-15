@@ -45,7 +45,7 @@ func UsersGuesses(db *sql.DB, pk int) ([]models.GuessWithNames) {
         log.Fatal(err)
     }
     for rows.Next() {
-        err := rows.Scan(&G.Team1, &G.Team2, &G.Result1, &G.Result2, &G.Date)
+        err := rows.Scan(&G.Team1, &G.Team2, &G.Result1, &G.Result2, &G.Date, &G.Closed)
         if err == nil {
             guesses = append(guesses, G)
         }
@@ -57,5 +57,5 @@ const (
     qCheckGuess = "SELECT pk FROM guesses WHERE game_pk=$1 AND user_pk=$2;"
     qInsertGuess = "INSERT INTO guesses (user_pk, game_pk, result1, result2) VALUES ($1, $2, $3, $4);"
     qUpdateGuess = "UPDATE guesses SET result1=$1, result2=$2, given=now() WHERE game_pk=$3 AND user_pk=$4;"
-    qUsersGuesses = "SELECT games.team1, games.team2, guesses.result1, guesses.result2, to_char(games.starts, 'MM-DD HH24:MI') FROM games LEFT JOIN (SELECT game_pk, result1, result2 FROM guesses WHERE user_pk=$1) AS guesses ON games.pk=guesses.game_pk ORDER BY games.starts;"
+    qUsersGuesses = "SELECT games.team1, games.team2, guesses.result1, guesses.result2, to_char(games.starts, 'MM-DD HH24:MI'), closed FROM games LEFT JOIN (SELECT game_pk, result1, result2 FROM guesses WHERE user_pk=$1) AS guesses ON games.pk=guesses.game_pk ORDER BY games.starts;"
 )

@@ -72,6 +72,13 @@ func GetCookieVal(r *http.Request, name string) (string) {
     return c.Value
 }
 
+func SetCookieVal(w http.ResponseWriter, name string, value string, path string) {
+    var C http.Cookie
+    C.Name = name
+    C.Value = value
+    C.Path = path
+    http.SetCookie(w, &C)
+}
 func SetSessionId(w http.ResponseWriter, sessionid string, remember bool) {
     // Writes a new (rewrites) cookie to set a sessionid.
     // If remember is false, cookies expire field is not set

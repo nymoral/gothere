@@ -2,11 +2,53 @@ package handlers
 
 import (
     "net/http"
+    "database/sql"
     "gothere/models"
     "gothere/cookies"
     "gothere/database"
     "gothere/templates"
 )
+
+func drawFull(w http.ResponseWriter, db *sql.DB, pk int) {
+    var context models.HomeContext
+    context.Games = database.GetGames(db)
+    lastGame := models.LastGame(context.Games)
+    context.Users = database.GetUsers(db, pk)
+    context.GamesNr = len(context.Games)
+    context.UsersNr = len(context.Users)
+    context.Guesses = database.GetGuesses(db, pk, context.GamesNr, context.UsersNr, lastGame)
+    templates.Render(w, "home", context)
+}
+
+const halfSize = 4
+
+func getSlice(total int, last int) (int, int) {
+    if total <= halfSize * 2 {
+        return 0, total
+    }
+    front := last + 1
+    back := total - front
+    if front >= halfSize && back >= halfSize {
+        return last - halfSize + 1, last + halfSize + 1
+    }
+    if front < halfSize && back >= halfSize {
+        return 0, halfSize * 2
+    }
+    return total - (2 * halfSize), total
+}
+
+func drawSmall(w http.ResponseWriter, db *sql.DB, pk int) {
+    var context models.HomeContext
+    context.Users = database.GetUsers(db, pk)
+    context.UsersNr = len(context.Users)
+
+    allGames := database.GetGames(db)
+    lastGame := models.LastGame(allGames)
+    s, e := getSlice(len(allGames), lastGame)
+    context.Games = allGames[s:e]
+    context.Guesses = database.GetSmall(db, pk, context.UsersNr, s, e - s, lastGame)
+    templates.Render(w, "small", context)
+}
 
 func HomeGet(w http.ResponseWriter, r *http.Request) {
     // / handler for GET method request.
@@ -17,6 +59,7 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
 
     sessionid := cookies.GetCookieVal(r, "sessionid")
     username := cookies.UsernameFromCookie(sessionid)
+    tablesize := cookies.GetCookieVal(r, "tablesize")
     pk, is_admin := database.GetPkAdmin(db, username)
 
     if username == "" || pk == -1 {
@@ -29,14 +72,12 @@ func HomeGet(w http.ResponseWriter, r *http.Request) {
         http.Redirect(w, r, "/admin/", http.StatusFound)
     } else {
         // Render home.
-        var context models.HomeContext
-        context.Games = database.GetGames(db)
-        lastGame := models.LastGame(context.Games)
-        context.Users = database.GetUsers(db, pk)
-        context.GamesNr = len(context.Games)
-        context.UsersNr = len(context.Users)
-        context.Guesses = database.GetGuesses(db, pk, context.GamesNr, context.UsersNr, lastGame)
-        templates.Render(w, "home", context)
+        if tablesize == "small" {
+            drawSmall(w, db, pk)
+        } else {
+            drawFull(w, db, pk)
+        }
+
     }
 }
 
