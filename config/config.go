@@ -52,4 +52,6 @@ type configType struct {
     MailPort       string
 
     Register       bool
+    ShowClosedNr   int
+    ShowOpenNr     int
 }

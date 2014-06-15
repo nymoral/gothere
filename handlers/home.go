@@ -4,10 +4,20 @@ import (
     "net/http"
     "database/sql"
     "gothere/models"
+    "gothere/config"
     "gothere/cookies"
     "gothere/database"
     "gothere/templates"
 )
+
+var _front int
+var _back int
+
+func init() {
+    _front = config.Config.ShowClosedNr
+    _back = config.Config.ShowOpenNr
+}
+
 
 func drawFull(w http.ResponseWriter, db *sql.DB, pk int) {
     var context models.HomeContext
@@ -20,21 +30,19 @@ func drawFull(w http.ResponseWriter, db *sql.DB, pk int) {
     templates.Render(w, "home", context)
 }
 
-const halfSize = 4
-
 func getSlice(total int, last int) (int, int) {
-    if total <= halfSize * 2 {
+    if total <= _front + _back {
         return 0, total
     }
     front := last + 1
     back := total - front
-    if front >= halfSize && back >= halfSize {
-        return last - halfSize + 1, last + halfSize + 1
+    if front >=  _front && back >= _back {
+        return last - _front + 1, last + _back + 1
     }
-    if front < halfSize && back >= halfSize {
-        return 0, halfSize * 2
+    if front < _front && back >= _back {
+        return 0, _front + _back
     }
-    return total - (2 * halfSize), total
+    return total - (_front + _back), total
 }
 
 func drawSmall(w http.ResponseWriter, db *sql.DB, pk int) {

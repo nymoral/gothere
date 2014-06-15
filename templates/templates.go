@@ -3,6 +3,7 @@ package templates
 import (
     "io"
     "log"
+    "fmt"
     "html/template"
     "gothere/config"
 )
@@ -22,7 +23,6 @@ func loadTemplates() {
     temps["guesses"]  = template.Must(template.ParseFiles(dir + "guesses.html",   base))
     temps["settings"] = template.Must(template.ParseFiles(dir + "settings.html",  base))
     temps["register"] = template.Must(template.ParseFiles(dir + "register.html",  base))
-    temps["error"]    = template.Must(template.ParseFiles(dir + "error.html",     base))
     temps["forgot"]   = template.Must(template.ParseFiles(dir + "forgot.html",    base))
     temps["recover"]  = template.Must(template.ParseFiles(dir + "recover.html",   base))
     temps["small"]    = template.Must(template.ParseFiles(dir + "small.html",     base))
@@ -45,14 +45,12 @@ func Render(wr io.Writer, name string, data interface{}) {
 
     t, err := t.Clone()
     if err != nil {
-        t = template.Must(template.ParseFiles(dir + "error.html", "base.html"))
-    }
-
-
-    err = t.ExecuteTemplate(wr, "base", data)
-    if err != nil {
-        log.Println(err)
-        t = template.Must(template.ParseFiles(dir + "error.html", "base.html"))
-        _ = t.ExecuteTemplate(wr, "base", data)
+        fmt.Fprintf(wr, "ERROR\n")
+    } else {
+        err = t.ExecuteTemplate(wr, "base", data)
+        if err != nil {
+            log.Println(err)
+            fmt.Fprintf(wr, "ERROR\n")
+        }
     }
 }

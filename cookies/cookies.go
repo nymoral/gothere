@@ -77,6 +77,7 @@ func SetCookieVal(w http.ResponseWriter, name string, value string, path string)
     C.Name = name
     C.Value = value
     C.Path = path
+    C.Expires = time.Now().AddDate(0, 1, 0)
     http.SetCookie(w, &C)
 }
 func SetSessionId(w http.ResponseWriter, sessionid string, remember bool) {

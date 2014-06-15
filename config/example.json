@@ -16,6 +16,8 @@
     "MailPassword"  : "",
     "MailHost"      : "smtp.live.com",
     "MailPort"      : "587",
-    "Register"      : true
+    "Register"      : true,
+    "ShowClosedNr"  : 4,
+    "ShowOpenNr"    : 4
 }
 
