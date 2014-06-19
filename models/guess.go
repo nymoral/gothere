@@ -1,21 +1,20 @@
 package models
 
 import (
-    "time"
+	"time"
 )
 
 type Guess struct {
-    Pk      int
+	Pk int
 
-    Gamepk  int
-    Userpk  int
+	Gamepk int
+	Userpk int
 
-    Result1 int
-    Result2 int
+	Result1 int
+	Result2 int
 
-    Points  int
-    Total   int
+	Points int
+	Total  int
 
-    Given   time.Time
+	Given time.Time
 }
-

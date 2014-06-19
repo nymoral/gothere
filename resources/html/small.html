@@ -19,7 +19,7 @@
         {{ range $uindex, $user := .Users }}<tr class="g_row {{ $user.Style }}">
             <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Place }}</td>
             <td rowspan="2" class="{{ $user.NameStyle }}">{{ $user.ShortNameFmt }}</td>
-            <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Points}}</td>
+            <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Points}}<div class="hidden">Atspėjo: {{ $user.Correct }}</div></td>
             {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.ResultFmt }}</td>{{ end }}
         </tr><tr class="p_row {{ $user.Style }}">
             {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.PointsSmallFmt }}</td>{{ end }}

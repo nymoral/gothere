@@ -1,20 +1,19 @@
-
 package server
 
 import (
-    "time"
-	"net/http"
 	"gothere/handlers"
+	"net/http"
+	"time"
 )
 
 // These functions manage aditional arguments for handlers
 // and request methods.
 
 func runAuto() {
-    for true {
-        handlers.AutoGameClose()
-        time.Sleep(1 * time.Minute)
-    }
+	for true {
+		handlers.AutoGameClose()
+		time.Sleep(1 * time.Minute)
+	}
 }
 func login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
@@ -66,19 +65,19 @@ func settings(w http.ResponseWriter, r *http.Request) {
 
 func forgot(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "POST" {
-        handlers.ForgotPost(w, r)
+		handlers.ForgotPost(w, r)
 	} else {
 		handlers.ForgotGet(w, r)
-    }
+	}
 }
 
 func logout(w http.ResponseWriter, r *http.Request) {
-    handlers.Logout(w, r)
+	handlers.Logout(w, r)
 }
 
-func errorHand(w http.ResponseWriter, r * http.Request) {
-    handlers.ErrorGet(w)
+func errorHand(w http.ResponseWriter, r *http.Request) {
+	handlers.ErrorGet(w)
 }
-func changeSize(w http.ResponseWriter, r * http.Request) {
-    handlers.ChangeSize(w, r)
+func changeSize(w http.ResponseWriter, r *http.Request) {
+	handlers.ChangeSize(w, r)
 }

@@ -1,44 +1,43 @@
 package handlers
 
 import (
-    "log"
-    "net/http"
-    "gothere/cookies"
-    "gothere/database"
-    "gothere/password"
-    "gothere/templates"
+	"gothere/cookies"
+	"gothere/database"
+	"gothere/password"
+	"gothere/templates"
+	"log"
+	"net/http"
 )
 
 func SettingsGet(w http.ResponseWriter) {
-    // /register GET method handler.
-    // Just render's the form.
+	// /register GET method handler.
+	// Just render's the form.
 
-    templates.Render(w, "settings", nil)
+	templates.Render(w, "settings", nil)
 }
 
 func SettingsPost(w http.ResponseWriter, r *http.Request) {
-    // /settings POST method handler.
-    // Validates the form,
+	// /settings POST method handler.
+	// Validates the form,
 
-    db := database.GetConnection()
+	db := database.GetConnection()
 
-    sessionid := cookies.GetCookieVal(r, "sessionid")
-    username := cookies.UsernameFromCookie(sessionid)
+	sessionid := cookies.GetCookieVal(r, "sessionid")
+	username := cookies.UsernameFromCookie(sessionid)
 
-    if username != "" {
-        pass , _ := database.GetPassword(db, username)
+	if username != "" {
+		pass, _ := database.GetPassword(db, username)
 
-        newPassword := r.FormValue("new")
-        repeat := r.FormValue("repeat")
-        oldPassword := r.FormValue("old")
+		newPassword := r.FormValue("new")
+		repeat := r.FormValue("repeat")
+		oldPassword := r.FormValue("old")
 
-        if password.Authenticate(oldPassword, pass) && len(newPassword) > 5 && newPassword == repeat{
-            hashed := password.NewPassword(newPassword)
-            database.ChangePassword(db, username, hashed)
-            log.Printf("USER (%s) CHANGED PASSWORD\n", username)
-        }
-    }
+		if password.Authenticate(oldPassword, pass) && len(newPassword) > 5 && newPassword == repeat {
+			hashed := password.NewPassword(newPassword)
+			database.ChangePassword(db, username, hashed)
+			log.Printf("USER (%s) CHANGED PASSWORD\n", username)
+		}
+	}
 
-    http.Redirect(w, r, "/login", http.StatusFound)
+	http.Redirect(w, r, "/login", http.StatusFound)
 }
-

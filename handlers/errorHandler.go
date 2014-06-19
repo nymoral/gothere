@@ -1,13 +1,13 @@
 package handlers
 
 import (
-    "log"
-    "net/http"
-    "gothere/templates"
+	"gothere/templates"
+	"log"
+	"net/http"
 )
 
 func ErrorGet(w http.ResponseWriter) {
-    //  Static error page
-    templates.Render(w, "error", nil)
-    log.Println("ERROR WAS RENDERED")
+	//  Static error page
+	templates.Render(w, "error", nil)
+	log.Println("ERROR WAS RENDERED")
 }

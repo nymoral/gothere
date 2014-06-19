@@ -1,22 +1,22 @@
 package utils
 
 import (
-    "crypto/rand"
+	"crypto/rand"
 )
 
-func RandomStr(L  int) string {
-    // Generates a random string of lenght L.
+func RandomStr(L int) string {
+	// Generates a random string of lenght L.
 
-    const source = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
-    var bytes = make([]byte, L)
-    rand.Read(bytes)
-    for i, b := range bytes {
-        bytes[i] = source[b % byte(len(source))]
-    }
-    return string(bytes)
+	const source = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	var bytes = make([]byte, L)
+	rand.Read(bytes)
+	for i, b := range bytes {
+		bytes[i] = source[b%byte(len(source))]
+	}
+	return string(bytes)
 }
 
-func GenRecoveryKey() (string) {
-    const keyLen = 64
-    return RandomStr(keyLen)
+func GenRecoveryKey() string {
+	const keyLen = 64
+	return RandomStr(keyLen)
 }
