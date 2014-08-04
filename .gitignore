@@ -6,5 +6,4 @@ config.json
 .*
 *.gz
 transfer
-resources/utils
 # To keep secret things secret.

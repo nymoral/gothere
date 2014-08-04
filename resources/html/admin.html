@@ -73,4 +73,19 @@
                 </div>
             </form>
         </div>
-    </div>{{end}}
+    </div>
+    <div id="form-cont">
+        <div id="form-head">
+            <h1>Rollback</h1>
+        </div>
+        <div id="form-wrap">
+            <form id="login_form" action="/admin/" method="post">
+                <input type="hidden" name="sending" value="rollback">
+				<input id="confirm" type="checkbox" name="confirm" value="1">
+                <div id="submit_row">
+                    <input type="submit" value="Rollback!">
+                </div>
+            </form>
+        </div>
+    </div>
+	{{end}}

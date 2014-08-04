@@ -142,6 +142,57 @@ func sendPointsToDb(db *sql.DB, pk int, points []models.Points) {
 	}
 }
 
+type tuple struct {
+	pk int
+	points int
+	given bool
+}
+
+func RollBack(db *sql.DB) {
+	q := "SELECT pk FROM games WHERE closed=true AND happened=true ORDER BY starts DESC, pk DESC LIMIT 1;"
+	row := db.QueryRow(q)
+	var lastgame int
+	err := row.Scan(&lastgame)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	q = "UPDATE games SET happened=false WHERE pk=$1;"
+	_, err = db.Exec(q, lastgame)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	q = "SELECT user_pk, points, result1 FROM guesses WHERE game_pk=$1;"
+	rows, err := db.Query(q, lastgame)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	tuples := make([]tuple, 0)
+	var tmp tuple
+	var res1 int
+	for rows.Next() {
+		err = rows.Scan(&tmp.pk, &tmp.points, &res1)
+		if err == nil {
+			tmp.given = res1 != -1
+			tuples = append(tuples, tmp)
+		}
+	}
+	q = "UPDATE users SET points = points - $2, correct = correct - $3 WHERE pk=$1;"
+	q2 := "DELETE FROM guesses WHERE game_pk=$1 AND user_pk=$2;"
+	for _, tmp = range tuples {
+		cor := 0
+		if tmp.points < 0 {
+			cor = 1
+		}
+		db.Exec(q, tmp.pk, tmp.points, cor)
+		if ! tmp.given {
+			db.Exec(q2, lastgame, tmp.pk)
+		}
+	}
+}
+
 const (
 	qGetPoints         = "SELECT users.pk, users.points, guesses.result1, guesses.result2 FROM (SELECT points, pk FROM users WHERE admin=false) as users LEFT JOIN (SELECT user_pk, result1, result2 FROM guesses WHERE game_pk=$1) AS guesses ON guesses.user_pk=users.pk;"
 	qUpdatePoints      = "UPDATE users SET points = points + $2, correct = correct + $3 WHERE pk=$1;"

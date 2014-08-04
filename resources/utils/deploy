@@ -1,0 +1,4 @@
+#! /bin/bash
+
+python template.py ../static/css/source.css ../static/css/style.css
+

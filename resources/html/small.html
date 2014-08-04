@@ -6,7 +6,7 @@
         <a href="/change/">Pilna lentelė</a>
         <a href="/logout/">Išeiti</a>
     </div>
-    <div id="table-wrap">
+    <div id="small-table-wrap">
         <table id="main-table" class="not_happend">
             <tr id="top_table_row">
                 <td colspan="3" rowspan="2" class="outer empty" style="border: 1px solid black;">Rezultatas/Data</td>
@@ -19,7 +19,7 @@
         {{ range $uindex, $user := .Users }}<tr class="g_row {{ $user.Style }}">
             <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Place }}</td>
             <td rowspan="2" class="{{ $user.NameStyle }}">{{ $user.ShortNameFmt }}</td>
-            <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Points}}<div class="hidden">Atspėjo: {{ $user.Correct }}</div></td>
+            <td rowspan="2" class="{{ $user.PlaceStyle }}">{{ $user.Points}} | {{ $user.Correct }}</td>
             {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.ResultFmt }}</td>{{ end }}
         </tr><tr class="p_row {{ $user.Style }}">
             {{ range $guess := index $GGG $uindex }}<td class="{{ $guess.Style }}">{{ $guess.PointsSmallFmt }}</td>{{ end }}

@@ -101,8 +101,8 @@ func GamesToClose(db *sql.DB) []string {
 
 const (
 	qCreateGame = "INSERT INTO games (team1, team2, starts) VALUES ($1, $2, $3);"
-	qOpenGames  = "SELECT pk, team1, team2, to_char(starts, 'MM-DD') FROM games WHERE closed=false ORDER BY starts;"
-	qToFinish   = "SELECT pk, team1, team2, to_char(starts, 'MM-DD') FROM games WHERE happened=false AND closed=true ORDER BY starts;"
+	qOpenGames  = "SELECT pk, team1, team2, to_char(starts, 'MM-DD') FROM games WHERE closed=false ORDER BY starts, pk;"
+	qToFinish   = "SELECT pk, team1, team2, to_char(starts, 'MM-DD') FROM games WHERE happened=false AND closed=true ORDER BY starts, pk"
 	qCloseGame  = "UPDATE games SET closed = TRUE WHERE pk=$1;"
 	qFinishGame = "UPDATE games SET closed = TRUE, happened = TRUE, result1=$1, result2=$2 WHERE pk=$3;"
 	qToClose    = "SELECT pk FROM games WHERE (starts - (now() + interval '3 hours')) < interval '15 minutes' AND closed = false;"

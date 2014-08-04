@@ -1,11 +1,11 @@
 package templates
 
 import (
-	"fmt"
-	"gothere/config"
-	"html/template"
 	"io"
 	"log"
+	"fmt"
+	"html/template"
+	"gothere/config"
 )
 
 var dynamicTemplates = config.Config.DynamicTemplates
@@ -31,9 +31,7 @@ func loadTemplates() {
 }
 
 func init() {
-	if !dynamicTemplates {
-		loadTemplates()
-	}
+	loadTemplates()
 }
 
 func Render(wr io.Writer, name string, data interface{}) {
@@ -43,14 +41,9 @@ func Render(wr io.Writer, name string, data interface{}) {
 	}
 	t := temps[name]
 
-	t, err := t.Clone()
+	err := t.ExecuteTemplate(wr, "base", data)
 	if err != nil {
+		log.Println(err)
 		fmt.Fprintf(wr, "ERROR\n")
-	} else {
-		err = t.ExecuteTemplate(wr, "base", data)
-		if err != nil {
-			log.Println(err)
-			fmt.Fprintf(wr, "ERROR\n")
-		}
 	}
 }

@@ -117,8 +117,8 @@ func GetSmall(db *sql.DB, pk int, nrUsers, offset int, nr int, last int) [][]mod
 }
 
 const (
-	qGetGames = "SELECT team1, team2, result1, result2, to_char(starts, 'MM-DD'), happened, closed FROM games ORDER BY starts;"
+	qGetGames = "SELECT team1, team2, result1, result2, to_char(starts, 'MM-DD'), happened, closed FROM games ORDER BY starts, pk;"
 	qGetUsers = "SELECT firstname, lastname, pk, points, correct FROM users WHERE admin=false ORDER BY points ASC, correct DESC, pk;"
-	qGetTable = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM games G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct DESC, U.pk, G.starts;"
-	qGetSmall = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM (SELECT * FROM games ORDER BY starts LIMIT $2 OFFSET $3) as G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct DESC, U.pk, G.starts;"
+	qGetTable = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM games G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct DESC, U.pk, G.starts, G.pk;"
+	qGetSmall = "SELECT gs.result1, gs.result2, gs.points, gs.total, G.happened FROM (SELECT * FROM games ORDER BY starts LIMIT $2 OFFSET $3) as G LEFT JOIN users AS U ON U.admin=false LEFT JOIN guesses AS gs ON gs.game_pk=G.pk AND gs.user_pk=U.pk AND (U.pk=$1 OR G.closed=true OR G.happened=true) ORDER BY U.points ASC, U.correct DESC, U.pk, G.starts, G.pk;"
 )

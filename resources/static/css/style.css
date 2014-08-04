@@ -90,6 +90,9 @@ input[type=submit] {
     overflow: auto;
     max-height: 100%;
 }
+#small-table-wrap {
+    margin: 20px auto ;
+}
 #main-table {
     text-align: center;
     empty-cells: show;
@@ -116,7 +119,7 @@ input[type=submit] {
     padding-bottom: 2px;
 }
 .outer.place{
-    text-align: right;
+    text-align: center;
     border: 1px solid black;
 }
 .hidden {
@@ -147,7 +150,7 @@ input[type=submit] {
 .user_place {
     border: 1px solid black;
     background-color: #D15A40;
-    text-align: right;
+    text-align: center;
 }
 .g_row td {
     border-top: 1px solid black;
@@ -219,10 +222,4 @@ input[type=submit] {
 .open{
     background-color: #FFF1C9;
     color: #2C2C2C;
-}
-.user_place:hover .hidden {
-    display: block;
-}
-.outer.place:hover .hidden {
-    display: block;
 }

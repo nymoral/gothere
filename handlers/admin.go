@@ -67,6 +67,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/admin", http.StatusFound)
 				log.Printf("GAME [%s - %s] ADDED\n", game.Team1, game.Team2)
 			}
+			break
 
 		case "close":
 			// Closes a game. Nothing to check.
@@ -74,6 +75,15 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
 			database.CloseGame(db, pk)
 			http.Redirect(w, r, "/admin", http.StatusFound)
 			log.Printf("GAME (%s) CLOSED\n", pk)
+			break
+
+		case "rollback":
+			confirm := r.FormValue("confirm") == "1"
+			if confirm {
+				database.RollBack(db)
+			}
+			http.Redirect(w, r, "/admin", http.StatusFound)
+			break
 
 		case "end":
 			// Finishes a game.
@@ -93,6 +103,7 @@ func AdminPost(w http.ResponseWriter, r *http.Request) {
 				http.Redirect(w, r, "/admin", http.StatusFound)
 				log.Printf("GAME (%s) FINISHED\n", pk)
 			}
+			break
 		}
 	} else {
 		// Not an admin tried subminting data.
