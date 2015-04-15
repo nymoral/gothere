@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	"gothere/utils"
+	"github.com/nymoral/gothere/utils"
 	"time"
 )
 

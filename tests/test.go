@@ -2,10 +2,10 @@ package tests
 
 import (
 	"fmt"
-	"gothere/cookies"
-	"gothere/database"
-	"gothere/password"
-	"gothere/utils"
+	"github.com/nymoral/gothere/cookies"
+	"github.com/nymoral/othere/database"
+	"github.com/nymoral/gothere/password"
+	"github.com/nymoral/gothere/utils"
 )
 
 func cookieTest() {

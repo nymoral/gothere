@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"gothere/cookies"
+	"github.com/nymoral/gothere/cookies"
 	"net/http"
 )
 

@@ -3,7 +3,7 @@ package database
 import (
 	"database/sql"
 	_ "github.com/lib/pq"
-	"gothere/models"
+	"github.com/nymoral/gothere/models"
 	"log"
 )
 

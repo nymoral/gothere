@@ -3,10 +3,10 @@ package handlers
 import (
 	"database/sql"
 	"fmt"
-	"gothere/database"
-	"gothere/password"
-	"gothere/templates"
-	"gothere/utils"
+	"github.com/nymoral/gothere/database"
+	"github.com/nymoral/gothere/password"
+	"github.com/nymoral/gothere/templates"
+	"github.com/nymoral/gothere/utils"
 	"log"
 	"net/http"
 )

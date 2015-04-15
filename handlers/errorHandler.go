@@ -1,7 +1,7 @@
 package handlers
 
 import (
-	"gothere/templates"
+	"github.com/nymoral/gothere/templates"
 	"log"
 	"net/http"
 )

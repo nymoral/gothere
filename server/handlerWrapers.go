@@ -1,7 +1,7 @@
 package server
 
 import (
-	"gothere/handlers"
+	"github.com/nymoral/gothere/handlers"
 	"net/http"
 	"time"
 )

@@ -1,8 +1,8 @@
 package handlers
 
 import (
-	"gothere/cookies"
-	"gothere/database"
+	"github.com/nymoral/gothere/cookies"
+	"github.com/nymoral/gothere/database"
 	"log"
 	"net/http"
 )

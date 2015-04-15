@@ -1,7 +1,7 @@
 package server
 
 import (
-	"gothere/config"
+	"github.com/nymoral/gothere/config"
 	"log"
 	"net/http"
 )

@@ -1,10 +1,10 @@
 package handlers
 
 import (
-	"gothere/database"
-	"gothere/models"
-	"gothere/password"
-	"gothere/templates"
+	"github.com/nymoral/gothere/database"
+	"github.com/nymoral/gothere/models"
+	"github.com/nymoral/gothere/password"
+	"github.com/nymoral/gothere/templates"
 	"log"
 	"net/http"
 	"strings"

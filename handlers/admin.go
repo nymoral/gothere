@@ -1,11 +1,11 @@
 package handlers
 
 import (
-	"gothere/cookies"
-	"gothere/database"
-	"gothere/models"
-	"gothere/templates"
-	"gothere/utils"
+	"github.com/nymoral/gothere/cookies"
+	"github.com/nymoral/gothere/database"
+	"github.com/nymoral/gothere/models"
+	"github.com/nymoral/gothere/templates"
+	"github.com/nymoral/gothere/utils"
 	"log"
 	"net/http"
 	"strconv"

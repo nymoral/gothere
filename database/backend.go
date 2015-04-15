@@ -1,11 +1,11 @@
 package database
 
 import (
-	"log"
-	"fmt"
 	"database/sql"
+	"fmt"
 	_ "github.com/lib/pq"
-	"gothere/config"
+	"github.com/nymoral/gothere/config"
+	"log"
 )
 
 var dbConnection *sql.DB

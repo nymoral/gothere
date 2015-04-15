@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"database/sql"
-	"gothere/config"
-	"gothere/cookies"
-	"gothere/database"
-	"gothere/models"
-	"gothere/templates"
+	"github.com/nymoral/gothere/config"
+	"github.com/nymoral/gothere/cookies"
+	"github.com/nymoral/gothere/database"
+	"github.com/nymoral/gothere/models"
+	"github.com/nymoral/gothere/templates"
 	"net/http"
 )
 

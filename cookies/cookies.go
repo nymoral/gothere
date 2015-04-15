@@ -2,7 +2,7 @@ package cookies
 
 import (
 	"github.com/gorilla/securecookie"
-	"gothere/config"
+	"github.com/nymoral/gothere/config"
 	"log"
 	"net/http"
 	"time"

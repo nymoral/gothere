@@ -1,7 +1,7 @@
 package main
 
 import (
-	"gothere/server"
+	"github.com/nymoral/gothere/server"
 )
 
 func main() {

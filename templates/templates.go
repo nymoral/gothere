@@ -5,7 +5,7 @@ import (
 	"log"
 	"fmt"
 	"html/template"
-	"gothere/config"
+	"github.com/nymoral/gothere/config"
 )
 
 var dynamicTemplates = config.Config.DynamicTemplates

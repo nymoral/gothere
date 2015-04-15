@@ -2,7 +2,7 @@ package utils
 
 import (
 	"fmt"
-	"gothere/config"
+	"github.com/nymoral/gothere/config"
 	"net/smtp"
 )
 
