@@ -1,11 +1,11 @@
 package templates
 
 import (
+	"fmt"
+	"github.com/nymoral/gothere/config"
+	"html/template"
 	"io"
 	"log"
-	"fmt"
-	"html/template"
-	"github.com/nymoral/gothere/config"
 )
 
 var dynamicTemplates = config.Config.DynamicTemplates

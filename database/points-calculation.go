@@ -143,9 +143,9 @@ func sendPointsToDb(db *sql.DB, pk int, points []models.Points) {
 }
 
 type tuple struct {
-	pk int
+	pk     int
 	points int
-	given bool
+	given  bool
 }
 
 func RollBack(db *sql.DB) {
@@ -187,7 +187,7 @@ func RollBack(db *sql.DB) {
 			cor = 1
 		}
 		db.Exec(q, tmp.pk, tmp.points, cor)
-		if ! tmp.given {
+		if !tmp.given {
 			db.Exec(q2, lastgame, tmp.pk)
 		}
 	}
